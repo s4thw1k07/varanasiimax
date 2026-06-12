@@ -156,18 +156,35 @@
             padding-left: 1.4rem;
         }
 
-        /* Title Image Container */
+        /* --- Premium Text Title UI Replacement --- */
         .title-container {
             margin-bottom: 0.5rem;
-            max-width: 600px;
+            max-width: 800px;
             width: 100%;
+            padding: 10px;
         }
-        .title-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+        
+        .main-page-title {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 30%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+            line-height: 1.1;
+            margin-bottom: 0.2rem;
+        }
+
+        .title-badge {
+            font-size: 0.8rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-weight: 800;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         p.subtitle { 
@@ -488,6 +505,7 @@
 </head>
 <body>
 
+    <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
@@ -507,6 +525,7 @@
         </ul>
     </nav>
 
+    <!-- INLINE VFX OVERLAY CONTAINER -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -519,17 +538,22 @@
         </div>
     </div>
 
+    <!-- Background Looping Video -->
     <video id="bgVideo" src="https://www.dropbox.com/scl/fi/w15o6z8qw3dxhp42s1ote/loop.mp4?rlkey=itw0zj2so39fd6dpkqpiehlsi&st=5cwm9pe9&raw=1" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
 
+    <!-- Premium CSS Styled Title Replacement Block -->
     <div class="title-container">
-        <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
+        <h1 class="main-page-title">Varanasi</h1>
+        <div class="title-badge">Explore Premium Formats Teaser</div>
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
+    <!-- Master Player Container -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
+            <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" autoplay loop controls controlsList="nofullscreen"></video>
@@ -537,6 +561,7 @@
         </div>
 
         <div class="controls">
+            <!-- IMAX 70MM -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -547,6 +572,7 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
+            <!-- IMAX -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -555,6 +581,7 @@
                 <span class="format-ratio">1.90:1</span>
             </button>
 
+            <!-- 70MM -->
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -565,6 +592,7 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
+            <!-- 35MM -->
             <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -575,6 +603,7 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
+            <!-- Dolby Vision -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -586,6 +615,7 @@
                 <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
             </button>
 
+            <!-- Large Format -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
