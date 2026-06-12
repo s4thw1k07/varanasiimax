@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Formats Explorer</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        
+        body { 
+            background-color: #000; 
+            color: #fff; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 0 2rem 2rem 2rem; 
+            text-align: center; 
+        }
+
+        /* Background Video Styles */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            z-index: -1; 
+            opacity: 0.35; 
+            pointer-events: none; 
+        }
+
+        /* --- Gold Glow Top Menu Bar Navigation --- */
+        .navbar {
+            width: 100vw;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            margin-bottom: 2rem;
+        }
+
+        .nav-logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 28px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 24px;
+        }
+
+        /* Dropdown Structure */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-trigger {
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dropdown-trigger:hover, .dropdown:hover .dropdown-trigger {
+            color: #fff;
+            background-color: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
+        }
+
+        .dropdown-trigger::after {
+            content: '▼';
+            font-size: 0.65rem;
+            margin-left: 2px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-trigger::after {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.2);
+            border-radius: 4px;
+            width: 260px;
+            padding: 6px 0;
+            display: none;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            display: flex;
+        }
+
+        .dropdown-item {
+            color: #ccc;
+            text-decoration: none;
+            padding: 0.75rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            line-height: 1.3;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .dropdown-item span {
+            display: block;
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .dropdown-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: #fff;
+            border-left-color: #d4af37;
+            padding-left: 1.4rem;
+        }
+
+        /* Title Image Container */
+        .title-container {
+            margin-bottom: 0.5rem;
+            max-width: 600px;
+            width: 100%;
+        }
+        .title-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+        }
+
+        p.subtitle { 
+            font-size: 1rem; 
+            color: #ccc; 
+            margin-bottom: 3rem; 
+            max-width: 800px; 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
+        }
+        
+        /* Master Player Container (Handles Fullscreen Root Layouts) */
+        .player-container {
+            width: 100%;
+            max-width: 1000px; 
+            display: flex;
+            flex-direction: column;
+            background-color: transparent; 
+            margin: 0 auto 3rem auto;
+            --current-ratio: 2.39; 
+        }
+
+        /* --- FIXED FULLSCREEN API SELECTORS --- */
+        .player-container:fullscreen { 
+            max-width: none; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #000;
+            padding: 20px;
+            box-sizing: border-box;
+            justify-content: space-between;
+        }
+        .player-container:-webkit-full-screen { 
+            max-width: none; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #000;
+            padding: 20px;
+            box-sizing: border-box;
+            justify-content: space-between;
+        }
+
+        /* Video Area Layout */
+        .video-area {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            min-height: 0; 
+        }
+
+        .player-container:fullscreen .video-area {
+            margin-bottom: 1rem;
+        }
+        .player-container:-webkit-full-screen .video-area {
+            margin-bottom: 1rem;
+        }
+
+        /* Video Wrapper */
+        .video-wrapper {
+            position: relative; 
+            aspect-ratio: var(--current-ratio) / 1;
+            width: 100%;
+            max-height: 100%;
+            background-color: #000;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .player-container:fullscreen .video-wrapper { 
+            border: none; 
+            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
+            max-height: calc(100vh - 150px);
+        }
+        .player-container:-webkit-full-screen .video-wrapper { 
+            border: none; 
+            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
+            max-height: calc(100vh - 150px);
+        }
+
+        video.main-video { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: all 0.8s ease; 
+        }
+
+        /* Overlay Logo Styling */
+        .format-overlay {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 10;
+            pointer-events: none; 
+            transition: opacity 0.3s ease;
+        }
+
+        /* DOLBY VISION COLOR GRADE */
+        video.dolby-grade {
+            filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
+        }
+        
+        /* Controls / Buttons */
+        .controls { 
+            display: flex; 
+            gap: 10px; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: center;
+            padding-bottom: 1rem;
+        }
+
+        .player-container:fullscreen .controls {
+            padding-bottom: 0;
+        }
+        .player-container:-webkit-full-screen .controls {
+            padding-bottom: 0;
+        }
+        
+        /* Buttons for Gold Glowing UI */
+        .format-btn { 
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(5px);
+            color: #d4af37; 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            border-radius: 6px; 
+            padding: 1rem 0.5rem; 
+            cursor: pointer; 
+            width: 120px; 
+            transition: all 0.3s ease; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: flex-end;
+            gap: 6px; 
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+        }
+        
+        .format-btn:hover { 
+            color: #fff; 
+            background-color: rgba(212, 175, 55, 0.15); 
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        
+        .format-btn.active { 
+            background-color: rgba(212, 175, 55, 0.2); 
+            color: #fff; 
+            border-color: #d4af37; 
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+        }
+
+        .format-title { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
+        .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
+        .screen-icon { margin-bottom: 8px; }
+
+        /* Fullscreen Specific Button Styles */
+        .divider {
+            width: 2px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.3);
+            margin: 0 10px;
+            border-radius: 2px;
+        }
+
+        .fullscreen-btn {
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 1rem;
+            cursor: pointer;
+            width: 100px;
+            height: 80px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+        }
+        .fullscreen-btn:hover {
+            color: #fff;
+            background-color: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+        .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
+        
+        /* Info Section Styles */
+        .info-section { 
+            width: 100%; 
+            max-width: 900px; 
+            background-color: rgba(17, 17, 17, 0.85); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 8px; 
+            padding: 2rem; 
+            text-align: left; 
+            margin-bottom: 3rem; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.05);
+        }
+        .info-section p { font-size: 1.1rem; color: #ddd; line-height: 1.6; margin-bottom: 2.5rem; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: #d4af37; }
+        .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .video-embed iframe { width: 100%; height: 100%; }
+
+        /* --- Same Page Inline VFX Overlay Styling --- */
+        .vfx-overlay-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: #050505;
+            z-index: 1000;
+            display: none; /* Controlled via JS */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .vfx-container {
+            width: 100%;
+            max-width: 960px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .vfx-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 12px;
+        }
+
+        .vfx-title {
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            text-align: left;
+        }
+
+        .back-btn {
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #d4af37;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            background-color: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .vfx-video-wrapper {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border-radius: 6px;
+            overflow: hidden;
+            background-color: #000;
+        }
+
+        .vfx-video-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            outline: none;
+        }
+
+        /* Typography */
+        .font-light { font-weight: 400; }
+        .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
+
+        /* Footer Credit */
+        .designer-credit {
+            margin-top: auto;
+            padding-top: 2rem;
+            padding-bottom: 1rem;
+            color: #aaa;
+            font-size: 0.9rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+        .designer-credit span {
+            color: #d4af37;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-logo-container">
+            <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
+        </div>
+        <ul class="nav-menu">
+            <li class="dropdown">
+                <a class="dropdown-trigger">VFX Shots by Sathwik</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" onclick="playVfxInline('strangerthings-part1.mp4', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
+                        <span>Stranger Things</span>Watch VFX reel by Starvel Studios.
+                    </a>
+                    <a class="dropdown-item" onclick="playVfxInline('VECNA\'S CURSE.mp4', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
+                        <span>Vecna's Curse</span>Watch breakdown by Starvel Studios.
+                    </a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
+        <div class="vfx-container">
+            <div class="vfx-header-area">
+                <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
+                <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
+            </div>
+            <div class="vfx-video-wrapper">
+                <video id="vfxTargetVideo" class="vfx-video-element" controls></video>
+            </div>
+        </div>
+    </div>
+
+    <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
+
+    <div class="title-container">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
+    </div>
+
+    <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
+
+    <div id="playerContainer" class="player-container">
+        
+        <div class="video-area">
+            <div class="video-wrapper" id="videoWrapper">
+                <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
+                <video class="main-video" id="myVideo" src="varanasi.mp4" poster="image_8622bf.jpg" autoplay loop controls controlsList="nofullscreen"></video>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="8" y1="9" x2="42" y2="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="8" y1="31" x2="42" y2="31" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">IMAX<br>70MM</span>
+                <span class="format-ratio">1.43:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                </svg>
+                <span class="format-title">IMAX</span>
+                <span class="format-ratio">1.90:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title"><span class="font-light">7</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: -1px; margin: 0 1px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>MM</span>
+                <span class="format-ratio">2.20:1</span>
+            </button>
+
+            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">35MM</span>
+                <span class="format-ratio">2.39:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                </svg>
+                <span class="format-title" style="display:flex; align-items:center; justify-content:center; gap:3px;">
+                    <svg width="16" height="12" viewBox="0 0 24 16" fill="currentColor"><path d="M7 0H0v16h7c4.4 0 8-3.6 8-8s-3.6-8-8-8z"/><path d="M17 0h7v16h-7c-4.4 0-8-3.6-8-8s3.6-8 8-8z"/></svg> 
+                    Dolby<br><span style="font-size: 0.5rem; letter-spacing: 2px; position:absolute; margin-top:24px;">VISION</span>
+                </span>
+                <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <path d="M 6 12 L 8 14 L 6 16 L 8 18 L 6 20 L 8 22 L 6 24 L 8 26 L 6 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <path d="M 44 12 L 42 14 L 44 16 L 42 18 L 44 20 L 42 22 L 44 24 L 42 26 L 44 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                </svg>
+                <span class="format-title font-impact" style="font-size: 1.1rem; line-height: 0.9;">LARGE FORMAT</span>
+                <span class="format-ratio">1.85:1 | 2.39:1</span>
+            </button>
+
+            <div class="divider"></div>
+
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+                <span class="format-title" style="font-size: 0.8rem;" id="fsText">FULLSCREEN</span>
+            </button>
+
+        </div>
+    </div>
+
+    <div class="info-section">
+        <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
+        
+        <div class="video-embed-container">
+            <h3>Rajamouli on IMAX 70mm</h3>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="designer-credit">
+        Designed By <span>G.Sathwik</span>
+    </div>
+
+    <script>
+        // Inline layout view controls
+        function playVfxInline(videoSrc, titleText, posterSrc) {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxTitle = document.getElementById('vfxDisplayTitle');
+
+            // Pause primary display player loop
+            if (explorerVideo) explorerVideo.pause();
+
+            // Set content attributes and switch layer state
+            vfxTitle.innerText = titleText;
+            vfxVideo.src = videoSrc;
+            vfxVideo.poster = posterSrc;
+            vfxOverlay.style.display = "flex";
+            vfxVideo.play();
+        }
+
+        function closeVfxInline() {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+
+            // Terminate overlay video feed streams and hide layout
+            if (vfxVideo) {
+                vfxVideo.pause();
+                vfxVideo.src = "";
+            }
+            vfxOverlay.style.display = "none";
+
+            // Resume primary format background track
+            if (explorerVideo) explorerVideo.play();
+        }
+
+        function changeRatio(ratio, buttonElement, formatType) {
+            const playerContainer = document.getElementById('playerContainer');
+            const videoElement = document.getElementById('myVideo');
+            const overlay = document.getElementById('formatOverlay');
+            
+            playerContainer.style.setProperty('--current-ratio', ratio);
+
+            if (formatType === 'dolby') {
+                videoElement.classList.add('dolby-grade');
+            } else {
+                videoElement.classList.remove('dolby-grade');
+            }
+
+            if (formatType === 'imax') {
+                overlay.src = 'imax-seeklogo.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                overlay.style.width = '100px';
+                
+            } else if (formatType === 'dolby') {
+                overlay.src = 'dolby.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))'; 
+                overlay.style.width = '100px';
+                
+            } else if (formatType === 'large') {
+                overlay.src = '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                overlay.style.width = '140px';
+                
+            } else {
+                overlay.style.display = 'none';
+            }
+
+            const buttons = document.querySelectorAll('.format-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+        }
+
+        const playerContainer = document.getElementById('playerContainer');
+        const fsText = document.getElementById('fsText');
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (playerContainer.requestFullscreen) {
+                    playerContainer.requestFullscreen();
+                } else if (playerContainer.webkitRequestFullscreen) { 
+                    playerContainer.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { 
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('fullscreenchange', updateFsButton);
+        document.addEventListener('webkitfullscreenchange', updateFsButton);
+
+        function updateFsButton() {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                fsText.innerText = "EXIT FS";
+            } else {
+                fsText.innerText = "FULLSCREEN";
+            }
+        }
+    </script>
+</body>
+</html>
