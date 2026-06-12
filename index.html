@@ -159,7 +159,7 @@
         /* --- Fixed Title Constraints --- */
         .title-container {
             margin-bottom: 1rem;
-            max-width: 420px; /* Reduced max-width to make the title.png look proportional and balanced */
+            max-width: 420px; 
             width: 100%;
             padding: 10px;
         }
@@ -514,7 +514,6 @@
 </head>
 <body>
 
-    <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
@@ -534,7 +533,6 @@
         </ul>
     </nav>
 
-    <!-- INLINE VFX OVERLAY CONTAINER -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -547,21 +545,17 @@
         </div>
     </div>
 
-    <!-- Background Looping Video -->
-    <video id="bgVideo" src="https://www.dropbox.com/scl/fi/w15o6z8qw3dxhp42s1ote/loop.mp4?rlkey=itw0zj2so39fd6dpkqpiehlsi&st=5cwm9pe9&raw=1" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
+    <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
 
-    <!-- Restored and Resized Image Logo Block -->
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
-    <!-- Master Player Container -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
-            <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" autoplay loop controls controlsList="nofullscreen"></video>
@@ -569,7 +563,6 @@
         </div>
 
         <div class="controls">
-            <!-- IMAX 70MM -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -580,7 +573,6 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
-            <!-- IMAX -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -589,7 +581,6 @@
                 <span class="format-ratio">1.90:1</span>
             </button>
 
-            <!-- 70MM -->
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -600,7 +591,6 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <!-- 35MM -->
             <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -611,7 +601,6 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <!-- Dolby Vision -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -623,7 +612,6 @@
                 <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
             </button>
 
-            <!-- Large Format -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
