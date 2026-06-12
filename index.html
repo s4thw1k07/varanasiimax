@@ -156,14 +156,23 @@
             padding-left: 1.4rem;
         }
 
-        /* --- Premium Text Title UI Replacement --- */
+        /* --- Fixed Title Constraints --- */
         .title-container {
-            margin-bottom: 0.5rem;
-            max-width: 800px;
+            margin-bottom: 1rem;
+            max-width: 420px; /* Reduced max-width to make the title.png look proportional and balanced */
             width: 100%;
             padding: 10px;
         }
-        
+
+        .title-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
+        }
+
+        /* --- Premium Text Title UI Replacement --- */
         .main-page-title {
             font-family: 'Impact', 'Arial Black', sans-serif;
             font-size: 3.2rem;
@@ -541,10 +550,10 @@
     <!-- Background Looping Video -->
     <video id="bgVideo" src="https://www.dropbox.com/scl/fi/w15o6z8qw3dxhp42s1ote/loop.mp4?rlkey=itw0zj2so39fd6dpkqpiehlsi&st=5cwm9pe9&raw=1" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
 
-    <!-- Premium CSS Styled Title Replacement Block -->
-   <div class="title-container">
-    <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
-</div>
+    <!-- Restored and Resized Image Logo Block -->
+    <div class="title-container">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
+    </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
