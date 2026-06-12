@@ -1,19 +1,3 @@
-To optimize this file for faster load speeds, we need to focus on **Browser Pre-loading**, **Video Rendering Bottlenecks**, and **Asset Priority**.
-
-Right now, when a browser hits your site, it pauses everything to try and download both `loop.mp4` and the heavy Dropbox Varanasi video simultaneously. This chokes the user's internet bandwidth, causing the background loop to stall and elements to lag.
-
-### Key Performance Optimizations Applied:
-
-1. **`preload="none"` on Main Video:** The heavy Dropbox video (`varanasi.mp4`) is now set to not load *until* the user interacts or clicks a format button. This saves massive amounts of initial bandwidth.
-2. **`preload="auto"` on Background Loop:** Forces the browser to stream your fast GitHub `loop.mp4` immediately so the background visual activates instantly.
-3. **DNS Prefetching:** Added a `<link rel="dns-prefetch">` tag targeting Dropbox's servers. The browser resolves the IP address for your video links in the background while the HTML is still parsing.
-4. **Hardware Acceleration:** Added a lightweight `transform: translateZ(0);` CSS rule to the background video container to force GPU computing, preventing frame rate stutters during aspect-ratio transitions.
-
----
-
-### The Fully Optimized Code
-
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
