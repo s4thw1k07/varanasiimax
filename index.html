@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Formats Explorer</title>
     
-    <!-- Custom Icon Profile for the Browser Tab Layout -->
     <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- Speed Optimization: Warm up connection to Dropbox servers early for the main trailer -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
@@ -68,6 +66,12 @@
             width: auto;
             object-fit: contain;
             filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.4));
+        }
+
+        .nav-right-side {
+            display: flex;
+            align-items: center;
+            gap: 24px;
         }
 
         .nav-menu {
@@ -164,6 +168,24 @@
             color: #fff;
             border-left-color: #d4af37;
             padding-left: 1.4rem;
+        }
+
+        /* --- Navbar Integrated View Counter Style --- */
+        .nav-view-counter {
+            color: #aaa;
+            font-size: 0.85rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(20, 20, 20, 0.5);
+        }
+        .nav-view-counter span {
+            color: #d4af37;
+            margin-left: 4px;
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
         }
 
         /* --- Fixed Title Constraints --- */
@@ -505,27 +527,6 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Premium Gold View Counter Styling --- */
-        .view-counter {
-            margin-top: 2rem;
-            color: #aaa;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            font-weight: 600;
-            background: rgba(15, 15, 15, 0.6);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.05);
-            display: inline-block;
-        }
-        .view-counter span {
-            color: #d4af37;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
-        }
-
         /* Footer Credit */
         .designer-credit {
             padding-top: 1rem;
@@ -544,27 +545,30 @@
 </head>
 <body>
 
-    <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
         </div>
-        <ul class="nav-menu">
-            <li class="dropdown">
-                <a class="dropdown-trigger">VFX Shots by Sathwik</a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
-                        <span>Stranger Things</span>Watch VFX reel by Starvel Studios.
-                    </a>
-                    <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
-                        <span>Vecna's Curse</span>Watch breakdown by Starvel Studios.
-                    </a>
-                </div>
-            </li>
-        </ul>
+        <div class="nav-right-side">
+            <ul class="nav-menu">
+                <li class="dropdown">
+                    <a class="dropdown-trigger">VFX Shots by Sathwik</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
+                            <span>Stranger Things</span>Watch VFX reel by Starvel Studios.
+                        </a>
+                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
+                            <span>Vecna's Curse</span>Watch breakdown by Starvel Studios.
+                        </a>
+                    </div>
+                </li>
+            </ul>
+            <div class="nav-view-counter">
+                Views:<span id="count">1,024</span>
+            </div>
+        </div>
     </nav>
 
-    <!-- INLINE VFX OVERLAY CONTAINER -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -577,30 +581,24 @@
         </div>
     </div>
 
-    <!-- Optimization: Background loop stream configured directly from local GitHub servers -->
     <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" preload="auto" autoplay loop muted playsinline></video>
 
-    <!-- Resized Image Logo Block -->
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
-    <!-- Master Player Container -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
-            <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
-                <!-- Optimization: Set main heavy trailer to preload none to prioritize page paint speed -->
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop controls controlsList="nofullscreen"></video>
             </div>
         </div>
 
         <div class="controls">
-            <!-- IMAX 70MM -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -611,7 +609,6 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
-            <!-- IMAX -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -620,7 +617,6 @@
                 <span class="format-ratio">1.90:1</span>
             </button>
 
-            <!-- 70MM -->
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -631,7 +627,6 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <!-- 35MM -->
             <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -642,7 +637,6 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <!-- Dolby Vision -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -654,7 +648,6 @@
                 <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
             </button>
 
-            <!-- Large Format -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -686,11 +679,6 @@
                 <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
-    </div>
-
-    <!-- Live View Counter Badge -->
-    <div class="view-counter">
-        👁️ Views: <span id="count">1,000+</span>
     </div>
 
     <div class="designer-credit">
@@ -818,7 +806,7 @@
                 .then(data => {
                     const result = JSON.parse(data.contents);
                     if(result && result.value) {
-                        document.getElementById('count').innerText = result.value.toLocaleString();
+                        document.getElementById('count').innerText = " " + result.value.toLocaleString();
                     }
                 })
                 .catch(() => {
@@ -826,7 +814,7 @@
                     let fallbackViews = localStorage.getItem('local_views') || 1024;
                     fallbackViews = parseInt(fallbackViews) + 1;
                     localStorage.setItem('local_views', fallbackViews);
-                    document.getElementById('count').innerText = fallbackViews.toLocaleString();
+                    document.getElementById('count').innerText = " " + fallbackViews.toLocaleString();
                 });
         }
         window.addEventListener('DOMContentLoaded', loadPageViews);
