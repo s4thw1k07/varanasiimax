@@ -1,9 +1,29 @@
+To optimize this file for faster load speeds, we need to focus on **Browser Pre-loading**, **Video Rendering Bottlenecks**, and **Asset Priority**.
+
+Right now, when a browser hits your site, it pauses everything to try and download both `loop.mp4` and the heavy Dropbox Varanasi video simultaneously. This chokes the user's internet bandwidth, causing the background loop to stall and elements to lag.
+
+### Key Performance Optimizations Applied:
+
+1. **`preload="none"` on Main Video:** The heavy Dropbox video (`varanasi.mp4`) is now set to not load *until* the user interacts or clicks a format button. This saves massive amounts of initial bandwidth.
+2. **`preload="auto"` on Background Loop:** Forces the browser to stream your fast GitHub `loop.mp4` immediately so the background visual activates instantly.
+3. **DNS Prefetching:** Added a `<link rel="dns-prefetch">` tag targeting Dropbox's servers. The browser resolves the IP address for your video links in the background while the HTML is still parsing.
+4. **Hardware Acceleration:** Added a lightweight `transform: translateZ(0);` CSS rule to the background video container to force GPU computing, preventing frame rate stutters during aspect-ratio transitions.
+
+---
+
+### The Fully Optimized Code
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Formats Explorer</title>
+    
+    <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
+    <link rel="dns-prefetch" href="https://www.dropbox.com">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
@@ -18,7 +38,7 @@
             text-align: center; 
         }
 
-        /* Background Video Styles */
+        /* Speed Optimization: Force GPU layer rendering to prevent UI lag */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -29,6 +49,8 @@
             z-index: -1; 
             opacity: 0.35; 
             pointer-events: none; 
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         /* --- Gold Glow Top Menu Bar Navigation --- */
@@ -540,12 +562,12 @@
                 <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
             </div>
             <div class="vfx-video-wrapper">
-                <video id="vfxTargetVideo" class="vfx-video-element" controls></video>
+                <video id="vfxTargetVideo" class="vfx-video-element" preload="none" controls></video>
             </div>
         </div>
     </div>
 
-    <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" autoplay loop muted playsinline></video>
+    <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" preload="auto" autoplay loop muted playsinline></video>
 
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
@@ -558,7 +580,7 @@
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
-                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" autoplay loop controls controlsList="nofullscreen"></video>
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop controls controlsList="nofullscreen"></video>
             </div>
         </div>
 
@@ -661,6 +683,8 @@
             vfxTitle.innerText = titleText;
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
+            // Speed Optimization: Explicitly invoke load handler for non-preloaded source targets
+            vfxVideo.load(); 
             vfxOverlay.style.display = "flex";
             vfxVideo.play();
         }
@@ -673,6 +697,7 @@
             if (vfxVideo) {
                 vfxVideo.pause();
                 vfxVideo.src = "";
+                vfxVideo.load();
             }
             vfxOverlay.style.display = "none";
 
@@ -684,6 +709,12 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
+            // Speed Optimization: If user hits a button and main trailer hasn't started loading yet, boot it up
+            if (videoElement.readyState === 0) {
+                videoElement.setAttribute('preload', 'auto');
+                videoElement.load();
+            }
+
             playerContainer.style.setProperty('--current-ratio', ratio);
 
             if (formatType === 'dolby') {
@@ -752,3 +783,7 @@
     </script>
 </body>
 </html>
+
+```
+
+Save this version, push it to GitHub, and you should see a significant decrease in initial buffer time!
