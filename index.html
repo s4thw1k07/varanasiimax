@@ -3,7 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Formats Explorer</title>
+    
+    <!-- Optimized SEO Title Link for Search Engines -->
+    <title>Varanasi IMAX Premium Formats Experience | Starvel Studios</title>
+    
+    <!-- Strict SEO Meta Tags for Google Indexing -->
+    <meta name="description" content="Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.">
+    <meta name="keywords" content="IMAX, Varanasi IMAX, IMAX 70mm, Dolby Vision, Varanasi teaser aspect ratio, Starvel Studios, G Sathwik">
+    <meta name="author" content="G. Sathwik">
+    
+    <!-- Open Graph Metadata for Premium Link Previews on Discord, WhatsApp, and X -->
+    <meta property="og:title" content="Varanasi IMAX Premium Formats Experience | Starvel Studios">
+    <meta property="og:description" content="Interactive format explorer for the cinematic Varanasi trailer presentation. Compare IMAX 70mm, Dolby Vision, and 35mm in real time.">
+    <meta property="og:image" content="image_8622bf.jpg">
+    <meta property="og:url" content="https://s4thw1k07.github.io/varanasiimax/">
+    <meta property="og:type" content="website">
     
     <!-- Custom Icon Profile for the Browser Tab Layout -->
     <link rel="icon" type="image/png" href="favicon.png">
@@ -529,7 +543,7 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Section Styling (As specified in image_5e3554.png) --- */
+        /* --- Support Section Styling --- */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -631,10 +645,15 @@
 </head>
 <body>
 
+    <!-- Hidden Keyword-Rich Headings mapped strictly for Google Crawlers/SEO Algorithms -->
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
+    </h1>
+
     <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
-            <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
+            <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
         </div>
         <div class="nav-right-side">
             <ul class="nav-menu">
@@ -665,7 +684,7 @@
                 <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
             </div>
             <div class="vfx-video-wrapper">
-                <video id="vfxTargetVideo" class="vfx-video-element" preload="none" controls></video>
+                <video id="vfxTargetVideo" class="vfx-video-element" preload="none" muted playsinline controls></video>
             </div>
         </div>
     </div>
@@ -673,9 +692,9 @@
     <!-- Optimization: Background loop stream configured directly from local GitHub servers -->
     <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" preload="auto" autoplay loop muted playsinline></video>
 
-    <!-- Resized Image Logo Block -->
+    <!-- Resized Image Logo Block with descriptive Alt Text -->
     <div class="title-container">
-        <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
@@ -686,14 +705,15 @@
         <div class="video-area">
             <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
-                <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
-                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop controls controlsList="nofullscreen"></video>
+                <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
+                <!-- Fixed iOS Optimization: Added muted and playsinline directly to secure native safari streams -->
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop muted playsinline controls></video>
             </div>
         </div>
 
         <div class="controls">
             <!-- IMAX 70MM -->
-            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
+            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                     <line x1="8" y1="9" x2="42" y2="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
@@ -704,7 +724,7 @@
             </button>
 
             <!-- IMAX -->
-            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
+            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')" aria-label="Switch aspect ratio framework to Digital IMAX">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                 </svg>
@@ -713,7 +733,7 @@
             </button>
 
             <!-- 70MM -->
-            <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
+            <button class="format-btn" onclick="changeRatio(2.20, this, 'none')" aria-label="Switch aspect ratio framework to Standard 70mm film">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                     <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
@@ -724,7 +744,7 @@
             </button>
 
             <!-- 35MM -->
-            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
+            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                     <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
@@ -735,7 +755,7 @@
             </button>
 
             <!-- Dolby Vision -->
-            <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')" aria-label="Switch aspect ratio framework to Dolby Vision high contrast grading">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                 </svg>
@@ -747,7 +767,7 @@
             </button>
 
             <!-- Large Format -->
-            <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'large')" aria-label="Switch aspect ratio framework to Large Format widescreen presentation">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
                     <path d="M 6 12 L 8 14 L 6 16 L 8 18 L 6 20 L 8 22 L 6 24 L 8 26 L 6 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
@@ -759,7 +779,7 @@
 
             <div class="divider"></div>
 
-            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton">
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton" aria-label="Toggle native application workspace fullscreen layout mode">
                 <svg viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                 </svg>
@@ -770,25 +790,26 @@
     </div>
 
     <!-- Educational Context Block -->
-    <div class="info-section">
+    <section class="info-section">
+        <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
         <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
         
         <div class="video-embed-container">
-            <h3>Rajamouli on IMAX 70mm</h3>
+            <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
             <div class="video-embed">
-                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Cinema Resolution and Projector Formats" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
-    </div>
+    </section>
 
     <!-- Support Section Layout Asset (Replicating image_5e3554.png layout rules) -->
-    <div class="support-container">
+    <section class="support-container">
         <h2 class="support-title">Support the Developer</h2>
         <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
         <div class="upi-block">
             <span class="upi-label">UPI ID:</span>
             <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
-            <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID" id="copyBtn">
+            <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn" aria-label="Copy developer upi token identifier">
                 <svg viewBox="0 0 24 24">
                     <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
                     <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
@@ -796,12 +817,12 @@
             </button>
         </div>
         <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
-    </div>
+    </section>
 
     <!-- Project Identity Brand Footer -->
-    <div class="designer-credit">
+    <footer class="designer-credit">
         Designed By <span>G.Sathwik</span>
-    </div>
+    </footer>
 
     <script>
         function playVfxInline(videoSrc, titleText, posterSrc) {
