@@ -667,7 +667,6 @@
             vfxTitle.innerText = titleText;
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
-            // Speed Optimization: Explicitly invoke load handler for non-preloaded source targets
             vfxVideo.load(); 
             vfxOverlay.style.display = "flex";
             vfxVideo.play();
@@ -693,7 +692,6 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            // Speed Optimization: If user hits a button and main trailer hasn't started loading yet, boot it up
             if (videoElement.readyState === 0) {
                 videoElement.setAttribute('preload', 'auto');
                 videoElement.load();
@@ -767,3 +765,5 @@
     </script>
 </body>
 </html>
+
+```
