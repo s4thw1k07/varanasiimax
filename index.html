@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Premium Formats Explorer</title>
     
+    <!-- Custom Icon Profile for the Browser Tab Layout -->
     <link rel="icon" type="image/png" href="favicon.png">
     
+    <!-- Speed Optimization: Warm up connection to Dropbox servers early for the main trailer -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
@@ -434,7 +436,7 @@
             border-radius: 8px; 
             padding: 2rem; 
             text-align: left; 
-            margin-bottom: 3rem; 
+            margin-bottom: 2rem; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.05);
         }
         .info-section p { font-size: 1.1rem; color: #ddd; line-height: 1.6; margin-bottom: 2.5rem; }
@@ -527,6 +529,89 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
+        /* --- Support Section Styling (As specified in image_5e3554.png) --- */
+        .support-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .support-title {
+            color: #d4af37;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 1.5rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
+        }
+
+        .support-text {
+            color: #ccc;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            margin-bottom: 1.2rem;
+        }
+
+        .upi-block {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .upi-label {
+            color: #d4af37;
+            font-weight: 700;
+            font-size: 1.15rem;
+            letter-spacing: 1px;
+        }
+
+        .upi-id-text {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.5px;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #d4af37;
+            cursor: pointer;
+            padding: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        
+        .copy-btn:hover {
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        .copy-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .support-subtext {
+            color: #aaa;
+            font-size: 0.95rem;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
         /* Footer Credit */
         .designer-credit {
             padding-top: 1rem;
@@ -536,6 +621,7 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            margin-top: auto;
         }
         .designer-credit span {
             color: #d4af37;
@@ -545,6 +631,7 @@
 </head>
 <body>
 
+    <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Logo">
@@ -563,12 +650,14 @@
                     </div>
                 </li>
             </ul>
+            <!-- Menu Bar Counter Target (No Emoji Logo) -->
             <div class="nav-view-counter">
                 Views:<span id="count">1,024</span>
             </div>
         </div>
     </nav>
 
+    <!-- INLINE VFX OVERLAY CONTAINER -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -581,17 +670,21 @@
         </div>
     </div>
 
+    <!-- Optimization: Background loop stream configured directly from local GitHub servers -->
     <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" preload="auto" autoplay loop muted playsinline></video>
 
+    <!-- Resized Image Logo Block -->
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Teaser">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
+    <!-- Master Player Container -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
+            <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Format Logo" style="display: none;">
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop controls controlsList="nofullscreen"></video>
@@ -599,6 +692,7 @@
         </div>
 
         <div class="controls">
+            <!-- IMAX 70MM -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -609,6 +703,7 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
+            <!-- IMAX -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -617,6 +712,7 @@
                 <span class="format-ratio">1.90:1</span>
             </button>
 
+            <!-- 70MM -->
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -627,6 +723,7 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
+            <!-- 35MM -->
             <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -637,6 +734,7 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
+            <!-- Dolby Vision -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -648,6 +746,7 @@
                 <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
             </button>
 
+            <!-- Large Format -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -670,6 +769,7 @@
         </div>
     </div>
 
+    <!-- Educational Context Block -->
     <div class="info-section">
         <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
         
@@ -681,6 +781,24 @@
         </div>
     </div>
 
+    <!-- Support Section Layout Asset (Replicating image_5e3554.png layout rules) -->
+    <div class="support-container">
+        <h2 class="support-title">Support the Developer</h2>
+        <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
+        <div class="upi-block">
+            <span class="upi-label">UPI ID:</span>
+            <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
+            <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID" id="copyBtn">
+                <svg viewBox="0 0 24 24">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                </svg>
+            </button>
+        </div>
+        <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
+    </div>
+
+    <!-- Project Identity Brand Footer -->
     <div class="designer-credit">
         Designed By <span>G.Sathwik</span>
     </div>
@@ -791,6 +909,23 @@
             } else {
                 fsText.innerText = "FULLSCREEN";
             }
+        }
+
+        // Clip-path System Handler: Copies string contents directly to physical clipboard stack
+        function copyUpiToClipboard() {
+            const upiString = document.getElementById('upiId').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            
+            navigator.clipboard.writeText(upiString).then(() => {
+                // Interactive Status Feedback Loop
+                const originalSvg = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalSvg;
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy string text parameter: ', err);
+            });
         }
 
         // Scripted Integration: Tracking dynamic dashboard parameters via free CountAPI gateway routing
