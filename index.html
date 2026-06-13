@@ -16,11 +16,13 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
+    <!-- Network & Domain Pre-connections -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
+    <!-- High-Priority Asset Preloading for Instant Menu Render -->
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
-    <link rel="preload" href="OPSENHEIMER.png" as="image">
+    <link rel="preload" href="OPPENHEIMER.png" as="image">
 
     <style>
         :root {
@@ -183,10 +185,10 @@
             transform: rotate(180deg);
         }
 
-        /* --- Liquid Glass Mega Grid Menu --- */
+        /* --- Cinematic Mega Tile Grid Menu with Entry Animations --- */
         .dropdown-menu {
             position: absolute;
-            top: 125%; 
+            top: 110%; 
             right: 0;
             background: rgba(12, 12, 12, 0.6);
             backdrop-filter: blur(35px);
@@ -311,7 +313,7 @@
             margin-left: 4px;
         }
 
-        /* --- Title UI Framing --- */
+        /* --- Fixed Title Constraints --- */
         .title-container {
             margin-bottom: 1rem;
             max-width: 420px; 
@@ -375,7 +377,6 @@
             align-items: center;
             justify-content: center;
             transform: translateZ(0);
-            /* Water aspect warping engine */
             transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         width 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
@@ -488,7 +489,7 @@
         }
         .fullscreen-btn svg { width: 22px; height: 22px; fill: currentColor; }
         
-        /* --- Information Framework Blocks --- */
+        /* Info Section */
         .info-section { 
             width: 100%; 
             max-width: 900px; 
@@ -504,11 +505,11 @@
         }
         .info-section h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; }
         .info-section p { font-size: 1.05rem; color: #d4d4d4; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; }
-        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; color: #e5c158; font-size: 0.9rem; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12rem; color: #e5c158; font-size: 0.9rem; }
         .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; border: var(--glass-border); }
         .video-embed iframe { width: 100%; height: 100%; }
 
-        /* --- Upstream Fluid Interstitial Layer Overlay --- */
+        /* --- Fluid Interstitial Layer Overlay Display --- */
         .vfx-overlay-screen {
             position: fixed;
             top: 0;
@@ -526,7 +527,6 @@
             padding: 2rem;
             opacity: 0;
             visibility: hidden;
-            /* Water ripple splash transition speed paths */
             transition: opacity 0.5s var(--water-transition), 
                         visibility 0.5s var(--water-transition),
                         backdrop-filter 0.5s var(--water-transition),
@@ -571,6 +571,77 @@
             font-size: 1.4rem;
             text-align: left;
             letter-spacing: -0.2px;
+        }
+
+        .vfx-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* --- FIXED & GLASS OPTIMIZED: Dolby Vision Toggle UI Component --- */
+        .dolby-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            user-select: none;
+            transition: all var(--water-duration) var(--water-transition);
+        }
+        .dolby-toggle-container:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dolby-toggle-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            transition: color var(--water-duration) ease;
+        }
+
+        .dolby-toggle-container.is-active .dolby-toggle-label {
+            color: #e5c158;
+            text-shadow: 0 0 8px rgba(229, 193, 88, 0.4);
+        }
+
+        .switch-track {
+            position: relative;
+            width: 42px;
+            height: 22px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            transition: all 0.3s var(--water-transition);
+        }
+
+        .switch-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+        }
+
+        .dolby-toggle-container.is-active .switch-track {
+            background-color: rgba(229, 193, 88, 0.2);
+            border-color: #e5c158;
+        }
+
+        .dolby-toggle-container.is-active .switch-knob {
+            transform: translateX(20px);
+            background-color: #e5c158;
+            box-shadow: 0 0 10px rgba(229, 193, 88, 0.6);
         }
 
         .back-btn {
@@ -630,7 +701,7 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Glass Container Layout Panel --- */
+        /* Support Section Split-Layout Framework */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -649,6 +720,21 @@
             gap: 2rem;
             text-align: left;
             transform: translateZ(0);
+        }
+
+        @media (max-width: 768px) {
+            .support-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .support-info-block {
+                align-items: center !important;
+            }
+            .support-actions-wrapper {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         .support-info-block {
@@ -681,7 +767,7 @@
             background: rgba(0, 0, 0, 0.3);
             padding: 0.6rem 1.2rem;
             border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,0,0.08);
             transition: all 0.3s ease;
         }
         .upi-block:hover { border-color: rgba(255,255,255,0.2); }
@@ -733,6 +819,7 @@
             line-height: 1.4;
         }
 
+        /* Layout Wrapper for Dual QR/Instagram Fields */
         .support-actions-wrapper {
             display: flex;
             align-items: center;
@@ -763,7 +850,7 @@
         .qr-wrapper:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .qr-wrapper:hover .qr-element { transform: scale(1.04); }
 
-        /* Liquid Instagram Link Block Framework */
+        /* Premium Instagram Link Button Framework */
         .instagram-link-card {
             display: flex;
             flex-direction: column;
@@ -827,11 +914,9 @@
             font-weight: 600;
         }
 
-        /* Fullscreen Workspace Reset Overrides */
         .player-container:fullscreen { max-width: none; width: 100vw; height: 100vh; background-color: #000; padding: 20px; box-sizing: border-box; justify-content: space-between; animation: none; }
         .player-container:-webkit-full-screen { max-width: none; width: 100vw; height: 100vh; background-color: #000; padding: 20px; box-sizing: border-box; justify-content: space-between; animation: none; }
 
-        /* Hardware Acceleration Fallback Zones */
         @supports not (backdrop-filter: blur(10px)) {
             .navbar { background: rgba(15, 15, 15, 0.95); }
             .dropdown-menu { background: rgba(12, 12, 12, 0.98); }
@@ -840,7 +925,11 @@
         }
     </style></head><body>
 
-    <nav class="navbar glass-ui">
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
+    </h1>
+
+    <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
         </div>
@@ -849,6 +938,7 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
+                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
@@ -859,6 +949,7 @@
                             </div>
                         </div>
                         
+                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
@@ -869,6 +960,7 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
@@ -879,6 +971,7 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
@@ -897,14 +990,16 @@
         </div>
     </nav>
 
+    <!-- Overlay Container with Dedicated Control Switches -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
                 <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
                 <div class="vfx-controls-right">
-                    <div class="dolby-toggle-container" id="dolbyToggleFrame">
+                    <!-- FIXED TRIGGER SURFACE: Label & switch bound to single clickable target parent -->
+                    <div class="dolby-toggle-container" id="dolbyToggleFrame" onclick="toggleVfxDolby()">
                         <span class="dolby-toggle-label">Dolby Vision</span>
-                        <div class="switch-track" onclick="toggleVfxDolby()">
+                        <div class="switch-track">
                             <div class="switch-knob"></div>
                         </div>
                     </div>
@@ -927,6 +1022,7 @@
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
     <div id="playerContainer" class="player-container">
+        
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
@@ -1005,7 +1101,7 @@
         </div>
     </div>
 
-    <section class="info-section glass-ui">
+    <section class="info-section">
         <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
         <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
         
@@ -1017,7 +1113,8 @@
         </div>
     </section>
 
-    <section class="support-container glass-ui">
+    <!-- Support Container Block Layout -->
+    <section class="support-container">
         <div class="support-info-block">
             <h2 class="support-title">Support the Developer</h2>
             <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
