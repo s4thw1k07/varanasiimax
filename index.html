@@ -16,11 +16,13 @@
     
     <link rel="icon" type="image/png" href="favicon.png">
     
+    <!-- Network & Domain Pre-connections -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
+    <!-- High-Priority Asset Preloading for Instant Menu Render -->
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
-    <link rel="preload" href="oppthumb.png" as="image">
+    <link rel="preload" href="OPPENHEIMER.png" as="image">
 
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
@@ -524,7 +526,7 @@
         .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000; border: 1px solid rgba(212, 175, 55, 0.3); }
         .video-embed iframe { width: 100%; height: 100%; }
 
-        /* --- UPGRADED: Fluid Interstitial Layer Overlay Display --- */
+        /* --- Fluid Interstitial Layer Overlay Display --- */
         .vfx-overlay-screen {
             position: fixed;
             top: 0;
@@ -555,6 +557,7 @@
         }
 
         .vfx-container {
+            position: relative;
             width: 100%;
             max-width: 960px;
             text-align: center;
@@ -612,6 +615,7 @@
         }
 
         .vfx-video-wrapper {
+            position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
             border: 1px solid rgba(255, 255, 255, 0.15);
@@ -621,11 +625,25 @@
             background-color: #000;
         }
 
+        /* Dedicated dynamic overlay badge targeting within the modular window container */
+        .vfx-format-overlay {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 10;
+            pointer-events: none;
+            width: 100px;
+            display: none;
+            filter: invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            transition: opacity 0.4s ease;
+        }
+
         .vfx-video-element {
             width: 100%;
             height: 100%;
             object-fit: cover;
             outline: none;
+            transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .font-light { font-weight: 400; }
@@ -796,7 +814,8 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
+                        <!-- Stranger Things Tile 1 (No Dolby) -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
                             </div>
@@ -806,7 +825,8 @@
                             </div>
                         </div>
                         
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
+                        <!-- Stranger Things Tile 2 (No Dolby) -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
                             </div>
@@ -816,23 +836,25 @@
                             </div>
                         </div>
                         
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png')">
+                        <!-- Oppenheimer Tile 1 (Dolby Vision Grade Enabled) -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="oppthumb.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer VFX</span>
-                                <div class="dropdown-item-desc">Watch VFX breakdown by Starvel Studios.</div>
+                                <div class="dropdown-item-desc">Watch VFX breakdown with Dolby Vision.</div>
                             </div>
                         </div>
                         
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png')">
+                        <!-- Oppenheimer Tile 2 (Dolby Vision Grade Enabled) -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="oppthumb.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer Shot</span>
-                                <div class="dropdown-item-desc">Watch shot breakdown by Starvel Studios.</div>
+                                <div class="dropdown-item-desc">Watch shot breakdown with Dolby Vision.</div>
                             </div>
                         </div>
                     </div>
@@ -844,6 +866,7 @@
         </div>
     </nav>
 
+    <!-- Overlay Container with Dedicated Overlay Badge -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -851,6 +874,7 @@
                 <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
             </div>
             <div class="vfx-video-wrapper">
+                <img id="vfxFormatOverlay" class="vfx-format-overlay" src="dolby.png" alt="Active Modal Video Format Badge">
                 <video id="vfxTargetVideo" class="vfx-video-element" preload="none" muted playsinline controls></video>
             </div>
         </div>
@@ -984,7 +1008,6 @@
     </footer>
 
     <script>
-        // Dropdown interactive state animation routing
         const vfxDropdown = document.getElementById('vfxDropdown');
         const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
 
@@ -999,21 +1022,30 @@
             }
         });
 
-        // UPGRADED: Enhanced animation toggles for single page seamless switching loops
-        function playVfxInline(videoSrc, titleText, posterSrc) {
+        // UPGRADED: Enhanced animation toggles to track dynamic Dolby color variables across modal play states
+        function playVfxInline(videoSrc, titleText, posterSrc, isDolby) {
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
             const vfxVideo = document.getElementById('vfxTargetVideo');
             const vfxTitle = document.getElementById('vfxDisplayTitle');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
 
             if (explorerVideo) explorerVideo.pause();
 
             vfxTitle.innerText = titleText;
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
-            vfxVideo.load(); 
             
-            // Injects dynamic frame animation hooks smoothly
+            // Evaluates grading variable state array
+            if (isDolby) {
+                vfxVideo.classList.add('dolby-grade');
+                vfxBadge.style.display = 'block';
+            } else {
+                vfxVideo.classList.remove('dolby-grade');
+                vfxBadge.style.display = 'none';
+            }
+
+            vfxVideo.load(); 
             vfxOverlay.classList.add('is-open');
             vfxVideo.play();
             
@@ -1031,7 +1063,6 @@
                 vfxVideo.load();
             }
             
-            // Smooth reverse transitions running in parallel
             vfxOverlay.classList.remove('is-open');
 
             if (explorerVideo) explorerVideo.play();
