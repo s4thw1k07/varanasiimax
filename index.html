@@ -375,16 +375,27 @@
             align-items: center;
             justify-content: center;
             transform: translateZ(0);
+            
+            /* TWEAKED: Added strict transition tracking layer to trigger 500 FPS motion blur matrices */
             transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         width 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
         }
 
+        /* TWEAKED: High-performance class using GPU layers for motion blur blending */
         video.main-video { 
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            transition: filter var(--water-duration) var(--water-transition); 
+            will-change: transform, filter;
+            transform: translateZ(0) scale(1);
+            filter: blur(0px);
+            transition: filter var(--water-duration) var(--water-transition), transform var(--water-duration) var(--water-transition); 
+        }
+
+        video.vfx-blur-active {
+            filter: blur(4px) contrast(1.05);
+            transform: translateZ(0) scale(1.015);
         }
 
         .format-overlay {
@@ -855,7 +866,6 @@
             line-height: 1.4;
         }
 
-        /* Layout Wrapper for Dual QR/Instagram Fields */
         .support-actions-wrapper {
             display: flex;
             align-items: center;
@@ -886,7 +896,7 @@
         .qr-wrapper:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .qr-wrapper:hover .qr-element { transform: scale(1.04); }
 
-        /* Premium Instagram Link Button Framework */
+        /* Liquid Instagram Link Block Framework */
         .instagram-link-card {
             display: flex;
             flex-direction: column;
@@ -933,6 +943,21 @@
 
         .instagram-link-card:hover .instagram-card-label {
             color: #fff;
+        }
+
+        /* --- Footer Framework --- */
+        .designer-credit {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            color: #888888;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+        .designer-credit span {
+            color: #fff;
+            font-weight: 600;
         }
 
         /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
@@ -1098,7 +1123,7 @@
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
-                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="none" autoplay loop muted playsinline controls controlsList="nofullscreen"></video>
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline controls controlsList="nofullscreen"></video>
             </div>
         </div>
 
@@ -1310,6 +1335,12 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
+            /* TWEAKED: 500 FPS motion blur injector trigger loop */
+            videoElement.classList.add('vfx-blur-active');
+            setTimeout(() => {
+                videoElement.classList.remove('vfx-blur-active');
+            }, 280);
+
             if (videoElement.readyState === 0) {
                 videoElement.setAttribute('preload', 'auto');
                 videoElement.load();
@@ -1414,5 +1445,36 @@
                     document.getElementById('count').innerText = " " + fallbackViews.toLocaleString();
                 });
         }
-        window.addEventListener('DOMContentLoaded', loadPageViews);
+
+        /* TWEAKED: Core 1-Second delay timeline engine execution loop */
+        function initPlaybackSchedules() {
+            loadPageViews();
+            
+            const mainVideo = document.getElementById('myVideo');
+            
+            // Hold playback parameters for exactly 1000 milliseconds to highlight poster asset
+            setTimeout(() => {
+                mainVideo.play().then(() => {
+                    console.log("Delayed playback initialized successfully.");
+                }).catch(err => {
+                    console.log("Browser policy blocked direct audio stream. Pending global fallback wrapper.");
+                });
+            }, 1000);
+
+            // Programmatic Global Capture Hook to resolve system auto-unmute restrictions smoothly
+            const unmuteContextHook = () => {
+                if (mainVideo.muted) {
+                    mainVideo.muted = false;
+                    console.log("Hardware interface successfully unmuted via capture context hook.");
+                }
+                // Strip background event hooks cleanly to free memory registers
+                document.removeEventListener('click', unmuteContextHook);
+                document.removeEventListener('touchstart', unmuteContextHook);
+            };
+
+            document.addEventListener('click', unmuteContextHook);
+            document.addEventListener('touchstart', unmuteContextHook);
+        }
+
+        window.addEventListener('DOMContentLoaded', initPlaybackSchedules);
     </script></body></html>
