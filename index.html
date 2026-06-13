@@ -16,9 +16,11 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
+    <!-- Network & Domain Pre-connections -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
+    <!-- High-Priority Asset Preloading for Instant Menu Render -->
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
     <link rel="preload" href="OPPENHEIMER.png" as="image">
 
@@ -410,9 +412,7 @@
             padding-bottom: 1rem;
         }
         
-        /* WATER RIPPLE TILE ENGINE */
         .format-btn { 
-            position: relative;
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -431,25 +431,6 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: all var(--water-duration) var(--water-transition);
             transform: translateZ(0);
-            overflow: hidden;
-        }
-
-        /* Fluid Water Underlay Ripple Effect */
-        .format-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%; left: 50%;
-            width: 0; height: 0;
-            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.75s var(--water-transition), height 0.75s var(--water-transition);
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .format-btn:hover::before, .format-btn.active::before { 
-            width: 200px; height: 200px; 
         }
         
         .format-btn:hover { 
@@ -468,8 +449,6 @@
             box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
             transform: translateY(-6px) scale(1.05);
         }
-
-        .format-btn > * { z-index: 2; position: relative; } /* Float data over water layer */
 
         .format-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; text-align: center; }
         .format-ratio { font-size: 0.7rem; opacity: 0.65; font-weight: 500; margin-top: 1px; }
@@ -1017,6 +996,7 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
+                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
@@ -1027,6 +1007,7 @@
                             </div>
                         </div>
                         
+                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
@@ -1037,6 +1018,7 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
@@ -1047,6 +1029,7 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
@@ -1065,6 +1048,7 @@
         </div>
     </nav>
 
+    <!-- Overlay Container with Dedicated Control Switches -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -1104,6 +1088,7 @@
         </div>
 
         <div class="controls">
+            <!-- 1.43:1 Native IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
                 <div class="screen-icon">
                     <svg width="65" height="15" viewBox="0 0 100 22" fill="currentColor">
@@ -1114,6 +1099,7 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
+            <!-- 1.90:1 Native Digital IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')" aria-label="Switch aspect ratio framework to Digital IMAX">
                 <div class="screen-icon">
                     <svg width="65" height="15" viewBox="0 0 100 22" fill="currentColor">
@@ -1134,7 +1120,7 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <button class="format-btn" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
+            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
                 <svg class="screen-icon" width="50" height="20" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
                     <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
@@ -1144,6 +1130,7 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
+            <!-- Native Dolby Double-D Vector Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')" aria-label="Switch aspect ratio framework to Dolby Vision high contrast grading">
                 <div class="screen-icon">
                     <svg width="45" height="18" viewBox="0 0 48 16" fill="currentColor">
@@ -1154,6 +1141,7 @@
                 <span class="format-ratio">1.85:1 | 2.39:1</span>
             </button>
 
+            <!-- Native Curved Widescreen Ribbon Vector Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')" aria-label="Switch aspect ratio framework to Large Format widescreen presentation">
                 <div class="screen-icon">
                     <svg width="50" height="20" viewBox="0 0 50 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
