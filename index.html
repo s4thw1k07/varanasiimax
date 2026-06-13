@@ -586,7 +586,6 @@
             text-align: left;
         }
 
-        /* --- UPGRADED: Hardware Integrated CSS Dolby Vision Toggle Switch --- */
         .vfx-controls-right {
             display: flex;
             align-items: center;
@@ -932,7 +931,6 @@
             <div class="vfx-header-area">
                 <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
                 <div class="vfx-controls-right">
-                    <!-- UPGRADED: Dynamic Dolby Vision Hardware Switch Container Frame -->
                     <div class="dolby-toggle-container" id="dolbyToggleFrame">
                         <span class="dolby-toggle-label">Dolby Vision</span>
                         <div class="switch-track" onclick="toggleVfxDolby()">
@@ -1079,7 +1077,7 @@
     <script>
         const vfxDropdown = document.getElementById('vfxDropdown');
         const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
-        let vfxDolbyActive = false; // State track pointer for the overlay player workspace
+        let vfxDolbyActive = false; 
 
         vfxTriggerBtn.addEventListener('click', function(event) {
             event.stopPropagation(); 
@@ -1092,7 +1090,6 @@
             }
         });
 
-        // UPGRADED: Enhanced modal state pointer logic with programmatic switch synchronization
         function playVfxInline(videoSrc, titleText, posterSrc, isDolby) {
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
@@ -1107,7 +1104,6 @@
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
             
-            // Core component synchronization mapping loop
             vfxDolbyActive = isDolby;
             if (vfxDolbyActive) {
                 vfxVideo.classList.add('dolby-grade');
@@ -1128,7 +1124,6 @@
             vfxDropdown.classList.remove('is-active');
         }
 
-        // UPGRADED: Direct user click toggling interface script loop for the overlay window player
         function toggleVfxDolby() {
             const vfxVideo = document.getElementById('vfxTargetVideo');
             const vfxBadge = document.getElementById('vfxFormatOverlay');
@@ -1147,7 +1142,7 @@
                 vfxBadge.style.opacity = '0';
                 setTimeout(() => {
                     if(!vfxDolbyActive) vfxBadge.style.display = 'none';
-                }, 400); // Wait for opacity fade transition to resolve safely
+                }, 400); 
             }
         }
 
