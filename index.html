@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- Optimized SEO Title Link for Search Engines -->
     <title>Varanasi IMAX Premium Formats Experience | Starvel Studios</title>
     
-    <!-- Strict SEO Meta Tags for Google Indexing -->
     <meta name="description" content="Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.">
     <meta name="keywords" content="IMAX, Varanasi IMAX, IMAX 70mm, Dolby Vision, Varanasi teaser aspect ratio, Starvel Studios, G Sathwik">
     <meta name="author" content="G. Sathwik">
     
-    <!-- Open Graph Metadata for Premium Link Previews on Discord, WhatsApp, and X -->
     <meta property="og:title" content="Varanasi IMAX Premium Formats Experience | Starvel Studios">
     <meta property="og:description" content="Interactive format explorer for the cinematic Varanasi trailer presentation. Compare IMAX 70mm, Dolby Vision, and 35mm in real time.">
     <meta property="og:image" content="image_8622bf.jpg">
     <meta property="og:url" content="https://s4thw1k07.github.io/varanasiimax/">
     <meta property="og:type" content="website">
     
-    <!-- Custom Icon Profile for the Browser Tab Layout -->
     <link rel="icon" type="image/png" href="favicon.png">
     
-    <!-- Speed Optimization: Warm up connection to Dropbox servers early for the main trailer -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
@@ -543,29 +538,57 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Section Styling --- */
+        /* --- Support Section Split-Layout Framework --- */
         .support-container {
             width: 100%;
             max-width: 900px;
             margin: 1.5rem auto;
-            padding: 1.5rem;
-            text-align: center;
+            padding: 2rem;
+            background: rgba(12, 12, 12, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            text-align: left;
+        }
+
+        /* Responsive Shift for Mobile Displays */
+        @media (max-width: 768px) {
+            .support-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .support-info-block {
+                align-items: center !important;
+            }
+        }
+
+        .support-info-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
         }
 
         .support-title {
             color: #d4af37;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 1.5rem;
-            font-weight: 500;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 3px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         }
 
         .support-text {
             color: #ccc;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             line-height: 1.5;
             margin-bottom: 1.2rem;
         }
@@ -573,22 +596,25 @@
         .upi-block {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 10px;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
         }
 
         .upi-label {
             color: #d4af37;
             font-weight: 700;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             letter-spacing: 1px;
         }
 
         .upi-id-text {
             color: #fff;
             font-weight: 600;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             letter-spacing: 0.5px;
         }
 
@@ -610,7 +636,7 @@
         }
 
         .copy-btn svg {
-            width: 20px;
+            width: 18px;
             height: 20px;
             fill: none;
             stroke: currentColor;
@@ -620,10 +646,35 @@
         }
 
         .support-subtext {
-            color: #aaa;
-            font-size: 0.95rem;
+            color: #888;
+            font-size: 0.9rem;
             font-style: italic;
-            line-height: 1.5;
+            line-height: 1.4;
+        }
+
+        /* QR Scanner Frame Layout Rules */
+        .qr-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
+        }
+
+        .qr-element {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 4px;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .qr-wrapper:hover .qr-element {
+            transform: scale(1.03);
         }
 
         /* Footer Credit */
@@ -645,12 +696,10 @@
 </head>
 <body>
 
-    <!-- Hidden Keyword-Rich Headings mapped strictly for Google Crawlers/SEO Algorithms -->
     <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
         Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
     </h1>
 
-    <!-- Sticky Top Navigation Bar -->
     <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
@@ -669,14 +718,12 @@
                     </div>
                 </li>
             </ul>
-            <!-- Menu Bar Counter Target (No Emoji Logo) -->
             <div class="nav-view-counter">
                 Views:<span id="count">1,024</span>
             </div>
         </div>
     </nav>
 
-    <!-- INLINE VFX OVERLAY CONTAINER -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -689,30 +736,24 @@
         </div>
     </div>
 
-    <!-- Optimization: Background loop stream configured directly from local GitHub servers -->
     <video id="bgVideo" src="loop.mp4" poster="image_8622bf.jpg" preload="auto" autoplay loop muted playsinline></video>
 
-    <!-- Resized Image Logo Block with descriptive Alt Text -->
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
-    <!-- Master Player Container -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
-            <!-- Main Aspect Ratio Video Block -->
             <div class="video-wrapper" id="videoWrapper">
                 <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
-                <!-- Fixed iOS Optimization: Added muted and playsinline directly to secure native safari streams -->
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop muted playsinline controls></video>
             </div>
         </div>
 
         <div class="controls">
-            <!-- IMAX 70MM -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -723,7 +764,6 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
-            <!-- IMAX -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')" aria-label="Switch aspect ratio framework to Digital IMAX">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -732,7 +772,6 @@
                 <span class="format-ratio">1.90:1</span>
             </button>
 
-            <!-- 70MM -->
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')" aria-label="Switch aspect ratio framework to Standard 70mm film">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -743,7 +782,6 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <!-- 35MM -->
             <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -754,7 +792,6 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <!-- Dolby Vision -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')" aria-label="Switch aspect ratio framework to Dolby Vision high contrast grading">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -766,7 +803,6 @@
                 <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
             </button>
 
-            <!-- Large Format -->
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')" aria-label="Switch aspect ratio framework to Large Format widescreen presentation">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
                     <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
@@ -789,7 +825,6 @@
         </div>
     </div>
 
-    <!-- Educational Context Block -->
     <section class="info-section">
         <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
         <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
@@ -802,24 +837,28 @@
         </div>
     </section>
 
-    <!-- Support Section Layout Asset (Replicating image_5e3554.png layout rules) -->
     <section class="support-container">
-        <h2 class="support-title">Support the Developer</h2>
-        <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
-        <div class="upi-block">
-            <span class="upi-label">UPI ID:</span>
-            <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
-            <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn" aria-label="Copy developer upi token identifier">
-                <svg viewBox="0 0 24 24">
-                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
-                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
-                </svg>
-            </button>
+        <div class="support-info-block">
+            <h2 class="support-title">Support the Developer</h2>
+            <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
+            <div class="upi-block">
+                <span class="upi-label">UPI ID:</span>
+                <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
+                <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn" aria-label="Copy developer upi token identifier">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
         </div>
-        <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
+        
+        <div class="qr-wrapper">
+            <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset for sathwik.gurram@okaxis">
+        </div>
     </section>
 
-    <!-- Project Identity Brand Footer -->
     <footer class="designer-credit">
         Designed By <span>G.Sathwik</span>
     </footer>
