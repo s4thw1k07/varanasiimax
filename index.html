@@ -19,6 +19,9 @@
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
+    <link rel="preload" href="Stranger Things PART 1.png" as="image">
+    <link rel="preload" href="oppthumb.png" as="image">
+
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
@@ -89,12 +92,14 @@
             gap: 24px;
         }
 
-        /* Dropdown Structure */
+        /* Dropdown Box Structure */
         .dropdown {
             position: relative;
         }
 
+        /* UPGRADED: Expanded trigger surface to cover entire box clickable field bounds */
         .dropdown-trigger {
+            background: transparent;
             color: #d4af37;
             text-decoration: none;
             font-weight: 700;
@@ -108,10 +113,13 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 6px;
+            width: 100%;
+            outline: none;
         }
 
-        .dropdown-trigger:hover, .dropdown:hover .dropdown-trigger {
+        .dropdown-trigger:hover, .dropdown:hover .dropdown-trigger, .dropdown.is-active .dropdown-trigger {
             color: #fff;
             background-color: rgba(212, 175, 55, 0.15);
             border-color: rgba(212, 175, 55, 0.5);
@@ -126,11 +134,11 @@
             transition: transform 0.3s ease;
         }
 
-        .dropdown:hover .dropdown-trigger::after {
+        .dropdown:hover .dropdown-trigger::after, .dropdown.is-active .dropdown-trigger::after {
             transform: rotate(180deg);
         }
 
-        /* --- UPGRADED: Cinematic Mega Tile Grid Menu --- */
+        /* --- Cinematic Mega Tile Grid Menu --- */
         .dropdown-menu {
             position: absolute;
             top: 120%;
@@ -148,7 +156,8 @@
             text-align: left;
         }
 
-        .dropdown:hover .dropdown-menu {
+        /* Responsive Display Triggers via Hover and Class Injection */
+        .dropdown:hover .dropdown-menu, .dropdown.is-active .dropdown-menu {
             display: grid;
         }
 
@@ -207,7 +216,7 @@
             transition: color 0.3s ease;
         }
 
-        /* Master Hover Performance Animations */
+        /* Hover Performance Animations */
         .dropdown-item:hover {
             background: rgba(212, 175, 55, 0.08);
             border-color: #d4af37;
@@ -229,7 +238,7 @@
             color: #ddd;
         }
 
-        /* Mobile Optimization for Mega Droproom Structure */
+        /* Mobile Adjustments */
         @media (max-width: 768px) {
             .dropdown-menu {
                 width: 300px;
@@ -273,30 +282,6 @@
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
         }
 
-        /* --- Premium Text Title UI Replacement --- */
-        .main-page-title {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            font-size: 3.2rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, #fff 30%, #d4af37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
-            line-height: 1.1;
-            margin-bottom: 0.2rem;
-        }
-
-        .title-badge {
-            font-size: 0.8rem;
-            color: #d4af37;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            font-weight: 800;
-            opacity: 0.9;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
         p.subtitle { 
             font-size: 1rem; 
             color: #ccc; 
@@ -305,7 +290,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
         }
         
-        /* Master Player Container (Handles Fullscreen Root Layouts) */
+        /* Master Player Container */
         .player-container {
             width: 100%;
             max-width: 1000px; 
@@ -316,7 +301,7 @@
             --current-ratio: 2.39; 
         }
 
-        /* --- FIXED FULLSCREEN API SELECTORS --- */
+        /* FULLSCREEN API SELECTORS */
         .player-container:fullscreen { 
             max-width: none; 
             width: 100vw; 
@@ -347,12 +332,8 @@
             min-height: 0; 
         }
 
-        .player-container:fullscreen .video-area {
-            margin-bottom: 1rem;
-        }
-        .player-container:-webkit-full-screen .video-area {
-            margin-bottom: 1rem;
-        }
+        .player-container:fullscreen .video-area { margin-bottom: 1rem; }
+        .player-container:-webkit-full-screen .video-area { margin-bottom: 1rem; }
 
         /* Video Wrapper */
         .video-wrapper {
@@ -388,7 +369,6 @@
             transition: all 0.8s ease; 
         }
 
-        /* Overlay Logo Styling */
         .format-overlay {
             position: absolute;
             top: 25px;
@@ -398,12 +378,11 @@
             transition: opacity 0.3s ease;
         }
 
-        /* DOLBY VISION COLOR GRADE */
         video.dolby-grade {
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* Controls / Buttons */
+        /* Controls */
         .controls { 
             display: flex; 
             gap: 10px; 
@@ -413,14 +392,9 @@
             padding-bottom: 1rem;
         }
 
-        .player-container:fullscreen .controls {
-            padding-bottom: 0;
-        }
-        .player-container:-webkit-full-screen .controls {
-            padding-bottom: 0;
-        }
+        .player-container:fullscreen .controls { padding-bottom: 0; }
+        .player-container:-webkit-full-screen .controls { padding-bottom: 0; }
         
-        /* Buttons for Gold Glowing UI */
         .format-btn { 
             background-color: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px);
@@ -458,7 +432,6 @@
         .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
         .screen-icon { margin-bottom: 8px; }
 
-        /* Fullscreen Specific Button Styles */
         .divider {
             width: 2px;
             height: 60px;
@@ -493,7 +466,7 @@
         }
         .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
         
-        /* Info Section Styles */
+        /* Info Section */
         .info-section { 
             width: 100%; 
             max-width: 900px; 
@@ -511,7 +484,7 @@
         .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000; border: 1px solid rgba(212, 175, 55, 0.3); }
         .video-embed iframe { width: 100%; height: 100%; }
 
-        /* --- Same Page Inline VFX Overlay Styling --- */
+        /* VFX Overlay Screen */
         .vfx-overlay-screen {
             position: fixed;
             top: 0;
@@ -592,11 +565,10 @@
             outline: none;
         }
 
-        /* Typography */
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Section Split-Layout Framework --- */
+        /* Support Section Split-Layout */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -615,7 +587,6 @@
             text-align: left;
         }
 
-        /* Responsive Shift for Mobile Displays */
         @media (max-width: 768px) {
             .support-container {
                 flex-direction: column;
@@ -710,7 +681,6 @@
             line-height: 1.4;
         }
 
-        /* QR Scanner Frame Layout Rules */
         .qr-wrapper {
             display: flex;
             flex-direction: column;
@@ -731,11 +701,8 @@
             transition: transform 0.3s ease;
         }
 
-        .qr-wrapper:hover .qr-element {
-            transform: scale(1.03);
-        }
+        .qr-wrapper:hover .qr-element { transform: scale(1.03); }
 
-        /* Footer Credit */
         .designer-credit {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -746,10 +713,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
             margin-top: auto;
         }
-        .designer-credit span {
-            color: #d4af37;
-            font-weight: bold;
-        }
+        .designer-credit span { color: #d4af37; font-weight: bold; }
     </style></head><body>
 
     <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
@@ -762,13 +726,12 @@
         </div>
         <div class="nav-right-side">
             <ul class="nav-menu">
-                <li class="dropdown">
-                    <a class="dropdown-trigger">VFX Shots by Sathwik</a>
+                <li class="dropdown" id="vfxDropdown">
+                    <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
-                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
                             <div class="dropdown-item-thumb">
-                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail Image Asset">
+                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Stranger Things</span>
@@ -776,10 +739,9 @@
                             </div>
                         </div>
                         
-                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
                             <div class="dropdown-item-thumb">
-                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail Image Asset">
+                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Vecna's Curse</span>
@@ -787,10 +749,9 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png')">
                             <div class="dropdown-item-thumb">
-                                <img src="oppthumb.png" alt="Oppenheimer Visual Effects Breakdown Video Cover Thumbnail">
+                                <img src="oppthumb.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer VFX</span>
@@ -798,10 +759,9 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png')">
                             <div class="dropdown-item-thumb">
-                                <img src="oppthumb.png" alt="Oppenheimer Shot Reconstruction Video Cover Thumbnail">
+                                <img src="oppthumb.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer Shot</span>
@@ -957,6 +917,22 @@
     </footer>
 
     <script>
+        // UPGRADED: Enhanced click mechanics to make entire button box surface interactive
+        const vfxDropdown = document.getElementById('vfxDropdown');
+        const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
+
+        vfxTriggerBtn.addEventListener('click', function(event) {
+            event.stopPropagation(); // Stops immediate document body click collision triggers
+            vfxDropdown.classList.toggle('is-active');
+        });
+
+        // Safe tracking loop to close panel dynamically if workspace background fields are clicked
+        document.addEventListener('click', function(event) {
+            if (!vfxDropdown.contains(event.target)) {
+                vfxDropdown.classList.remove('is-active');
+            }
+        });
+
         function playVfxInline(videoSrc, titleText, posterSrc) {
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
@@ -971,6 +947,9 @@
             vfxVideo.load(); 
             vfxOverlay.style.display = "flex";
             vfxVideo.play();
+            
+            // Auto close tiles once selection loads up
+            vfxDropdown.classList.remove('is-active');
         }
 
         function closeVfxInline() {
@@ -1064,13 +1043,11 @@
             }
         }
 
-        // Clip-path System Handler: Copies string contents directly to physical clipboard stack
         function copyUpiToClipboard() {
             const upiString = document.getElementById('upiId').innerText;
             const copyBtn = document.getElementById('copyBtn');
             
             navigator.clipboard.writeText(upiString).then(() => {
-                // Interactive Status Feedback Loop
                 const originalSvg = copyBtn.innerHTML;
                 copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
                 setTimeout(() => {
@@ -1081,7 +1058,6 @@
             });
         }
 
-        // Scripted Integration: Tracking dynamic dashboard parameters via free CountAPI gateway routing
         function loadPageViews() {
             const namespace = "s4thw1k07_varanasiimax";
             const key = "visits";
@@ -1098,7 +1074,6 @@
                     }
                 })
                 .catch(() => {
-                    // Safe fallback calculation to keep UI clean if network paths are busy
                     let fallbackViews = localStorage.getItem('local_views') || 1024;
                     fallbackViews = parseInt(fallbackViews) + 1;
                     localStorage.setItem('local_views', fallbackViews);
