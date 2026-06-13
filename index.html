@@ -4,11 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- 1. This updates the main purple clickable link text in Google -->
     <title>IMAX FORMATS | Starvel Studios</title>
     
     <meta name="description" content="Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.">
     <meta name="keywords" content="IMAX, Varanasi IMAX, IMAX 70mm, Dolby Vision, Varanasi teaser aspect ratio, Starvel Studios, G Sathwik">
     <meta name="author" content="G. Sathwik">
+    
+    <!-- 2. Schema.org markup to force Google to show "WATCH THE IMAX VERSION HERE" instead of "GitHub Pages documentation" -->
+    <meta property="og:site_name" content="WATCH THE IMAX VERSION HERE">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "WATCH THE IMAX VERSION HERE",
+      "url": "https://s4thw1k07.github.io/varanasiimax/"
+    }
+    </script>
     
     <meta property="og:title" content="IMAX FORMATS | Starvel Studios">
     <meta property="og:description" content="Interactive format explorer for the cinematic Varanasi trailer presentation. Compare IMAX 70mm, Dolby Vision, and 35mm in real time.">
@@ -16,7 +28,9 @@
     <meta property="og:url" content="https://s4thw1k07.github.io/varanasiimax/">
     <meta property="og:type" content="website">
     
+    <!-- 3. This replaces the generic Globe icon in Google with your Starvel/Custom Favicon logo -->
     <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
     
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
@@ -72,6 +86,7 @@
             align-items: center;
         }
 
+        /* Keeps the Starvel logo in the page design */
         .nav-logo {
             height: 28px;
             width: auto;
@@ -702,6 +717,7 @@
 
     <nav class="navbar">
         <div class="nav-logo-container">
+            <!-- Keeps your Starvel logo inside the website header -->
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
         </div>
         <div class="nav-right-side">
@@ -971,13 +987,11 @@
             }
         }
 
-        // Clip-path System Handler: Copies string contents directly to physical clipboard stack
         function copyUpiToClipboard() {
             const upiString = document.getElementById('upiId').innerText;
             const copyBtn = document.getElementById('copyBtn');
             
             navigator.clipboard.writeText(upiString).then(() => {
-                // Interactive Status Feedback Loop
                 const originalSvg = copyBtn.innerHTML;
                 copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
                 setTimeout(() => {
@@ -988,7 +1002,6 @@
             });
         }
 
-        // Scripted Integration: Tracking dynamic dashboard parameters via free CountAPI gateway routing
         function loadPageViews() {
             const namespace = "s4thw1k07_varanasiimax";
             const key = "visits";
@@ -1005,7 +1018,6 @@
                     }
                 })
                 .catch(() => {
-                    // Safe fallback calculation to keep UI clean if network paths are busy
                     let fallbackViews = localStorage.getItem('local_views') || 1024;
                     fallbackViews = parseInt(fallbackViews) + 1;
                     localStorage.setItem('local_views', fallbackViews);
