@@ -4,14 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- 1. This updates the main purple clickable link text in Google -->
     <title>IMAX FORMATS | Starvel Studios</title>
     
     <meta name="description" content="Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.">
     <meta name="keywords" content="IMAX, Varanasi IMAX, IMAX 70mm, Dolby Vision, Varanasi teaser aspect ratio, Starvel Studios, G Sathwik">
     <meta name="author" content="G. Sathwik">
     
-    <!-- 2. Schema.org markup to force Google to show "WATCH THE IMAX VERSION HERE" instead of "GitHub Pages documentation" -->
     <meta property="og:site_name" content="WATCH THE IMAX VERSION HERE">
     <script type="application/ld+json">
     {
@@ -28,7 +26,6 @@
     <meta property="og:url" content="https://s4thw1k07.github.io/varanasiimax/">
     <meta property="og:type" content="website">
     
-    <!-- 3. This replaces the generic Globe icon in Google with your Starvel/Custom Favicon logo -->
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
@@ -49,7 +46,6 @@
             text-align: center; 
         }
 
-        /* Speed Optimization: Force GPU layer rendering to prevent UI lag */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -86,7 +82,6 @@
             align-items: center;
         }
 
-        /* Keeps the Starvel logo in the page design */
         .nav-logo {
             height: 28px;
             width: auto;
@@ -106,7 +101,6 @@
             gap: 24px;
         }
 
-        /* Dropdown Structure */
         .dropdown {
             position: relative;
         }
@@ -196,7 +190,6 @@
             padding-left: 1.4rem;
         }
 
-        /* --- Navbar Integrated View Counter Style --- */
         .nav-view-counter {
             color: #aaa;
             font-size: 0.85rem;
@@ -230,30 +223,6 @@
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
         }
 
-        /* --- Premium Text Title UI Replacement --- */
-        .main-page-title {
-            font-family: 'Impact', 'Arial Black', sans-serif;
-            font-size: 3.2rem;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            background: linear-gradient(135deg, #fff 30%, #d4af37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
-            line-height: 1.1;
-            margin-bottom: 0.2rem;
-        }
-
-        .title-badge {
-            font-size: 0.8rem;
-            color: #d4af37;
-            text-transform: uppercase;
-            letter-spacing: 6px;
-            font-weight: 800;
-            opacity: 0.9;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
         p.subtitle { 
             font-size: 1rem; 
             color: #ccc; 
@@ -262,35 +231,15 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
         }
         
-        /* Master Player Container (Handles Fullscreen Root Layouts) */
+        /* Master Player Container */
         .player-container {
             width: 100%;
             max-width: 1000px; 
             display: flex;
             flex-direction: column;
             background-color: transparent; 
-            margin: 0 auto 3rem auto;
+            margin: 0 auto 1.5rem auto;
             --current-ratio: 2.39; 
-        }
-
-        /* --- FIXED FULLSCREEN API SELECTORS --- */
-        .player-container:fullscreen { 
-            max-width: none; 
-            width: 100vw; 
-            height: 100vh; 
-            background-color: #000;
-            padding: 20px;
-            box-sizing: border-box;
-            justify-content: space-between;
-        }
-        .player-container:-webkit-full-screen { 
-            max-width: none; 
-            width: 100vw; 
-            height: 100vh; 
-            background-color: #000;
-            padding: 20px;
-            box-sizing: border-box;
-            justify-content: space-between;
         }
 
         /* Video Area Layout */
@@ -304,38 +253,20 @@
             min-height: 0; 
         }
 
-        .player-container:fullscreen .video-area {
-            margin-bottom: 1rem;
-        }
-        .player-container:-webkit-full-screen .video-area {
-            margin-bottom: 1rem;
-        }
-
-        /* Video Wrapper */
+        /* Video Wrapper - GOLD BORDER THEME */
         .video-wrapper {
             position: relative; 
             aspect-ratio: var(--current-ratio) / 1;
             width: 100%;
             max-height: 100%;
             background-color: #000;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 1px solid #d4af37;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
             overflow: hidden;
             transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-        }
-
-        .player-container:fullscreen .video-wrapper { 
-            border: none; 
-            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
-            max-height: calc(100vh - 150px);
-        }
-        .player-container:-webkit-full-screen .video-wrapper { 
-            border: none; 
-            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
-            max-height: calc(100vh - 150px);
         }
 
         video.main-video { 
@@ -345,7 +276,146 @@
             transition: all 0.8s ease; 
         }
 
-        /* Overlay Logo Styling */
+        /* --- CUSTOM GOLD VIDEO CONTROLS OVERLAY FRAME (Matches image_ee80a0.png) --- */
+        .custom-video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.4) 70%, rgba(0,0,0,0) 100%);
+            display: flex;
+            flex-direction: column;
+            padding: 1.5rem 1.2rem 0.8rem 1.2rem;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 20;
+            pointer-events: auto;
+        }
+
+        .video-wrapper:hover .custom-video-controls,
+        .custom-video-controls:focus-within {
+            opacity: 1;
+        }
+
+        .progress-timeline-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.8rem;
+            cursor: pointer;
+        }
+
+        .progress-bar-rail {
+            width: 100%;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            position: relative;
+            border-radius: 2px;
+            transition: height 0.1s ease;
+        }
+
+        .progress-timeline-container:hover .progress-bar-rail {
+            height: 6px;
+        }
+
+        .progress-filled-gold {
+            height: 100%;
+            width: 0%;
+            background: #d4af37;
+            box-shadow: 0 0 8px #d4af37;
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .controls-button-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+        .controls-left-group, .controls-right-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .control-action-btn {
+            background: transparent;
+            border: none;
+            color: #d4af37;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .control-action-btn:hover {
+            color: #fff;
+            transform: scale(1.15);
+            filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.6));
+        }
+
+        .control-action-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .timestamp-display {
+            font-size: 0.85rem;
+            color: #d4af37;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- EMBEDDED LOADER OVERLAY (Matches image_ee80a0.png) --- */
+        .cinematic-loader-screen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 15;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .gold-spinner-circle {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(212, 175, 55, 0.1);
+            border-top: 3px solid #d4af37;
+            border-radius: 50%;
+            animation: spinLoader 1s linear infinite;
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
+        }
+
+        .loader-flavor-text {
+            color: #d4af37;
+            font-style: italic;
+            font-size: 1.1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 300;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.3);
+        }
+
+        @keyframes spinLoader {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Format Overlay Badge */
         .format-overlay {
             position: absolute;
             top: 25px;
@@ -355,12 +425,11 @@
             transition: opacity 0.3s ease;
         }
 
-        /* DOLBY VISION COLOR GRADE */
         video.dolby-grade {
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* Controls / Buttons */
+        /* Format Selector UI Panel */
         .controls { 
             display: flex; 
             gap: 10px; 
@@ -369,15 +438,7 @@
             align-items: center;
             padding-bottom: 1rem;
         }
-
-        .player-container:fullscreen .controls {
-            padding-bottom: 0;
-        }
-        .player-container:-webkit-full-screen .controls {
-            padding-bottom: 0;
-        }
         
-        /* Buttons for Gold Glowing UI */
         .format-btn { 
             background-color: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px);
@@ -415,40 +476,45 @@
         .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
         .screen-icon { margin-bottom: 8px; }
 
-        /* Fullscreen Specific Button Styles */
-        .divider {
-            width: 2px;
-            height: 60px;
-            background-color: rgba(212, 175, 55, 0.3);
-            margin: 0 10px;
-            border-radius: 2px;
+        /* --- NATIVE ASPECT-RATIO PRESERVATION FULLSCREEN ENGINE --- */
+        #videoWrapper:fullscreen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: #000 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
 
-        .fullscreen-btn {
-            background-color: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(5px);
-            color: #d4af37;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 6px;
-            padding: 1rem;
-            cursor: pointer;
-            width: 100px;
-            height: 80px;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+        #videoWrapper:fullscreen .main-video {
+            width: min(100vw, calc(100vh * var(--current-ratio))) !important;
+            height: min(100vh, calc(100vw / var(--current-ratio))) !important;
+            object-fit: cover !important;
         }
-        .fullscreen-btn:hover {
-            color: #fff;
-            background-color: rgba(212, 175, 55, 0.15);
-            border-color: rgba(212, 175, 55, 0.6);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+
+        /* Fullscreen Webkit Rules */
+        #videoWrapper:-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            max-width: none !important;
+            max-height: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            background: #000 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
         }
-        .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
+
+        #videoWrapper:-webkit-full-screen .main-video {
+            width: min(100vw, calc(100vh * var(--current-ratio))) !important;
+            height: min(100vh, calc(100vw / var(--current-ratio))) !important;
+            object-fit: cover !important;
+        }
         
         /* Info Section Styles */
         .info-section { 
@@ -549,7 +615,6 @@
             outline: none;
         }
 
-        /* Typography */
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
@@ -572,7 +637,6 @@
             text-align: left;
         }
 
-        /* Responsive Shift for Mobile Displays */
         @media (max-width: 768px) {
             .support-container {
                 flex-direction: column;
@@ -667,7 +731,6 @@
             line-height: 1.4;
         }
 
-        /* QR Scanner Frame Layout Rules */
         .qr-wrapper {
             display: flex;
             flex-direction: column;
@@ -692,7 +755,6 @@
             transform: scale(1.03);
         }
 
-        /* Footer Credit */
         .designer-credit {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -717,7 +779,6 @@
 
     <nav class="navbar">
         <div class="nav-logo-container">
-            <!-- Keeps your Starvel logo inside the website header -->
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
         </div>
         <div class="nav-right-side">
@@ -760,15 +821,67 @@
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
+    <!-- Master Layout Player Interface -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
+                
+                <!-- GOLD LOADER SCREEN (Matches image_ee80a0.png) -->
+                <div id="cinematicLoader" class="cinematic-loader-screen">
+                    <div class="gold-spinner-circle"></div>
+                    <div class="loader-flavor-text">Your Cinematic Experience is Loading...</div>
+                </div>
+
                 <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
-                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop muted playsinline controls></video>
+                
+                <!-- Core Video Node -->
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop muted playsinline></video>
+
+                <!-- PREMIUM CUSTOM CONTROLS OVERLAY (Matches image_ee80a0.png) -->
+                <div class="custom-video-controls" id="customControls">
+                    
+                    <!-- Progress Slider -->
+                    <div class="progress-timeline-container" id="progressContainer">
+                        <div class="progress-bar-rail">
+                            <div class="progress-filled-gold" id="progressFill"></div>
+                        </div>
+                    </div>
+
+                    <!-- Button Execution Layout Row -->
+                    <div class="controls-button-row">
+                        <div class="controls-left-group">
+                            <button class="control-action-btn" id="playPauseBtn" aria-label="Toggle Play State">
+                                <svg id="playIcon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <svg id="pauseIcon" viewBox="0 0 24 24" style="display:none;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                            <button class="control-action-btn" id="volumeBtn" aria-label="Toggle Audio Track">
+                                <svg id="volumeMutedIcon" viewBox="0 0 24 24"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM3 9v6h4l5 5V4L7 9H3z"/></svg>
+                                <svg id="volumeOnIcon" viewBox="0 0 24 24" style="display:none;"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+                            </button>
+                            <div class="timestamp-display">
+                                <span id="timeCurrent">0:00</span> / <span id="timeTotal">0:00</span>
+                            </div>
+                        </div>
+
+                        <div class="controls-right-group">
+                            <!-- Settings Placeholder Asset -->
+                            <button class="control-action-btn" aria-label="Format Configurations">
+                                <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                            </button>
+                            <!-- Embedded Aspect-Ratio-Safe Fullscreen Trigger -->
+                            <button class="control-action-btn" id="fsOverlayBtn" onclick="toggleWrapperFullscreen()" aria-label="Execute Cinematic Widescreen Fullscreen Layout">
+                                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
             </div>
         </div>
 
+        <!-- Format Selector Options Deck -->
         <div class="controls">
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
@@ -828,16 +941,6 @@
                 <span class="format-title font-impact" style="font-size: 1.1rem; line-height: 0.9;">LARGE FORMAT</span>
                 <span class="format-ratio">1.85:1 | 2.39:1</span>
             </button>
-
-            <div class="divider"></div>
-
-            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton" aria-label="Toggle native application workspace fullscreen layout mode">
-                <svg viewBox="0 0 24 24">
-                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                </svg>
-                <span class="format-title" style="font-size: 0.8rem;" id="fsText">FULLSCREEN</span>
-            </button>
-
         </div>
     </div>
 
@@ -880,53 +983,111 @@
     </footer>
 
     <script>
-        function playVfxInline(videoSrc, titleText, posterSrc) {
-            const explorerVideo = document.getElementById('myVideo');
-            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
-            const vfxVideo = document.getElementById('vfxTargetVideo');
-            const vfxTitle = document.getElementById('vfxDisplayTitle');
+        const mainVideo = document.getElementById('myVideo');
+        const videoWrapper = document.getElementById('videoWrapper');
+        const playerContainer = document.getElementById('playerContainer');
+        const loaderScreen = document.getElementById('cinematicLoader');
+        
+        // Custom UI Control Elements
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playIcon = document.getElementById('playIcon');
+        const pauseIcon = document.getElementById('pauseIcon');
+        const volumeBtn = document.getElementById('volumeBtn');
+        const volumeMutedIcon = document.getElementById('volumeMutedIcon');
+        const volumeOnIcon = document.getElementById('volumeOnIcon');
+        const progressContainer = document.getElementById('progressContainer');
+        const progressFill = document.getElementById('progressFill');
+        const timeCurrent = document.getElementById('timeCurrent');
+        const timeTotal = document.getElementById('timeTotal');
 
-            if (explorerVideo) explorerVideo.pause();
+        // Force initialize preload parameters to support custom layout triggers
+        window.addEventListener('DOMContentLoaded', () => {
+            mainVideo.setAttribute('preload', 'auto');
+            mainVideo.load();
+        });
 
-            vfxTitle.innerText = titleText;
-            vfxVideo.src = videoSrc;
-            vfxVideo.poster = posterSrc;
-            vfxVideo.load(); 
-            vfxOverlay.style.display = "flex";
-            vfxVideo.play();
-        }
+        // --- CUSTOM PLATFORM LOGIC FOR VIDEO INTERACTION ---
+        mainVideo.addEventListener('waiting', () => { loaderScreen.style.opacity = '1'; loaderScreen.style.visibility = 'visible'; });
+        mainVideo.addEventListener('playing', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
+        mainVideo.addEventListener('canplay', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
 
-        function closeVfxInline() {
-            const explorerVideo = document.getElementById('myVideo');
-            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
-            const vfxVideo = document.getElementById('vfxTargetVideo');
-
-            if (vfxVideo) {
-                vfxVideo.pause();
-                vfxVideo.src = "";
-                vfxVideo.load();
+        function togglePlayState() {
+            if (mainVideo.paused) {
+                mainVideo.play();
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            } else {
+                mainVideo.pause();
+                playIcon.style.display = 'block';
+                pauseIcon.style.display = 'none';
             }
-            vfxOverlay.style.display = "none";
+        }
+        playPauseBtn.addEventListener('click', togglePlayState);
+        mainVideo.addEventListener('click', togglePlayState);
 
-            if (explorerVideo) explorerVideo.play();
+        volumeBtn.addEventListener('click', () => {
+            if (mainVideo.muted) {
+                mainVideo.muted = false;
+                volumeMutedIcon.style.display = 'none';
+                volumeOnIcon.style.display = 'block';
+            } else {
+                mainVideo.muted = true;
+                volumeMutedIcon.style.display = 'block';
+                volumeOnIcon.style.display = 'none';
+            }
+        });
+
+        function formatTimeSpan(seconds) {
+            if (isNaN(seconds)) return "0:00";
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
         }
 
+        mainVideo.addEventListener('timeupdate', () => {
+            const percentage = (mainVideo.currentTime / mainVideo.duration) * 100;
+            progressFill.style.width = `${percentage}%`;
+            timeCurrent.innerText = formatTimeSpan(mainVideo.currentTime);
+        });
+
+        mainVideo.addEventListener('loadedmetadata', () => {
+            timeTotal.innerText = formatTimeSpan(mainVideo.duration);
+        });
+
+        progressContainer.addEventListener('click', (e) => {
+            const rect = progressContainer.getBoundingClientRect();
+            const clickPosition = (e.clientX - rect.left) / rect.width;
+            mainVideo.currentTime = clickPosition * mainVideo.duration;
+        });
+
+        // --- ASPECT-RATIO CONTROLLED NATIVE FULLSCREEN LOGIC ---
+        function toggleWrapperFullscreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (videoWrapper.requestFullscreen) {
+                    videoWrapper.requestFullscreen();
+                } else if (videoWrapper.webkitRequestFullscreen) {
+                    videoWrapper.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        // --- MASTER SYSTEM RATIO TRANSITION CONTROLLER ---
         function changeRatio(ratio, buttonElement, formatType) {
-            const playerContainer = document.getElementById('playerContainer');
-            const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            if (videoElement.readyState === 0) {
-                videoElement.setAttribute('preload', 'auto');
-                videoElement.load();
-            }
-
             playerContainer.style.setProperty('--current-ratio', ratio);
+            videoWrapper.style.setProperty('--current-ratio', ratio);
 
             if (formatType === 'dolby') {
-                videoElement.classList.add('dolby-grade');
+                mainVideo.classList.add('dolby-grade');
             } else {
-                videoElement.classList.remove('dolby-grade');
+                mainVideo.classList.remove('dolby-grade');
             }
 
             if (formatType === 'imax') {
@@ -934,19 +1095,16 @@
                 overlay.style.display = 'block';
                 overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
                 overlay.style.width = '100px';
-                
             } else if (formatType === 'dolby') {
                 overlay.src = 'dolby.png';
                 overlay.style.display = 'block';
                 overlay.style.filter = 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))'; 
                 overlay.style.width = '100px';
-                
             } else if (formatType === 'large') {
                 overlay.src = '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png';
                 overlay.style.display = 'block';
                 overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
                 overlay.style.width = '140px';
-                
             } else {
                 overlay.style.filter = 'none';
                 overlay.style.display = 'none';
@@ -957,34 +1115,33 @@
             buttonElement.classList.add('active');
         }
 
-        const playerContainer = document.getElementById('playerContainer');
-        const fsText = document.getElementById('fsText');
+        function playVfxInline(videoSrc, titleText, posterSrc) {
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxTitle = document.getElementById('vfxDisplayTitle');
 
-        function toggleFullscreen() {
-            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (playerContainer.requestFullscreen) {
-                    playerContainer.requestFullscreen();
-                } else if (playerContainer.webkitRequestFullscreen) { 
-                    playerContainer.webkitRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { 
-                    document.webkitExitFullscreen();
-                }
-            }
+            if (mainVideo) mainVideo.pause();
+
+            vfxTitle.innerText = titleText;
+            vfxVideo.src = videoSrc;
+            vfxVideo.poster = posterSrc;
+            vfxVideo.load(); 
+            vfxOverlay.style.display = "flex";
+            vfxVideo.play();
         }
 
-        document.addEventListener('fullscreenchange', updateFsButton);
-        document.addEventListener('webkitfullscreenchange', updateFsButton);
+        function closeVfxInline() {
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
 
-        function updateFsButton() {
-            if (document.fullscreenElement || document.webkitFullscreenElement) {
-                fsText.innerText = "EXIT FS";
-            } else {
-                fsText.innerText = "FULLSCREEN";
+            if (vfxVideo) {
+                vfxVideo.pause();
+                vfxVideo.src = "";
+                vfxVideo.load();
             }
+            vfxOverlay.style.display = "none";
+
+            if (mainVideo) mainVideo.play();
         }
 
         function copyUpiToClipboard() {
@@ -994,9 +1151,7 @@
             navigator.clipboard.writeText(upiString).then(() => {
                 const originalSvg = copyBtn.innerHTML;
                 copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
-                setTimeout(() => {
-                    copyBtn.innerHTML = originalSvg;
-                }, 2000);
+                setTimeout(() => { copyBtn.innerHTML = originalSvg; }, 2000);
             }).catch(err => {
                 console.error('Could not copy string text parameter: ', err);
             });
