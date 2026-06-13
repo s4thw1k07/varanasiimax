@@ -384,7 +384,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            /* Ultra smooth aspect ratio transformation curve */
             transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
                         width 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
                         max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
@@ -541,8 +540,6 @@
             align-items: center;
             justify-content: center;
             padding: 2rem;
-            
-            /* Fluid cinematic transition mechanics */
             opacity: 0;
             visibility: hidden;
             transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
@@ -564,8 +561,6 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            
-            /* Pop-out scaling performance animation curves */
             transform: scale(0.9) translateY(30px);
             transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
@@ -589,6 +584,71 @@
             font-size: 1.4rem;
             text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             text-align: left;
+        }
+
+        /* --- UPGRADED: Hardware Integrated CSS Dolby Vision Toggle Switch --- */
+        .vfx-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .dolby-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            user-select: none;
+        }
+
+        .dolby-toggle-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #aaa;
+            transition: color 0.3s ease;
+        }
+
+        .dolby-toggle-container.is-active .dolby-toggle-label {
+            color: #d4af37;
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+        }
+
+        .switch-track {
+            position: relative;
+            width: 38px;
+            height: 20px;
+            background-color: #222;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .switch-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 14px;
+            height: 14px;
+            background-color: #aaa;
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+        }
+
+        .dolby-toggle-container.is-active .switch-track {
+            background-color: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+        }
+
+        .dolby-toggle-container.is-active .switch-knob {
+            transform: translateX(18px);
+            background-color: #d4af37;
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
         }
 
         .back-btn {
@@ -625,7 +685,6 @@
             background-color: #000;
         }
 
-        /* Dedicated dynamic overlay badge targeting within the modular window container */
         .vfx-format-overlay {
             position: absolute;
             top: 25px;
@@ -635,6 +694,7 @@
             width: 100px;
             display: none;
             filter: invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            opacity: 0;
             transition: opacity 0.4s ease;
         }
 
@@ -814,7 +874,7 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
-                        <!-- Stranger Things Tile 1 (No Dolby) -->
+                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
@@ -825,7 +885,7 @@
                             </div>
                         </div>
                         
-                        <!-- Stranger Things Tile 2 (No Dolby) -->
+                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
@@ -836,10 +896,10 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 1 (Dolby Vision Grade Enabled) -->
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png', true)">
+                        <!-- Oppenheimer Tile 1 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
-                                <img src="oppthumb.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer VFX</span>
@@ -847,10 +907,10 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 2 (Dolby Vision Grade Enabled) -->
-                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png', true)">
+                        <!-- Oppenheimer Tile 2 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
-                                <img src="oppthumb.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer Shot</span>
@@ -866,12 +926,21 @@
         </div>
     </nav>
 
-    <!-- Overlay Container with Dedicated Overlay Badge -->
+    <!-- Overlay Container with Dedicated Control Switches -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
                 <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
-                <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
+                <div class="vfx-controls-right">
+                    <!-- UPGRADED: Dynamic Dolby Vision Hardware Switch Container Frame -->
+                    <div class="dolby-toggle-container" id="dolbyToggleFrame">
+                        <span class="dolby-toggle-label">Dolby Vision</span>
+                        <div class="switch-track" onclick="toggleVfxDolby()">
+                            <div class="switch-knob"></div>
+                        </div>
+                    </div>
+                    <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
+                </div>
             </div>
             <div class="vfx-video-wrapper">
                 <img id="vfxFormatOverlay" class="vfx-format-overlay" src="dolby.png" alt="Active Modal Video Format Badge">
@@ -1010,6 +1079,7 @@
     <script>
         const vfxDropdown = document.getElementById('vfxDropdown');
         const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
+        let vfxDolbyActive = false; // State track pointer for the overlay player workspace
 
         vfxTriggerBtn.addEventListener('click', function(event) {
             event.stopPropagation(); 
@@ -1022,13 +1092,14 @@
             }
         });
 
-        // UPGRADED: Enhanced animation toggles to track dynamic Dolby color variables across modal play states
+        // UPGRADED: Enhanced modal state pointer logic with programmatic switch synchronization
         function playVfxInline(videoSrc, titleText, posterSrc, isDolby) {
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
             const vfxVideo = document.getElementById('vfxTargetVideo');
             const vfxTitle = document.getElementById('vfxDisplayTitle');
             const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
 
             if (explorerVideo) explorerVideo.pause();
 
@@ -1036,12 +1107,17 @@
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
             
-            // Evaluates grading variable state array
-            if (isDolby) {
+            // Core component synchronization mapping loop
+            vfxDolbyActive = isDolby;
+            if (vfxDolbyActive) {
                 vfxVideo.classList.add('dolby-grade');
+                toggleFrame.classList.add('is-active');
                 vfxBadge.style.display = 'block';
+                setTimeout(() => vfxBadge.style.opacity = '1', 50);
             } else {
                 vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
                 vfxBadge.style.display = 'none';
             }
 
@@ -1050,6 +1126,29 @@
             vfxVideo.play();
             
             vfxDropdown.classList.remove('is-active');
+        }
+
+        // UPGRADED: Direct user click toggling interface script loop for the overlay window player
+        function toggleVfxDolby() {
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
+
+            vfxDolbyActive = !vfxDolbyActive;
+
+            if (vfxDolbyActive) {
+                vfxVideo.classList.add('dolby-grade');
+                toggleFrame.classList.add('is-active');
+                vfxBadge.style.display = 'block';
+                setTimeout(() => vfxBadge.style.opacity = '1', 50);
+            } else {
+                vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
+                setTimeout(() => {
+                    if(!vfxDolbyActive) vfxBadge.style.display = 'none';
+                }, 400); // Wait for opacity fade transition to resolve safely
+            }
         }
 
         function closeVfxInline() {
