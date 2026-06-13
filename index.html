@@ -256,7 +256,7 @@
             animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
         }
         
-        /* Master Player Container Layout */
+        /* --- FIXED MASTER PLAYER CONTAINER LAYOUT --- */
         .player-container {
             width: 100%;
             max-width: 1000px; 
@@ -268,7 +268,7 @@
             animation: scaleInCinematic 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
         }
 
-        /* --- THE ODYSSEY-STYLE FULLSCREEN CORE DECK FRAME (image_ee5ed5.jpg) --- */
+        /* Odyssey-Style Fullscreen Architecture Modifications */
         .player-container:fullscreen {
             max-width: none !important;
             width: 100vw !important;
@@ -293,7 +293,7 @@
             align-items: center !important;
         }
 
-        /* Video Workspace Flex Node */
+        /* Video Workspace Base Node */
         .video-area {
             width: 100%;
             display: flex;
@@ -301,6 +301,7 @@
             align-items: center;
             flex-grow: 1;
             min-height: 0; 
+            background: #000;
         }
 
         .player-container:fullscreen .video-area {
@@ -315,12 +316,13 @@
             height: calc(100vh - 160px);
         }
 
-        /* --- SMOOTH ASPECT-RATIO CROPPING ENGINE --- */
+        /* --- DYNAMIC RESIZING CROPPING CANVAS ENGINE --- */
         .video-wrapper {
             position: relative; 
-            aspect-ratio: var(--current-ratio) / 1;
             width: 100%;
-            max-height: 100%;
+            max-width: 100%;
+            max-height: 550px; /* Removes absolute block locking logic */
+            aspect-ratio: var(--current-ratio) / 1;
             background-color: #000;
             border: 1px solid #d4af37;
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
@@ -329,7 +331,7 @@
             align-items: center;
             justify-content: center;
             
-            /* Crucial Hardware Accelerated Animation Anchors */
+            /* High Performance Interpolation Properties */
             transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
                         width 0.8s cubic-bezier(0.25, 1, 0.5, 1),
                         height 0.8s cubic-bezier(0.25, 1, 0.5, 1),
@@ -337,27 +339,30 @@
             will-change: aspect-ratio, width, height;
         }
 
-        /* Fullscreen Interpolated Vector Boundaries */
+        /* Screen Bound Constraints in Fullscreen Mode */
         .player-container:fullscreen .video-wrapper {
             width: min(100vw, calc((100vh - 160px) * var(--current-ratio))) !important;
             height: min(calc(100vh - 160px), calc(100vw / var(--current-ratio))) !important;
+            max-height: none !important;
             box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
         }
 
         .player-container:-webkit-full-screen .video-wrapper {
             width: min(100vw, calc((100vh - 160px) * var(--current-ratio))) !important;
             height: min(calc(100vh - 160px), calc(100vw / var(--current-ratio))) !important;
+            max-height: none !important;
             box-shadow: 0 0 35px rgba(212, 175, 55, 0.3);
         }
 
         video.main-video { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; 
+            object-fit: cover; /* Guarantees explicit edge truncation mapping */
+            background: #000;
             transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.5s ease; 
         }
 
-        /* --- THEMED CONTROLS BAR SYSTEM (image_ee80a0.png) --- */
+        /* --- PREMIUM CUSTOM GOLD CONTROLS (image_ee80a0.png) --- */
         .custom-video-controls {
             position: absolute;
             bottom: 0;
@@ -458,7 +463,7 @@
             text-shadow: 0 0 4px rgba(212, 175, 55, 0.2);
         }
 
-        /* --- PRE-LOAD LOADER NOTIFICATION PANEL --- */
+        /* --- CUSTOM PRELOAD LOADER LOGIC --- */
         .cinematic-loader-screen {
             position: absolute;
             top: 0;
@@ -518,7 +523,7 @@
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* --- FORMAT OPTIONS SELECTOR DECK ROW --- */
+        /* --- DYNAMIC SELECTOR DECK DECK PANEL ROW --- */
         .controls { 
             display: flex; 
             gap: 10px; 
@@ -529,9 +534,9 @@
             width: 100%;
         }
 
-        /* Fullscreen Layout Realignment Modifications (image_ee5ed5.jpg) */
+        /* Appends deck cleanly below target canvas array in fullscreen (image_ee5ed5.jpg) */
         .player-container:fullscreen .controls {
-            order: 2; /* Drops precisely underneath video boundary stack array */
+            order: 2; 
             padding-top: 1rem;
             padding-bottom: 0.5rem;
             border-top: 1px solid rgba(212, 175, 55, 0.15);
@@ -560,7 +565,6 @@
             gap: 6px; 
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
             
-            /* Button Interactive Physics */
             transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
                         background-color 0.3s ease, 
                         border-color 0.3s ease, 
@@ -569,7 +573,7 @@
             animation: microStagger 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
         }
         
-        /* Setup Micro Stagger Load Sequence delays */
+        /* Staggered delay configurations */
         .format-btn:nth-child(1) { animation-delay: 0.35s; }
         .format-btn:nth-child(2) { animation-delay: 0.40s; }
         .format-btn:nth-child(3) { animation-delay: 0.45s; }
@@ -607,7 +611,7 @@
             transform: scale(1.08);
         }
 
-        /* Info Section Content Deck Styles */
+        /* Description Node Styles */
         .info-section { 
             width: 100%; 
             max-width: 900px; 
@@ -710,7 +714,7 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Section Layout Panel --- */
+        /* --- Support Section Matrix Panel --- */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -1074,7 +1078,7 @@
         const playerContainer = document.getElementById('playerContainer');
         const loaderScreen = document.getElementById('cinematicLoader');
         
-        // Custom Controls Management
+        // Custom Controls Matrix
         const playPauseBtn = document.getElementById('playPauseBtn');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
@@ -1093,7 +1097,7 @@
             mainVideo.load();
         });
 
-        // BUFFERING SYSTEM TIMING CONTROLS
+        // BUFFER LOADING OBSERVER SIGNALS
         mainVideo.addEventListener('waiting', () => { loaderScreen.style.opacity = '1'; loaderScreen.style.visibility = 'visible'; });
         mainVideo.addEventListener('playing', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
         mainVideo.addEventListener('canplay', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
@@ -1147,7 +1151,7 @@
             mainVideo.currentTime = clickPosition * mainVideo.duration;
         });
 
-        // --- ENHANCED FULLSCREEN ENGINE (image_ee5ed5.jpg) ---
+        // --- FULLSCREEN CONTROLLER PIPELINE (Appends Selector Row to bottom smoothly) ---
         function toggleContainerFullscreen() {
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (playerContainer.requestFullscreen) {
@@ -1164,7 +1168,6 @@
             }
         }
 
-        // Handle native keyboard Escape triggers smoothly
         function handleFsStateIcons() {
             if (document.fullscreenElement || document.webkitFullscreenElement) {
                 fsEnterIcon.style.display = 'none';
@@ -1177,11 +1180,10 @@
         document.addEventListener('fullscreenchange', handleFsStateIcons);
         document.addEventListener('webkitfullscreenchange', handleFsStateIcons);
 
-        // --- HARDWARE ACCELERATED TRANSITION CONTROLLER ---
+        // --- TRANSITION MANAGER WITH HARDWARE ACCELERATION DRIVERS ---
         function changeRatio(ratio, buttonElement, formatType) {
             const overlay = document.getElementById('formatOverlay');
             
-            // Apply scale targets through local CSS properties fluidly
             playerContainer.style.setProperty('--current-ratio', ratio);
             videoWrapper.style.setProperty('--current-ratio', ratio);
 
