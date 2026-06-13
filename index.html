@@ -34,6 +34,7 @@
             min-height: 100vh; 
             padding: 0 2rem 2rem 2rem; 
             text-align: center; 
+            overflow-x: hidden;
         }
 
         /* Speed Optimization: Force GPU layer rendering to prevent UI lag */
@@ -51,6 +52,29 @@
             will-change: transform;
         }
 
+        /* --- GLOBAL SMOOTH PAGE TRANSITIONS --- */
+        .navbar, .title-container, .subtitle, .player-container, .info-section, .support-container, .designer-credit {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cinematicFadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+
+        /* Staggered load delays to look clean */
+        .navbar { animation-delay: 0.1s; }
+        .title-container { animation-delay: 0.3s; }
+        .subtitle { animation-delay: 0.4s; }
+        .player-container { animation-delay: 0.5s; }
+        .info-section { animation-delay: 0.6s; }
+        .support-container { animation-delay: 0.7s; }
+        .designer-credit { animation-delay: 0.8s; }
+
+        @keyframes cinematicFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* --- Gold Glow Top Menu Bar Navigation --- */
         .navbar {
             width: 100vw;
@@ -66,6 +90,7 @@
             top: 0;
             z-index: 100;
             margin-bottom: 2rem;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .nav-logo-container {
@@ -92,12 +117,10 @@
             gap: 24px;
         }
 
-        /* Dropdown Box Structure */
         .dropdown {
             position: relative;
         }
 
-        /* UPGRADED: Expanded trigger surface to cover entire box clickable field bounds */
         .dropdown-trigger {
             background: transparent;
             color: #d4af37;
@@ -110,7 +133,7 @@
             border: 1px solid transparent;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -119,7 +142,7 @@
             outline: none;
         }
 
-        .dropdown-trigger:hover, .dropdown:hover .dropdown-trigger, .dropdown.is-active .dropdown-trigger {
+        .dropdown-trigger:hover, .dropdown.is-active .dropdown-trigger {
             color: #fff;
             background-color: rgba(212, 175, 55, 0.15);
             border-color: rgba(212, 175, 55, 0.5);
@@ -131,34 +154,45 @@
             content: '▼';
             font-size: 0.65rem;
             margin-left: 2px;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .dropdown:hover .dropdown-trigger::after, .dropdown.is-active .dropdown-trigger::after {
+        .dropdown.is-active .dropdown-trigger::after {
             transform: rotate(180deg);
         }
 
-        /* --- Cinematic Mega Tile Grid Menu --- */
+        /* --- Cinematic Mega Tile Grid Menu with Entry Animations --- */
         .dropdown-menu {
             position: absolute;
-            top: 120%;
+            top: 110%; 
             right: 0;
             background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
             border: 1px solid rgba(212, 175, 55, 0.4);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
             border-radius: 8px;
             width: 580px;
             padding: 1.2rem;
-            display: none;
+            display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             text-align: left;
+            
+            /* Structural Animation Defaults */
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95) translateY(-10px);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            pointer-events: none;
         }
 
-        /* Responsive Display Triggers via Hover and Class Injection */
-        .dropdown:hover .dropdown-menu, .dropdown.is-active .dropdown-menu {
-            display: grid;
+        .dropdown.is-active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1) translateY(0);
+            pointer-events: auto;
         }
 
         /* --- Visual Hover Tile System --- */
@@ -170,7 +204,7 @@
             border-radius: 6px;
             overflow: hidden;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
         }
 
@@ -187,7 +221,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease, filter 0.3s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
         }
 
         .dropdown-item-meta {
@@ -221,11 +255,11 @@
             background: rgba(212, 175, 55, 0.08);
             border-color: #d4af37;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.2);
-            transform: translateY(-3px);
+            transform: translateY(-4px);
         }
 
         .dropdown-item:hover .dropdown-item-thumb img {
-            transform: scale(1.05);
+            transform: scale(1.06);
             filter: brightness(1.1);
         }
 
@@ -335,7 +369,7 @@
         .player-container:fullscreen .video-area { margin-bottom: 1rem; }
         .player-container:-webkit-full-screen .video-area { margin-bottom: 1rem; }
 
-        /* Video Wrapper */
+        /* Video Wrapper and Ratio Transitions */
         .video-wrapper {
             position: relative; 
             aspect-ratio: var(--current-ratio) / 1;
@@ -345,10 +379,13 @@
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
-            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             align-items: center;
             justify-content: center;
+            /* Ultra smooth aspect ratio transformation curve */
+            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        width 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .player-container:fullscreen .video-wrapper { 
@@ -366,7 +403,7 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            transition: all 0.8s ease; 
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
 
         .format-overlay {
@@ -375,7 +412,7 @@
             left: 25px;
             z-index: 10;
             pointer-events: none; 
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         video.dolby-grade {
@@ -404,13 +441,13 @@
             padding: 1rem 0.5rem; 
             cursor: pointer; 
             width: 120px; 
-            transition: all 0.3s ease; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: flex-end;
             gap: 6px; 
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
         .format-btn:hover { 
@@ -418,6 +455,7 @@
             background-color: rgba(212, 175, 55, 0.15); 
             border-color: rgba(212, 175, 55, 0.6);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: scale(1.03);
         }
         
         .format-btn.active { 
@@ -426,6 +464,7 @@
             border-color: #d4af37; 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3);
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
         .format-title { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
@@ -450,19 +489,20 @@
             cursor: pointer;
             width: 100px;
             height: 80px;
-            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 8px;
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .fullscreen-btn:hover {
             color: #fff;
             background-color: rgba(212, 175, 55, 0.15);
             border-color: rgba(212, 175, 55, 0.6);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: scale(1.03);
         }
         .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
         
@@ -484,20 +524,34 @@
         .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000; border: 1px solid rgba(212, 175, 55, 0.3); }
         .video-embed iframe { width: 100%; height: 100%; }
 
-        /* VFX Overlay Screen */
+        /* --- UPGRADED: Fluid Interstitial Layer Overlay Display --- */
         .vfx-overlay-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: #050505;
+            background-color: rgba(5, 5, 5, 0.85);
+            backdrop-filter: blur(0px);
             z-index: 1000;
-            display: none; 
+            display: flex; 
             flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 2rem;
+            
+            /* Fluid cinematic transition mechanics */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        visibility 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        backdrop-filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .vfx-overlay-screen.is-open {
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(20px);
         }
 
         .vfx-container {
@@ -507,6 +561,14 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
+            
+            /* Pop-out scaling performance animation curves */
+            transform: scale(0.9) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .vfx-overlay-screen.is-open .vfx-container {
+            transform: scale(1) translateY(0);
         }
 
         .vfx-header-area {
@@ -537,7 +599,7 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
         }
 
@@ -546,6 +608,7 @@
             background-color: rgba(212, 175, 55, 0.2);
             border-color: #d4af37;
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: scale(1.02);
         }
 
         .vfx-video-wrapper {
@@ -631,7 +694,9 @@
             padding: 0.5rem 1rem;
             border-radius: 6px;
             border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: border-color 0.3s ease;
         }
+        .upi-block:hover { border-color: rgba(212, 175, 55, 0.5); }
 
         .upi-label {
             color: #d4af37;
@@ -656,12 +721,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
         .copy-btn:hover {
             color: #fff;
-            transform: scale(1.1);
+            transform: scale(1.15);
         }
 
         .copy-btn svg {
@@ -690,6 +755,7 @@
             border-radius: 8px;
             border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .qr-element {
@@ -698,10 +764,11 @@
             object-fit: contain;
             border-radius: 4px;
             filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.15));
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .qr-wrapper:hover .qr-element { transform: scale(1.03); }
+        .qr-wrapper:hover { border-color: rgba(212, 175, 55, 0.4); }
+        .qr-wrapper:hover .qr-element { transform: scale(1.05); }
 
         .designer-credit {
             padding-top: 1rem;
@@ -917,22 +984,22 @@
     </footer>
 
     <script>
-        // UPGRADED: Enhanced click mechanics to make entire button box surface interactive
+        // Dropdown interactive state animation routing
         const vfxDropdown = document.getElementById('vfxDropdown');
         const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
 
         vfxTriggerBtn.addEventListener('click', function(event) {
-            event.stopPropagation(); // Stops immediate document body click collision triggers
+            event.stopPropagation(); 
             vfxDropdown.classList.toggle('is-active');
         });
 
-        // Safe tracking loop to close panel dynamically if workspace background fields are clicked
         document.addEventListener('click', function(event) {
             if (!vfxDropdown.contains(event.target)) {
                 vfxDropdown.classList.remove('is-active');
             }
         });
 
+        // UPGRADED: Enhanced animation toggles for single page seamless switching loops
         function playVfxInline(videoSrc, titleText, posterSrc) {
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
@@ -945,10 +1012,11 @@
             vfxVideo.src = videoSrc;
             vfxVideo.poster = posterSrc;
             vfxVideo.load(); 
-            vfxOverlay.style.display = "flex";
+            
+            // Injects dynamic frame animation hooks smoothly
+            vfxOverlay.classList.add('is-open');
             vfxVideo.play();
             
-            // Auto close tiles once selection loads up
             vfxDropdown.classList.remove('is-active');
         }
 
@@ -962,7 +1030,9 @@
                 vfxVideo.src = "";
                 vfxVideo.load();
             }
-            vfxOverlay.style.display = "none";
+            
+            // Smooth reverse transitions running in parallel
+            vfxOverlay.classList.remove('is-open');
 
             if (explorerVideo) explorerVideo.play();
         }
