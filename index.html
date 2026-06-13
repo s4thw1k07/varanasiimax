@@ -16,11 +16,9 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
-    <!-- Network & Domain Pre-connections -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
-    <!-- High-Priority Asset Preloading for Instant Menu Render -->
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
     <link rel="preload" href="OPPENHEIMER.png" as="image">
 
@@ -579,7 +577,7 @@
             gap: 20px;
         }
 
-        /* --- FIXED & GLASS OPTIMIZED: Dolby Vision Toggle UI Component --- */
+        /* --- Dolby Vision Toggle UI Component --- */
         .dolby-toggle-container {
             display: flex;
             align-items: center;
@@ -914,8 +912,61 @@
             font-weight: 600;
         }
 
-        .player-container:fullscreen { max-width: none; width: 100vw; height: 100vh; background-color: #000; padding: 20px; box-sizing: border-box; justify-content: space-between; animation: none; }
-        .player-container:-webkit-full-screen { max-width: none; width: 100vw; height: 100vh; background-color: #000; padding: 20px; box-sizing: border-box; justify-content: space-between; animation: none; }
+        /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
+        .player-container:fullscreen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 30px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        .player-container:-webkit-full-screen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 30px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        /* Force high-priority layout box sizing on native window layer calls */
+        .player-container:fullscreen .video-area,
+        .player-container:-webkit-full-screen .video-area {
+            width: 100% !important;
+            height: calc(100vh - 160px) !important;
+            margin-bottom: 20px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .player-container:fullscreen .video-wrapper,
+        .player-container:-webkit-full-screen .video-wrapper {
+            border: none !important;
+            border-radius: 12px !important;
+            height: 100% !important;
+            width: auto !important;
+            max-width: 100% !important;
+            aspect-ratio: var(--current-ratio) / 1 !important;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9) !important;
+        }
+
+        .player-container:fullscreen .controls,
+        .player-container:-webkit-full-screen .controls {
+            width: 100% !important;
+            max-width: 900px !important;
+            padding-bottom: 0 !important;
+            background: transparent !important;
+            z-index: 10 !important;
+        }
 
         @supports not (backdrop-filter: blur(10px)) {
             .navbar { background: rgba(15, 15, 15, 0.95); }
@@ -924,10 +975,6 @@
             .vfx-overlay-screen { background-color: rgba(5, 5, 5, 0.98); }
         }
     </style></head><body>
-
-    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
-        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
-    </h1>
 
     <nav class="navbar">
         <div class="nav-logo-container">
@@ -938,7 +985,6 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
-                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
@@ -949,7 +995,6 @@
                             </div>
                         </div>
                         
-                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
@@ -960,7 +1005,6 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
@@ -971,7 +1015,6 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
@@ -990,13 +1033,11 @@
         </div>
     </nav>
 
-    <!-- Overlay Container with Dedicated Control Switches -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
                 <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
                 <div class="vfx-controls-right">
-                    <!-- FIXED TRIGGER SURFACE: Label & switch bound to single clickable target parent -->
                     <div class="dolby-toggle-container" id="dolbyToggleFrame" onclick="toggleVfxDolby()">
                         <span class="dolby-toggle-label">Dolby Vision</span>
                         <div class="switch-track">
@@ -1113,7 +1154,6 @@
         </div>
     </section>
 
-    <!-- Support Container Block Layout -->
     <section class="support-container">
         <div class="support-info-block">
             <h2 class="support-title">Support the Developer</h2>
