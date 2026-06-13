@@ -25,9 +25,9 @@
     <style>
         :root {
             /* Apple Liquid Glass Design Variables */
-            --glass-bg: rgba(255, 255, 255, 0.06);
+            --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-bg-hover: rgba(255, 255, 255, 0.12);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.15);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.12);
             --glass-shine: 1px solid rgba(255, 255, 255, 0.25);
             --gold-glow: rgba(212, 175, 55, 0.25);
             
@@ -275,7 +275,7 @@
         }
 
         .dropdown-item:hover {
-            background: rgba(255, 255, 255, 0.07);
+            background: rgba(212, 175, 55, 0.08);
             border: var(--glass-border);
             box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
             transform: translateY(-4px) scale(1.02);
@@ -410,7 +410,9 @@
             padding-bottom: 1rem;
         }
         
+        /* WATER RIPPLE TILE ENGINE */
         .format-btn { 
+            position: relative;
             background: var(--glass-bg);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
@@ -420,6 +422,7 @@
             padding: 1.1rem 0.6rem; 
             cursor: pointer; 
             width: 125px; 
+            height: 90px;
             display: flex; 
             flex-direction: column; 
             align-items: center; 
@@ -428,29 +431,49 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
             transition: all var(--water-duration) var(--water-transition);
             transform: translateZ(0);
+            overflow: hidden;
+        }
+
+        /* Fluid Water Underlay Ripple Effect */
+        .format-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.75s var(--water-transition), height 0.75s var(--water-transition);
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .format-btn:hover::before, .format-btn.active::before { 
+            width: 200px; height: 200px; 
         }
         
         .format-btn:hover { 
             color: #fff; 
             background: var(--glass-bg-hover);
             border: var(--glass-shine);
-            transform: translateY(-3px) scale(1.03);
+            transform: translateY(-4px) scale(1.03);
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         
         .format-btn.active { 
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.14);
             color: #fff; 
             border: var(--glass-shine);
             border-color: #e5c158;
-            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.15);
-            transform: translateY(-5px) scale(1.06);
+            box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
+            transform: translateY(-6px) scale(1.05);
         }
 
-        .format-title { font-weight: 700; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
-        .format-ratio { font-size: 0.75rem; opacity: 0.7; font-weight: 500;}
-        .screen-icon { margin-bottom: 6px; opacity: 0.8; transition: opacity 0.3s ease; }
-        .format-btn:hover .screen-icon, .format-btn.active .screen-icon { opacity: 1; }
+        .format-btn > * { z-index: 2; position: relative; } /* Float data over water layer */
+
+        .format-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; text-align: center; }
+        .format-ratio { font-size: 0.7rem; opacity: 0.65; font-weight: 500; margin-top: 1px; }
+        .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; }
 
         .divider {
             width: 1px;
@@ -469,7 +492,7 @@
             padding: 1rem;
             cursor: pointer;
             width: 105px;
-            height: 82px;
+            height: 90px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -483,7 +506,7 @@
             color: #fff;
             background: var(--glass-bg-hover);
             border: var(--glass-shine);
-            transform: translateY(-3px) scale(1.03);
+            transform: translateY(-4px) scale(1.03);
         }
         .fullscreen-btn svg { width: 22px; height: 22px; fill: currentColor; }
         
@@ -503,7 +526,7 @@
         }
         .info-section h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; }
         .info-section p { font-size: 1.05rem; color: #d4d4d4; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; }
-        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12rem; color: #e5c158; font-size: 0.9rem; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; color: #e5c158; font-size: 0.9rem; }
         .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; border: var(--glass-border); }
         .video-embed iframe { width: 100%; height: 100%; }
 
@@ -765,7 +788,7 @@
             background: rgba(0, 0, 0, 0.3);
             padding: 0.6rem 1.2rem;
             border-radius: 30px;
-            border: 1px solid rgba(255,255,0,0.08);
+            border: 1px solid rgba(255,255,255,0.08);
             transition: all 0.3s ease;
         }
         .upi-block:hover { border-color: rgba(255,255,255,0.2); }
@@ -840,7 +863,7 @@
             width: 140px;
             height: 140px;
             object-fit: contain;
-            border-radius: 8px;
+            border-radius: 4px;
             filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
             transition: transform var(--water-duration) var(--water-transition);
         }
@@ -936,7 +959,6 @@
             align-items: center !important;
         }
 
-        /* Force high-priority layout box sizing on native window layer calls */
         .player-container:fullscreen .video-area,
         .player-container:-webkit-full-screen .video-area {
             width: 100% !important;
@@ -959,13 +981,19 @@
             box-shadow: 0 0 50px rgba(0,0,0,0.9) !important;
         }
 
+        /* FIXED Row Constraint Engine */
         .player-container:fullscreen .controls,
         .player-container:-webkit-full-screen .controls {
-            width: 100% !important;
-            max-width: 900px !important;
+            width: auto !important;
+            max-width: 100% !important;
             padding-bottom: 0 !important;
             background: transparent !important;
             z-index: 10 !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            justify-content: center !important;
+            align-items: center !important;
         }
 
         @supports not (backdrop-filter: blur(10px)) {
@@ -975,6 +1003,10 @@
             .vfx-overlay-screen { background-color: rgba(5, 5, 5, 0.98); }
         }
     </style></head><body>
+
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
+    </h1>
 
     <nav class="navbar">
         <div class="nav-logo-container">
@@ -1073,36 +1105,38 @@
 
         <div class="controls">
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
-                    <line x1="8" y1="9" x2="42" y2="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    <line x1="8" y1="31" x2="42" y2="31" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                </svg>
-                <span class="format-title">IMAX<br>70MM</span>
+                <div class="screen-icon">
+                    <svg width="65" height="15" viewBox="0 0 100 22" fill="currentColor">
+                        <path d="M0 21.6h5.8V.4H0v21.2zM12.2.4l5.3 14.8L22.8.4h6.3v21.2h-5.2V6.8l-4.9 14.8h-3l-4.9-14.8v14.8h-5.2V.4h6.3zM40.2 14.8H48l2.3 6.8h5.7L49.4.4h-6.2L36.6 21.6h5.7l2.1-6.8zm4-11.2l2.6 7.8H41.6l2.6-7.8zM61.8.4L68 11.2 74.2.4h6.1l-8.9 14.4v6.8h-5.4v-6.8L55.7.4h6.1z"/>
+                    </svg>
+                </div>
+                <span class="format-title">70MM Film</span>
                 <span class="format-ratio">1.43:1</span>
             </button>
 
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')" aria-label="Switch aspect ratio framework to Digital IMAX">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
-                </svg>
-                <span class="format-title">IMAX</span>
+                <div class="screen-icon">
+                    <svg width="65" height="15" viewBox="0 0 100 22" fill="currentColor">
+                        <path d="M0 21.6h5.8V.4H0v21.2zM12.2.4l5.3 14.8L22.8.4h6.3v21.2h-5.2V6.8l-4.9 14.8h-3l-4.9-14.8v14.8h-5.2V.4h6.3zM40.2 14.8H48l2.3 6.8h5.7L49.4.4h-6.2L36.6 21.6h5.7l2.1-6.8zm4-11.2l2.6 7.8H41.6l2.6-7.8zM61.8.4L68 11.2 74.2.4h6.1l-8.9 14.4v6.8h-5.4v-6.8L55.7.4h6.1z"/>
+                    </svg>
+                </div>
+                <span class="format-title">Digital</span>
                 <span class="format-ratio">1.90:1</span>
             </button>
 
             <button class="format-btn" onclick="changeRatio(2.20, this, 'none')" aria-label="Switch aspect ratio framework to Standard 70mm film">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                <svg class="screen-icon" width="50" height="20" viewBox="0 0 50 40">
+                    <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
                     <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
                     <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
                 </svg>
-                <span class="format-title"><span class="font-light">7</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: -1px; margin: 0 1px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>MM</span>
+                <span class="format-title"><span class="font-light">7</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: -1px; margin: 0 1px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>MM</span>
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+            <button class="format-btn" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
+                <svg class="screen-icon" width="50" height="20" viewBox="0 0 50 40">
+                    <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
                     <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
                     <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
                 </svg>
@@ -1111,23 +1145,22 @@
             </button>
 
             <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')" aria-label="Switch aspect ratio framework to Dolby Vision high contrast grading">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
-                </svg>
-                <span class="format-title" style="display:flex; align-items:center; justify-content:center; gap:3px;">
-                    <svg width="16" height="12" viewBox="0 0 24 16" fill="currentColor"><path d="M7 0H0v16h7c4.4 0 8-3.6 8-8s-3.6-8-8-8z"/><path d="M17 0h7v16h-7c-4.4 0-8-3.6-8-8s3.6-8 8-8z"/></svg> 
-                    Dolby<br><span style="font-size: 0.5rem; letter-spacing: 2px; position:absolute; margin-top:24px;">VISION</span>
-                </span>
-                <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
+                <div class="screen-icon">
+                    <svg width="45" height="18" viewBox="0 0 48 16" fill="currentColor">
+                        <path d="M14 0H2v16h12c4.42 0 8-3.58 8-8s-3.58-8-8-8zm-1 11H7V5h6c1.66 0 3 1.34 3 3s-1.34 3-3 3zm21-11H22v16h12c4.42 0 8-3.58 8-8s-3.58-8-8-8zm-1 11h-6V5h6c1.66 0 3 1.34 3 3s-1.34 3-3 3z"/>
+                    </svg>
+                </div>
+                <span class="format-title">Dolby Vision</span>
+                <span class="format-ratio">1.85:1 | 2.39:1</span>
             </button>
 
             <button class="format-btn" onclick="changeRatio(1.85, this, 'large')" aria-label="Switch aspect ratio framework to Large Format widescreen presentation">
-                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
-                    <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
-                    <path d="M 6 12 L 8 14 L 6 16 L 8 18 L 6 20 L 8 22 L 6 24 L 8 26 L 6 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-                    <path d="M 44 12 L 42 14 L 44 16 L 42 18 L 44 20 L 42 22 L 44 24 L 42 26 L 44 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
-                </svg>
-                <span class="format-title font-impact" style="font-size: 1.1rem; line-height: 0.9;">LARGE FORMAT</span>
+                <div class="screen-icon">
+                    <svg width="50" height="20" viewBox="0 0 50 20" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+                        <path d="M2 3 C 15 6, 35 3, 48 3 L 45 17 C 32 17, 18 19, 2 17 Z"/>
+                    </svg>
+                </div>
+                <span class="format-title font-impact">Large Format</span>
                 <span class="format-ratio">1.85:1 | 2.39:1</span>
             </button>
 
