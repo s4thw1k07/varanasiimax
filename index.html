@@ -311,7 +311,7 @@
             margin-left: 4px;
         }
 
-        /* --- Title UI Framing --- */
+        /* --- Fixed Title Constraints --- */
         .title-container {
             margin-bottom: 1rem;
             max-width: 420px; 
@@ -434,6 +434,12 @@
             overflow: hidden;
         }
 
+        /* Dynamic Media Variants to Center Premium Logos */
+        .format-btn.premium-logo-btn {
+            justify-content: center;
+            gap: 12px;
+        }
+
         /* Fluid Water Underlay Ripple Mechanics */
         .format-btn::before {
             content: '';
@@ -469,12 +475,20 @@
             transform: translateY(-6px) scale(1.05);
         }
 
-        .format-btn > * { z-index: 2; position: relative; } /* Float parameters safely over water overlay */
+        .format-btn > * { z-index: 2; position: relative; }
 
         .format-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; text-align: center; }
         .format-ratio { font-size: 0.7rem; opacity: 0.65; font-weight: 500; margin-top: 1px; }
         .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; }
         .screen-icon img { width: 100%; height: auto; object-fit: contain; }
+
+        /* Centering overrides for text-free graphic cards */
+        .premium-logo-btn .screen-icon {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
         .divider {
             width: 1px;
@@ -921,21 +935,6 @@
             color: #fff;
         }
 
-        /* --- Footer Framework --- */
-        .designer-credit {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            color: #888888;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: auto;
-        }
-        .designer-credit span {
-            color: #fff;
-            font-weight: 600;
-        }
-
         /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
         .player-container:fullscreen {
             max-width: none !important;
@@ -1140,19 +1139,17 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
+            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
                 <div class="screen-icon">
                     <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);">
                 </div>
-                <span class="format-title">Dolby Vision</span>
                 <span class="format-ratio">1.85:1</span>
             </button>
 
-            <button class="format-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
+            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
                 <div class="screen-icon">
-                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 85px; height: auto; filter: invert(1);">
+                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);">
                 </div>
-                <span class="format-title">Large Format</span>
                 <span class="format-ratio">1.85:1</span>
             </button>
 
