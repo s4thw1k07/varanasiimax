@@ -231,7 +231,7 @@
             text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
         }
         
-        /* Master Player Container */
+        /* --- MASTER CONTAINER FOR CHROME/STANDARD INTERFACES --- */
         .player-container {
             width: 100%;
             max-width: 1000px; 
@@ -240,20 +240,57 @@
             background-color: transparent; 
             margin: 0 auto 1.5rem auto;
             --current-ratio: 2.39; 
+            transition: padding 0.3s ease;
         }
 
-        /* Video Area Layout */
+        /* --- ADVANCED ODYSSEY-STYLE NATIVE FULLSCREEN RESOLUTION LAYOUT (image_ee74c3.jpg) --- */
+        .player-container:fullscreen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 1rem 2rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        .player-container:-webkit-full-screen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 1rem 2rem !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        /* Video Workspace Flex Settings */
         .video-area {
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-bottom: 1.5rem;
             flex-grow: 1;
             min-height: 0; 
         }
 
-        /* Video Wrapper - GOLD BORDER THEME */
+        .player-container:fullscreen .video-area {
+            margin: auto 0;
+            width: 100%;
+            height: calc(100vh - 160px); /* Leaves explicit space for top/bottom selector rows */
+        }
+
+        .player-container:-webkit-full-screen .video-area {
+            margin: auto 0;
+            width: 100%;
+            height: calc(100vh - 160px);
+        }
+
+        /* Border Wrapper Box Element */
         .video-wrapper {
             position: relative; 
             aspect-ratio: var(--current-ratio) / 1;
@@ -269,6 +306,17 @@
             justify-content: center;
         }
 
+        /* Fullscreen Video Constraint Calculations */
+        .player-container:fullscreen .video-wrapper {
+            width: min(100vw, calc((100vh - 160px) * var(--current-ratio))) !important;
+            height: min(calc(100vh - 160px), calc(100vw / var(--current-ratio))) !important;
+        }
+
+        .player-container:-webkit-full-screen .video-wrapper {
+            width: min(100vw, calc((100vh - 160px) * var(--current-ratio))) !important;
+            height: min(calc(100vh - 160px), calc(100vw / var(--current-ratio))) !important;
+        }
+
         video.main-video { 
             width: 100%; 
             height: 100%; 
@@ -276,7 +324,7 @@
             transition: all 0.8s ease; 
         }
 
-        /* --- CUSTOM GOLD VIDEO CONTROLS OVERLAY FRAME (Matches image_ee80a0.png) --- */
+        /* --- THEMED CONTROLS BOX PANEL (image_ee80a0.png) --- */
         .custom-video-controls {
             position: absolute;
             bottom: 0;
@@ -373,7 +421,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- EMBEDDED LOADER OVERLAY (Matches image_ee80a0.png) --- */
+        /* --- PRE-LOAD GRAPHIC CONTAINER (image_ee80a0.png) --- */
         .cinematic-loader-screen {
             position: absolute;
             top: 0;
@@ -415,7 +463,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Format Overlay Badge */
         .format-overlay {
             position: absolute;
             top: 25px;
@@ -429,14 +476,31 @@
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* Format Selector UI Panel */
+        /* --- INTERACTIVE FORMAT OPTIONS DECK BAR CONTAINER --- */
         .controls { 
             display: flex; 
             gap: 10px; 
             flex-wrap: wrap; 
             justify-content: center; 
             align-items: center;
+            padding-top: 0.5rem;
+            width: 100%;
+            transition: order 0.1s ease-in-out;
+        }
+
+        /* RE-ORDER DECK ROW TO THE VERY TOP IN FULLSCREEN MODE (image_ee74c3.jpg) */
+        .player-container:fullscreen .controls {
+            order: -1; 
+            padding-top: 0;
             padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .player-container:-webkit-full-screen .controls {
+            order: -1;
+            padding-top: 0;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
         }
         
         .format-btn { 
@@ -475,46 +539,6 @@
         .format-title { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
         .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
         .screen-icon { margin-bottom: 8px; }
-
-        /* --- NATIVE ASPECT-RATIO PRESERVATION FULLSCREEN ENGINE --- */
-        #videoWrapper:fullscreen {
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: none !important;
-            max-height: none !important;
-            border: none !important;
-            box-shadow: none !important;
-            background: #000 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        #videoWrapper:fullscreen .main-video {
-            width: min(100vw, calc(100vh * var(--current-ratio))) !important;
-            height: min(100vh, calc(100vw / var(--current-ratio))) !important;
-            object-fit: cover !important;
-        }
-
-        /* Fullscreen Webkit Rules */
-        #videoWrapper:-webkit-full-screen {
-            width: 100vw !important;
-            height: 100vh !important;
-            max-width: none !important;
-            max-height: none !important;
-            border: none !important;
-            box-shadow: none !important;
-            background: #000 !important;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        #videoWrapper:-webkit-full-screen .main-video {
-            width: min(100vw, calc(100vh * var(--current-ratio))) !important;
-            height: min(100vh, calc(100vw / var(--current-ratio))) !important;
-            object-fit: cover !important;
-        }
         
         /* Info Section Styles */
         .info-section { 
@@ -821,13 +845,12 @@
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
-    <!-- Master Layout Player Interface -->
+    <!-- TARGET ELEMENT FOR FULLSCREEN MODE -> CARRIES BOTH DECK SELECTOR AND CANVAS TOGETHER (image_ee74c3.jpg) -->
     <div id="playerContainer" class="player-container">
         
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
                 
-                <!-- GOLD LOADER SCREEN (Matches image_ee80a0.png) -->
                 <div id="cinematicLoader" class="cinematic-loader-screen">
                     <div class="gold-spinner-circle"></div>
                     <div class="loader-flavor-text">Your Cinematic Experience is Loading...</div>
@@ -835,20 +858,17 @@
 
                 <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
                 
-                <!-- Core Video Node -->
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="image_8622bf.jpg" preload="none" autoplay loop muted playsinline></video>
 
-                <!-- PREMIUM CUSTOM CONTROLS OVERLAY (Matches image_ee80a0.png) -->
+                <!-- CUSTOM CONTROLS PANEL FOOTER OVERLAY (image_ee80a0.png) -->
                 <div class="custom-video-controls" id="customControls">
                     
-                    <!-- Progress Slider -->
                     <div class="progress-timeline-container" id="progressContainer">
                         <div class="progress-bar-rail">
                             <div class="progress-filled-gold" id="progressFill"></div>
                         </div>
                     </div>
 
-                    <!-- Button Execution Layout Row -->
                     <div class="controls-button-row">
                         <div class="controls-left-group">
                             <button class="control-action-btn" id="playPauseBtn" aria-label="Toggle Play State">
@@ -865,12 +885,10 @@
                         </div>
 
                         <div class="controls-right-group">
-                            <!-- Settings Placeholder Asset -->
                             <button class="control-action-btn" aria-label="Format Configurations">
                                 <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
                             </button>
-                            <!-- Embedded Aspect-Ratio-Safe Fullscreen Trigger -->
-                            <button class="control-action-btn" id="fsOverlayBtn" onclick="toggleWrapperFullscreen()" aria-label="Execute Cinematic Widescreen Fullscreen Layout">
+                            <button class="control-action-btn" id="fsOverlayBtn" onclick="toggleContainerFullscreen()" aria-label="Execute Fullscreen Display">
                                 <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
                             </button>
                         </div>
@@ -881,7 +899,7 @@
             </div>
         </div>
 
-        <!-- Format Selector Options Deck -->
+        <!-- Format Options Row Deck -->
         <div class="controls">
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
                 <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
@@ -988,7 +1006,7 @@
         const playerContainer = document.getElementById('playerContainer');
         const loaderScreen = document.getElementById('cinematicLoader');
         
-        // Custom UI Control Elements
+        // Custom UI Nodes
         const playPauseBtn = document.getElementById('playPauseBtn');
         const playIcon = document.getElementById('playIcon');
         const pauseIcon = document.getElementById('pauseIcon');
@@ -1000,17 +1018,17 @@
         const timeCurrent = document.getElementById('timeCurrent');
         const timeTotal = document.getElementById('timeTotal');
 
-        // Force initialize preload parameters to support custom layout triggers
         window.addEventListener('DOMContentLoaded', () => {
             mainVideo.setAttribute('preload', 'auto');
             mainVideo.load();
         });
 
-        // --- CUSTOM PLATFORM LOGIC FOR VIDEO INTERACTION ---
+        // --- LOADING NOTIFICATION ROUTINES ---
         mainVideo.addEventListener('waiting', () => { loaderScreen.style.opacity = '1'; loaderScreen.style.visibility = 'visible'; });
         mainVideo.addEventListener('playing', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
         mainVideo.addEventListener('canplay', () => { loaderScreen.style.opacity = '0'; loaderScreen.style.visibility = 'hidden'; });
 
+        // --- PLAYBACK TRIGGER EXECUTIVE SYSTEM ---
         function togglePlayState() {
             if (mainVideo.paused) {
                 mainVideo.play();
@@ -1060,13 +1078,14 @@
             mainVideo.currentTime = clickPosition * mainVideo.duration;
         });
 
-        // --- ASPECT-RATIO CONTROLLED NATIVE FULLSCREEN LOGIC ---
-        function toggleWrapperFullscreen() {
+        // --- TARGETED FULLSCREEN EXECUTION MODULE (image_ee74c3.jpg) ---
+        function toggleContainerFullscreen() {
+            // Targets the entire parent architecture block so selector switches scale seamlessly inside the layout frame
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
-                if (videoWrapper.requestFullscreen) {
-                    videoWrapper.requestFullscreen();
-                } else if (videoWrapper.webkitRequestFullscreen) {
-                    videoWrapper.webkitRequestFullscreen();
+                if (playerContainer.requestFullscreen) {
+                    playerContainer.requestFullscreen();
+                } else if (playerContainer.webkitRequestFullscreen) {
+                    playerContainer.webkitRequestFullscreen();
                 }
             } else {
                 if (document.exitFullscreen) {
@@ -1077,7 +1096,7 @@
             }
         }
 
-        // --- MASTER SYSTEM RATIO TRANSITION CONTROLLER ---
+        // --- VARIABLE ASPECT ENGINE ROUTER ---
         function changeRatio(ratio, buttonElement, formatType) {
             const overlay = document.getElementById('formatOverlay');
             
