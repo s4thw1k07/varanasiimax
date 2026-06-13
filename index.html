@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
+    <!-- 1. This updates the main purple clickable link text in Google -->
     <title>IMAX FORMATS | Starvel Studios</title>
     
     <meta name="description" content="Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.">
     <meta name="keywords" content="IMAX, Varanasi IMAX, IMAX 70mm, Dolby Vision, Varanasi teaser aspect ratio, Starvel Studios, G Sathwik">
     <meta name="author" content="G. Sathwik">
     
+    <!-- 2. Schema.org markup to force Google to show "WATCH THE IMAX VERSION HERE" instead of "GitHub Pages documentation" -->
     <meta property="og:site_name" content="WATCH THE IMAX VERSION HERE">
     <script type="application/ld+json">
     {
@@ -26,6 +28,7 @@
     <meta property="og:url" content="https://s4thw1k07.github.io/varanasiimax/">
     <meta property="og:type" content="website">
     
+    <!-- 3. This replaces the generic Globe icon in Google with your Starvel/Custom Favicon logo -->
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="apple-touch-icon" href="favicon.png">
     
@@ -44,9 +47,9 @@
             min-height: 100vh; 
             padding: 0 2rem 2rem 2rem; 
             text-align: center; 
-            overflow-x: hidden;
         }
 
+        /* Speed Optimization: Force GPU layer rendering to prevent UI lag */
         #bgVideo {
             position: fixed;
             top: 0;
@@ -59,27 +62,6 @@
             pointer-events: none; 
             transform: translateZ(0);
             will-change: transform;
-        }
-
-        /* --- Website Entrance Animations --- */
-        @keyframes slideDownReveal {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUpReveal {
-            from { opacity: 0; transform: translateY(30px); filter: blur(5px); }
-            to { opacity: 1; transform: translateY(0); filter: blur(0); }
-        }
-
-        @keyframes scaleInCinematic {
-            from { opacity: 0; transform: scale(0.95); filter: brightness(0.3); }
-            to { opacity: 1; transform: scale(1); filter: brightness(1); }
-        }
-
-        @keyframes microStagger {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         /* --- Gold Glow Top Menu Bar Navigation --- */
@@ -97,7 +79,6 @@
             top: 0;
             z-index: 100;
             margin-bottom: 2rem;
-            animation: slideDownReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
         }
 
         .nav-logo-container {
@@ -105,6 +86,7 @@
             align-items: center;
         }
 
+        /* Keeps the Starvel logo in the page design */
         .nav-logo {
             height: 28px;
             width: auto;
@@ -124,6 +106,7 @@
             gap: 24px;
         }
 
+        /* Dropdown Structure */
         .dropdown {
             position: relative;
         }
@@ -139,7 +122,7 @@
             border: 1px solid transparent;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             gap: 6px;
@@ -213,6 +196,7 @@
             padding-left: 1.4rem;
         }
 
+        /* --- Navbar Integrated View Counter Style --- */
         .nav-view-counter {
             color: #aaa;
             font-size: 0.85rem;
@@ -236,7 +220,6 @@
             max-width: 420px; 
             width: 100%;
             padding: 10px;
-            animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.1s both;
         }
 
         .title-container img {
@@ -247,16 +230,39 @@
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
         }
 
+        /* --- Premium Text Title UI Replacement --- */
+        .main-page-title {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff 30%, #d4af37 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.9));
+            line-height: 1.1;
+            margin-bottom: 0.2rem;
+        }
+
+        .title-badge {
+            font-size: 0.8rem;
+            color: #d4af37;
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            font-weight: 800;
+            opacity: 0.9;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
         p.subtitle { 
             font-size: 1rem; 
             color: #ccc; 
             margin-bottom: 3rem; 
             max-width: 800px; 
             text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
-            animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.2s both;
         }
         
-        /* --- Clean Master Player Container Layout --- */
+        /* Master Player Container (Handles Fullscreen Root Layouts) */
         .player-container {
             width: 100%;
             max-width: 1000px; 
@@ -265,10 +271,9 @@
             background-color: transparent; 
             margin: 0 auto 3rem auto;
             --current-ratio: 2.39; 
-            animation: scaleInCinematic 1s cubic-bezier(0.25, 1, 0.5, 1) 0.3s both;
         }
 
-        /* Fullscreen Layout Configurations */
+        /* --- FIXED FULLSCREEN API SELECTORS --- */
         .player-container:fullscreen { 
             max-width: none; 
             width: 100vw; 
@@ -288,7 +293,7 @@
             justify-content: space-between;
         }
 
-        /* Video Area Workspace Box */
+        /* Video Area Layout */
         .video-area {
             width: 100%;
             display: flex;
@@ -299,47 +304,48 @@
             min-height: 0; 
         }
 
-        .player-container:fullscreen .video-area { margin-bottom: 1rem; }
-        .player-container:-webkit-full-screen .video-area { margin-bottom: 1rem; }
+        .player-container:fullscreen .video-area {
+            margin-bottom: 1rem;
+        }
+        .player-container:-webkit-full-screen .video-area {
+            margin-bottom: 1rem;
+        }
 
-        /* --- CRITICAL: FIXED ASPECT RATIO CANCES CONTROLLER --- */
+        /* Video Wrapper */
         .video-wrapper {
             position: relative; 
             aspect-ratio: var(--current-ratio) / 1;
             width: 100%;
-            max-width: 100%;
+            max-height: 100%;
             background-color: #000;
             border: 1px solid rgba(255, 255, 255, 0.2);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
+            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            
-            /* High-Performance Smooth Crop Transitions */
-            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-            will-change: aspect-ratio, width;
         }
 
         .player-container:fullscreen .video-wrapper { 
             border: none; 
-            width: min(100vw, calc((100vh - 150px) * var(--current-ratio))) !important; 
-            height: min(calc(100vh - 150px), calc(100vw / var(--current-ratio))) !important;
+            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
+            max-height: calc(100vh - 150px);
         }
         .player-container:-webkit-full-screen .video-wrapper { 
             border: none; 
-            width: min(100vw, calc((100vh - 150px) * var(--current-ratio))) !important; 
-            height: min(calc(100vh - 150px), calc(100vw / var(--current-ratio))) !important;
+            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
+            max-height: calc(100vh - 150px);
         }
 
         video.main-video { 
             width: 100%; 
             height: 100%; 
-            object-fit: cover; /* Forces frames to physically crop visually instead of stretching */
-            background-color: #000;
+            object-fit: cover; 
+            transition: all 0.8s ease; 
         }
 
-        /* Overlay Format Badge Styling */
+        /* Overlay Logo Styling */
         .format-overlay {
             position: absolute;
             top: 25px;
@@ -349,12 +355,12 @@
             transition: opacity 0.3s ease;
         }
 
-        /* DOLBY VISION FILTER EFFECT */
+        /* DOLBY VISION COLOR GRADE */
         video.dolby-grade {
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* Controls Row Framework */
+        /* Controls / Buttons */
         .controls { 
             display: flex; 
             gap: 10px; 
@@ -364,10 +370,14 @@
             padding-bottom: 1rem;
         }
 
-        .player-container:fullscreen .controls { padding-bottom: 0; }
-        .player-container:-webkit-full-screen .controls { padding-bottom: 0; }
+        .player-container:fullscreen .controls {
+            padding-bottom: 0;
+        }
+        .player-container:-webkit-full-screen .controls {
+            padding-bottom: 0;
+        }
         
-        /* --- Premium Gold Format Selector Buttons --- */
+        /* Buttons for Gold Glowing UI */
         .format-btn { 
             background-color: rgba(0, 0, 0, 0.6); 
             backdrop-filter: blur(5px);
@@ -377,30 +387,20 @@
             padding: 1rem 0.5rem; 
             cursor: pointer; 
             width: 120px; 
+            transition: all 0.3s ease; 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: flex-end;
             gap: 6px; 
             box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
-            
-            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-            animation: microStagger 0.6s cubic-bezier(0.25, 1, 0.5, 1) both;
         }
-
-        .format-btn:nth-child(1) { animation-delay: 0.35s; }
-        .format-btn:nth-child(2) { animation-delay: 0.40s; }
-        .format-btn:nth-child(3) { animation-delay: 0.45s; }
-        .format-btn:nth-child(4) { animation-delay: 0.50s; }
-        .format-btn:nth-child(5) { animation-delay: 0.55s; }
-        .format-btn:nth-child(6) { animation-delay: 0.60s; }
         
         .format-btn:hover { 
             color: #fff; 
             background-color: rgba(212, 175, 55, 0.15); 
             border-color: rgba(212, 175, 55, 0.6);
             box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
-            transform: translateY(-4px);
         }
         
         .format-btn.active { 
@@ -409,15 +409,13 @@
             border-color: #d4af37; 
             box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3);
             text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-            transform: translateY(-2px);
         }
 
         .format-title { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
         .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
-        .screen-icon { margin-bottom: 8px; transition: transform 0.3s ease; }
-        
-        .format-btn:hover .screen-icon { transform: scale(1.08); }
+        .screen-icon { margin-bottom: 8px; }
 
+        /* Fullscreen Specific Button Styles */
         .divider {
             width: 2px;
             height: 60px;
@@ -452,7 +450,7 @@
         }
         .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
         
-        /* Info Description Segment Styles */
+        /* Info Section Styles */
         .info-section { 
             width: 100%; 
             max-width: 900px; 
@@ -464,7 +462,6 @@
             text-align: left; 
             margin-bottom: 2rem; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.05);
-            animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.4s both;
         }
         .info-section p { font-size: 1.1rem; color: #ddd; line-height: 1.6; margin-bottom: 2.5rem; }
         .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: #d4af37; }
@@ -552,10 +549,11 @@
             outline: none;
         }
 
+        /* Typography */
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* --- Support Area Layout Framework --- */
+        /* --- Support Section Split-Layout Framework --- */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -572,9 +570,9 @@
             justify-content: space-between;
             gap: 2rem;
             text-align: left;
-            animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.5s both;
         }
 
+        /* Responsive Shift for Mobile Displays */
         @media (max-width: 768px) {
             .support-container {
                 flex-direction: column;
@@ -669,6 +667,7 @@
             line-height: 1.4;
         }
 
+        /* QR Scanner Frame Layout Rules */
         .qr-wrapper {
             display: flex;
             flex-direction: column;
@@ -689,8 +688,11 @@
             transition: transform 0.3s ease;
         }
 
-        .qr-wrapper:hover .qr-element { transform: scale(1.03); }
+        .qr-wrapper:hover .qr-element {
+            transform: scale(1.03);
+        }
 
+        /* Footer Credit */
         .designer-credit {
             padding-top: 1rem;
             padding-bottom: 1rem;
@@ -700,7 +702,6 @@
             text-transform: uppercase;
             text-shadow: 0 2px 4px rgba(0,0,0,0.8);
             margin-top: auto;
-            animation: fadeInUpReveal 0.8s cubic-bezier(0.25, 1, 0.5, 1) 0.6s both;
         }
         .designer-credit span {
             color: #d4af37;
@@ -716,6 +717,7 @@
 
     <nav class="navbar">
         <div class="nav-logo-container">
+            <!-- Keeps your Starvel logo inside the website header -->
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
         </div>
         <div class="nav-right-side">
@@ -829,7 +831,7 @@
 
             <div class="divider"></div>
 
-            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton" aria-label="Toggle workspace layout mode">
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton" aria-label="Toggle native application workspace fullscreen layout mode">
                 <svg viewBox="0 0 24 24">
                     <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                 </svg>
@@ -909,9 +911,8 @@
             if (explorerVideo) explorerVideo.play();
         }
 
-        // --- FIXED TRANSITION LOGIC PIPELINE ---
         function changeRatio(ratio, buttonElement, formatType) {
-            const container = document.getElementById('playerContainer');
+            const playerContainer = document.getElementById('playerContainer');
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
@@ -920,8 +921,7 @@
                 videoElement.load();
             }
 
-            // Explicitly sets root and layout variable contexts concurrently
-            container.style.setProperty('--current-ratio', ratio);
+            playerContainer.style.setProperty('--current-ratio', ratio);
 
             if (formatType === 'dolby') {
                 videoElement.classList.add('dolby-grade');
