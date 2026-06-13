@@ -130,53 +130,113 @@
             transform: rotate(180deg);
         }
 
+        /* --- UPGRADED: Cinematic Mega Tile Grid Menu --- */
         .dropdown-menu {
             position: absolute;
-            top: 100%;
+            top: 120%;
             right: 0;
-            background: rgba(15, 15, 15, 0.95);
-            backdrop-filter: blur(8px);
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(12px);
             border: 1px solid rgba(212, 175, 55, 0.4);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.2);
-            border-radius: 4px;
-            width: 260px;
-            padding: 6px 0;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+            border-radius: 8px;
+            width: 580px;
+            padding: 1.2rem;
             display: none;
-            flex-direction: column;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
             text-align: left;
         }
 
         .dropdown:hover .dropdown-menu {
-            display: flex;
+            display: grid;
         }
 
+        /* --- Visual Hover Tile System --- */
         .dropdown-item {
-            color: #ccc;
+            display: flex;
+            flex-direction: column;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
+            overflow: hidden;
             text-decoration: none;
-            padding: 0.75rem 1.2rem;
-            font-size: 0.85rem;
-            font-weight: 500;
-            line-height: 1.3;
-            transition: all 0.2s ease;
-            border-left: 2px solid transparent;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
+        }
+
+        .dropdown-item-thumb {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: #050505;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .dropdown-item-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease, filter 0.3s ease;
+        }
+
+        .dropdown-item-meta {
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, rgba(5,5,5,0.6) 100%);
         }
 
         .dropdown-item span {
             display: block;
             color: #d4af37;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
+            letter-spacing: 0.8px;
+            transition: color 0.3s ease;
         }
 
+        .dropdown-item-desc {
+            color: #aaa;
+            font-size: 0.75rem;
+            line-height: 1.3;
+            font-weight: 400;
+            transition: color 0.3s ease;
+        }
+
+        /* Master Hover Performance Animations */
         .dropdown-item:hover {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.08);
+            border-color: #d4af37;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.2);
+            transform: translateY(-3px);
+        }
+
+        .dropdown-item:hover .dropdown-item-thumb img {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+        }
+
+        .dropdown-item:hover span {
             color: #fff;
-            border-left-color: #d4af37;
-            padding-left: 1.4rem;
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
+        }
+
+        .dropdown-item:hover .dropdown-item-desc {
+            color: #ddd;
+        }
+
+        /* Mobile Optimization for Mega Droproom Structure */
+        @media (max-width: 768px) {
+            .dropdown-menu {
+                width: 300px;
+                grid-template-columns: 1fr;
+                max-height: 400px;
+                overflow-y: auto;
+            }
         }
 
         /* --- Navbar Integrated View Counter Style --- */
@@ -705,18 +765,49 @@
                 <li class="dropdown">
                     <a class="dropdown-trigger">VFX Shots by Sathwik</a>
                     <div class="dropdown-menu">
-                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
-                            <span>Stranger Things</span>Watch VFX reel by Starvel Studios.
-                        </a>
-                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
-                            <span>Vecna's Curse</span>Watch breakdown by Starvel Studios.
-                        </a>
-                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png')">
-                            <span>Oppenheimer VFX</span>Watch VFX breakdown by Starvel Studios.
-                        </a>
-                        <a class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png')">
-                            <span>Oppenheimer Shot</span>Watch shot breakdown by Starvel Studios.
-                        </a>
+                        <!-- Stranger Things Tile 1 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png')">
+                            <div class="dropdown-item-thumb">
+                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail Image Asset">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Stranger Things</span>
+                                <div class="dropdown-item-desc">Watch VFX reel by Starvel Studios.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stranger Things Tile 2 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png')">
+                            <div class="dropdown-item-thumb">
+                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail Image Asset">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Vecna's Curse</span>
+                                <div class="dropdown-item-desc">Watch breakdown by Starvel Studios.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Oppenheimer Tile 1 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'oppthumb.png')">
+                            <div class="dropdown-item-thumb">
+                                <img src="oppthumb.png" alt="Oppenheimer Visual Effects Breakdown Video Cover Thumbnail">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer VFX</span>
+                                <div class="dropdown-item-desc">Watch VFX breakdown by Starvel Studios.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Oppenheimer Tile 2 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'oppthumb.png')">
+                            <div class="dropdown-item-thumb">
+                                <img src="oppthumb.png" alt="Oppenheimer Shot Reconstruction Video Cover Thumbnail">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer Shot</span>
+                                <div class="dropdown-item-desc">Watch shot breakdown by Starvel Studios.</div>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
