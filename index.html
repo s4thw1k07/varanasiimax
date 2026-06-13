@@ -16,9 +16,11 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
+    <!-- Network & Domain Pre-connections -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
 
+    <!-- High-Priority Asset Preloading for Instant Menu Render -->
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
     <link rel="preload" href="OPPENHEIMER.png" as="image">
 
@@ -26,7 +28,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
         body { 
-            background-color: #050505; 
+            background-color: #000; 
             color: #fff; 
             display: flex; 
             flex-direction: column; 
@@ -35,27 +37,6 @@
             padding: 0 2rem 2rem 2rem; 
             text-align: center; 
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Apple Liquid Glass Background Blobs */
-        .liquid-bg-blob {
-            position: fixed;
-            width: 50vw;
-            height: 50vw;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0,0,0,0) 70%);
-            z-index: -2;
-            pointer-events: none;
-            filter: blur(80px);
-            animation: floatBlobs 20s infinite alternate cubic-bezier(0.45, 0, 0.55, 1);
-        }
-        .blob-1 { top: -10%; left: -10%; }
-        .blob-2 { bottom: -10%; right: -10%; animation-delay: -5s; background: radial-gradient(circle, rgba(140, 100, 40, 0.12) 0%, rgba(0,0,0,0) 70%); }
-
-        @keyframes floatBlobs {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(8%, 12%) scale(1.15); }
         }
 
         /* Speed Optimization: Force GPU layer rendering to prevent UI lag */
@@ -67,52 +48,51 @@
             height: 100vh;
             object-fit: cover;
             z-index: -1; 
-            opacity: 0.25; 
+            opacity: 0.35; 
             pointer-events: none; 
             transform: translateZ(0);
             will-change: transform;
         }
 
-        /* --- GLOBAL FLUID PAGE TRANSITIONS (Apple Fluid Curve) --- */
+        /* --- GLOBAL SMOOTH PAGE TRANSITIONS --- */
         .navbar, .title-container, .subtitle, .player-container, .info-section, .support-container, .designer-credit {
             opacity: 0;
-            transform: scale(0.96) translateY(30px);
-            animation: appleLiquidFadeIn 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            transform: translateY(20px);
+            animation: cinematicFadeIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         /* Staggered load delays to look clean */
-        .navbar { animation-delay: 0.15s; }
-        .title-container { animation-delay: 0.35s; }
-        .subtitle { animation-delay: 0.45s; }
-        .player-container { animation-delay: 0.55s; }
-        .info-section { animation-delay: 0.65s; }
-        .support-container { animation-delay: 0.75s; }
-        .designer-credit { animation-delay: 0.85s; }
+        .navbar { animation-delay: 0.1s; }
+        .title-container { animation-delay: 0.3s; }
+        .subtitle { animation-delay: 0.4s; }
+        .player-container { animation-delay: 0.5s; }
+        .info-section { animation-delay: 0.6s; }
+        .support-container { animation-delay: 0.7s; }
+        .designer-credit { animation-delay: 0.8s; }
 
-        @keyframes appleLiquidFadeIn {
+        @keyframes cinematicFadeIn {
             to {
                 opacity: 1;
-                transform: scale(1) translateY(0);
+                transform: translateY(0);
             }
         }
 
-        /* --- Apple Liquid Glass Top Menu Bar Navigation --- */
+        /* --- Gold Glow Top Menu Bar Navigation --- */
         .navbar {
             width: 100vw;
-            background: rgba(15, 15, 15, 0.65);
-            backdrop-filter: blur(24px) saturate(180%);
-            -webkit-backdrop-filter: blur(24px) saturate(180%);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 20px rgba(212, 175, 55, 0.15);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0.85rem 2rem;
+            padding: 0.75rem 2rem;
             position: sticky;
             top: 0;
             z-index: 100;
             margin-bottom: 2rem;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .nav-logo-container {
@@ -124,7 +104,7 @@
             height: 42px;
             width: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.4));
         }
 
         .nav-right-side {
@@ -144,71 +124,69 @@
         }
 
         .dropdown-trigger {
-            background: rgba(255, 255, 255, 0.03);
+            background: transparent;
             color: #d4af37;
             text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.95rem;
             text-transform: uppercase;
             letter-spacing: 1px;
-            padding: 0.6rem 1.2rem;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
+            padding: 0.5rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 4px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
+            width: 100%;
             outline: none;
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.05);
         }
 
         .dropdown-trigger:hover, .dropdown.is-active .dropdown-trigger {
             color: #fff;
             background-color: rgba(212, 175, 55, 0.15);
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.25), inset 0 1px 1px rgba(255,255,255,0.1);
+            border-color: rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 4px rgba(255, 255, 255, 0.2);
         }
 
         .dropdown-trigger::after {
             content: '▼';
             font-size: 0.65rem;
             margin-left: 2px;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .dropdown.is-active .dropdown-trigger::after {
             transform: rotate(180deg);
         }
 
-        /* --- Liquid Glass Mega Menu with SVG Morph Goo Drop Effects --- */
+        /* --- Cinematic Mega Tile Grid Menu with Entry Animations --- */
         .dropdown-menu {
             position: absolute;
-            top: 130%; 
+            top: 110%; 
             right: 0;
-            background: rgba(15, 15, 15, 0.7);
-            backdrop-filter: blur(30px) saturate(200%);
-            -webkit-backdrop-filter: blur(30px) saturate(200%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.1);
-            border-radius: 16px;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(212, 175, 55, 0.15);
+            border-radius: 8px;
             width: 580px;
-            padding: 1.4rem;
+            padding: 1.2rem;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             text-align: left;
             
-            /* Enhanced Liquid State Toggle */
+            /* Structural Animation Defaults */
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.85) translateY(-20px);
-            filter: url('#liquid-goo') blur(4px);
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        transform 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        filter 0.4s ease;
+            transform: scale(0.95) translateY(-10px);
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        visibility 0.4s cubic-bezier(0.25, 1, 0.5, 1), 
+                        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             pointer-events: none;
         }
 
@@ -216,20 +194,19 @@
             opacity: 1;
             visibility: visible;
             transform: scale(1) translateY(0);
-            filter: url('') blur(0px);
             pointer-events: auto;
         }
 
-        /* --- Visual Hover Tile Glass System --- */
+        /* --- Visual Hover Tile System --- */
         .dropdown-item {
             display: flex;
             flex-direction: column;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 6px;
             overflow: hidden;
             text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
         }
 
@@ -246,15 +223,15 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
         }
 
         .dropdown-item-meta {
-            padding: 0.85rem;
+            padding: 0.75rem;
             display: flex;
             flex-direction: column;
-            gap: 4px;
-            background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, rgba(5,5,5,0.4) 100%);
+            gap: 2px;
+            background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, rgba(5,5,5,0.6) 100%);
         }
 
         .dropdown-item span {
@@ -270,27 +247,27 @@
         .dropdown-item-desc {
             color: #aaa;
             font-size: 0.75rem;
-            line-height: 1.4;
+            line-height: 1.3;
             font-weight: 400;
             transition: color 0.3s ease;
         }
 
-        /* Hover Interactive Glass Flow Actions */
+        /* Hover Performance Animations */
         .dropdown-item:hover {
             background: rgba(212, 175, 55, 0.08);
-            border-color: rgba(212, 175, 55, 0.5);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4), inset 0 1px 1px rgba(255,255,255,0.1);
-            transform: translateY(-4px) scale(1.02);
+            border-color: #d4af37;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.2);
+            transform: translateY(-4px);
         }
 
         .dropdown-item:hover .dropdown-item-thumb img {
-            transform: scale(1.08);
+            transform: scale(1.06);
             filter: brightness(1.1);
         }
 
         .dropdown-item:hover span {
             color: #fff;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 5px rgba(212, 175, 55, 0.5);
         }
 
         .dropdown-item:hover .dropdown-item-desc {
@@ -307,23 +284,22 @@
             }
         }
 
-        /* --- Navbar Integrated Liquid View Counter Style --- */
+        /* --- Navbar Integrated View Counter Style --- */
         .nav-view-counter {
-            color: #bbb;
-            font-size: 0.8rem;
+            color: #aaa;
+            font-size: 0.85rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             font-weight: 700;
-            padding: 0.5rem 1.2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            background: rgba(255, 255, 255, 0.03);
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.02);
+            padding: 0.4rem 0.9rem;
+            border-radius: 4px;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            background: rgba(20, 20, 20, 0.5);
         }
         .nav-view-counter span {
             color: #d4af37;
             margin-left: 4px;
-            text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
         }
 
         /* --- Fixed Title Constraints --- */
@@ -339,31 +315,25 @@
             height: auto;
             display: block;
             margin: 0 auto;
-            filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.6));
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.75));
         }
 
         p.subtitle { 
             font-size: 1rem; 
-            color: #bbb; 
+            color: #ccc; 
             margin-bottom: 3rem; 
             max-width: 800px; 
-            text-shadow: 0 2px 8px rgba(0,0,0,0.6); 
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8); 
         }
         
-        /* Master Liquid Glass Player Container */
+        /* Master Player Container */
         .player-container {
             width: 100%;
             max-width: 1000px; 
             display: flex;
             flex-direction: column;
-            background: rgba(18, 18, 18, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 1.5rem;
+            background-color: transparent; 
             margin: 0 auto 3rem auto;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.05);
             --current-ratio: 2.39; 
         }
 
@@ -374,9 +344,15 @@
             height: 100vh; 
             background-color: #000;
             padding: 20px;
-            border-radius: 0;
-            border: none;
-            backdrop-filter: none;
+            box-sizing: border-box;
+            justify-content: space-between;
+        }
+        .player-container:-webkit-full-screen { 
+            max-width: none; 
+            width: 100vw; 
+            height: 100vh; 
+            background-color: #000;
+            padding: 20px;
             box-sizing: border-box;
             justify-content: space-between;
         }
@@ -393,29 +369,33 @@
         }
 
         .player-container:fullscreen .video-area { margin-bottom: 1rem; }
+        .player-container:-webkit-full-screen .video-area { margin-bottom: 1rem; }
 
-        /* Video Wrapper and Ratio Fluid Elastic Transitions */
+        /* Video Wrapper and Ratio Transitions */
         .video-wrapper {
             position: relative; 
             aspect-ratio: var(--current-ratio) / 1;
             width: 100%;
             max-height: 100%;
             background-color: #000;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 8px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
-                        width 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
-                        max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
+            transition: aspect-ratio 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        width 0.8s cubic-bezier(0.25, 1, 0.5, 1), 
+                        max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .player-container:fullscreen .video-wrapper { 
             border: none; 
-            border-radius: 0;
+            width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
+            max-height: calc(100vh - 150px);
+        }
+        .player-container:-webkit-full-screen .video-wrapper { 
+            border: none; 
             width: min(100%, calc((100vh - 150px) * var(--current-ratio))); 
             max-height: calc(100vh - 150px);
         }
@@ -424,7 +404,7 @@
             width: 100%; 
             height: 100%; 
             object-fit: cover; 
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); 
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1); 
         }
 
         .format-overlay {
@@ -433,32 +413,32 @@
             left: 25px;
             z-index: 10;
             pointer-events: none; 
-            transition: opacity 0.4s ease;
+            transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         video.dolby-grade {
             filter: contrast(1.15) saturate(1.2) brightness(1.05) drop-shadow(0 0 10px rgba(255,255,255,0.1));
         }
         
-        /* Controls UI Formats Grid */
+        /* Controls */
         .controls { 
             display: flex; 
-            gap: 12px; 
+            gap: 10px; 
             flex-wrap: wrap; 
             justify-content: center; 
             align-items: center;
-            padding-bottom: 0.5rem;
+            padding-bottom: 1rem;
         }
 
         .player-container:fullscreen .controls { padding-bottom: 0; }
+        .player-container:-webkit-full-screen .controls { padding-bottom: 0; }
         
         .format-btn { 
-            background: rgba(255, 255, 255, 0.03); 
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.6); 
+            backdrop-filter: blur(5px);
             color: #d4af37; 
-            border: 1px solid rgba(255, 255, 255, 0.08); 
-            border-radius: 12px; 
+            border: 1px solid rgba(212, 175, 55, 0.3); 
+            border-radius: 6px; 
             padding: 1rem 0.5rem; 
             cursor: pointer; 
             width: 120px; 
@@ -467,94 +447,93 @@
             align-items: center; 
             justify-content: flex-end;
             gap: 6px; 
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
         .format-btn:hover { 
             color: #fff; 
-            background-color: rgba(212, 175, 55, 0.12); 
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15), inset 0 1px 0 rgba(255,255,255,0.1);
-            transform: translateY(-2px);
+            background-color: rgba(212, 175, 55, 0.15); 
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: scale(1.03);
         }
         
         .format-btn.active { 
             background-color: rgba(212, 175, 55, 0.2); 
             color: #fff; 
             border-color: #d4af37; 
-            box-shadow: 0 0 25px rgba(212, 175, 55, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.2);
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
-            transform: scale(1.04);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), inset 0 0 10px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
+            transform: scale(1.05);
         }
 
-        .format-title { font-weight: 800; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
-        .format-ratio { font-size: 0.75rem; opacity: 0.7; font-weight: 500;}
+        .format-title { font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; }
+        .format-ratio { font-size: 0.8rem; opacity: 0.8; font-weight: 500;}
         .screen-icon { margin-bottom: 8px; }
 
         .divider {
-            width: 1px;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.1);
-            margin: 0 8px;
+            width: 2px;
+            height: 60px;
+            background-color: rgba(212, 175, 55, 0.3);
+            margin: 0 10px;
+            border-radius: 2px;
         }
 
         .fullscreen-btn {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(5px);
             color: #d4af37;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
             padding: 1rem;
             cursor: pointer;
             width: 100px;
-            height: 76px;
+            height: 80px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
         .fullscreen-btn:hover {
             color: #fff;
-            background-color: rgba(212, 175, 55, 0.12);
-            border-color: rgba(212, 175, 55, 0.4);
-            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
-            transform: translateY(-2px);
+            background-color: rgba(212, 175, 55, 0.15);
+            border-color: rgba(212, 175, 55, 0.6);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transform: scale(1.03);
         }
-        .fullscreen-btn svg { width: 22px; height: 22px; fill: currentColor; }
+        .fullscreen-btn svg { width: 24px; height: 24px; fill: currentColor; }
         
-        /* Info Liquid Glass Panel */
+        /* Info Section */
         .info-section { 
             width: 100%; 
             max-width: 900px; 
-            background: rgba(18, 18, 18, 0.5); 
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.06); 
-            border-radius: 16px; 
-            padding: 2.5rem; 
+            background-color: rgba(17, 17, 17, 0.85); 
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.2); 
+            border-radius: 8px; 
+            padding: 2rem; 
             text-align: left; 
             margin-bottom: 2rem; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4), inset 0 1px 1px rgba(255,255,255,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px rgba(212, 175, 55, 0.05);
         }
-        .info-section p { font-size: 1.05rem; color: #ccc; line-height: 1.65; margin-bottom: 2.5rem; }
-        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; color: #d4af37; font-weight: 700;}
-        .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #000; border: 1px solid rgba(255, 255, 255, 0.1); }
+        .info-section p { font-size: 1.1rem; color: #ddd; line-height: 1.6; margin-bottom: 2.5rem; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1rem; color: #d4af37; }
+        .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 4px; overflow: hidden; background: #000; border: 1px solid rgba(212, 175, 55, 0.3); }
         .video-embed iframe { width: 100%; height: 100%; }
 
-        /* --- Fluid Overlay Screen --- */
+        /* --- Fluid Interstitial Layer Overlay Display --- */
         .vfx-overlay-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background-color: rgba(5, 5, 5, 0.5);
+            background-color: rgba(5, 5, 5, 0.85);
             backdrop-filter: blur(0px);
-            -webkit-backdrop-filter: blur(0px);
             z-index: 1000;
             display: flex; 
             flex-direction: column;
@@ -563,16 +542,15 @@
             padding: 2rem;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
-                        visibility 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                        backdrop-filter 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), 
+                        visibility 0.5s cubic-bezier(0.25, 1, 0.5, 1),
+                        backdrop-filter 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .vfx-overlay-screen.is-open {
             opacity: 1;
             visibility: visible;
-            backdrop-filter: blur(30px) saturate(150%);
-            -webkit-backdrop-filter: blur(30px) saturate(150%);
+            backdrop-filter: blur(20px);
         }
 
         .vfx-container {
@@ -583,8 +561,8 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            transform: scale(0.9) translateY(40px);
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scale(0.9) translateY(30px);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
         .vfx-overlay-screen.is-open .vfx-container {
@@ -595,17 +573,16 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 14px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 12px;
         }
 
         .vfx-title {
             color: #d4af37;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            font-size: 1.3rem;
-            font-weight: 700;
-            text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+            font-size: 1.4rem;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
             text-align: left;
         }
 
@@ -618,13 +595,12 @@
         .dolby-toggle-container {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 0.5rem 1rem;
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            padding: 0.4rem 0.8rem;
             border-radius: 20px;
             user-select: none;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
         }
 
         .dolby-toggle-label {
@@ -632,66 +608,68 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            color: #999;
+            color: #aaa;
             transition: color 0.3s ease;
         }
 
         .dolby-toggle-container.is-active .dolby-toggle-label {
             color: #d4af37;
-            text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
         }
 
         .switch-track {
             position: relative;
-            width: 40px;
-            height: 22px;
-            background-color: rgba(255,255,255,0.06);
+            width: 38px;
+            height: 20px;
+            background-color: #222;
             border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: background-color 0.3s ease, border-color 0.3s ease;
         }
 
         .switch-knob {
             position: absolute;
             top: 2px;
             left: 2px;
-            width: 16px;
-            height: 16px;
-            background-color: #999;
+            width: 14px;
+            height: 14px;
+            background-color: #aaa;
             border-radius: 50%;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
         }
 
         .dolby-toggle-container.is-active .switch-track {
-            background-color: rgba(212, 175, 55, 0.25);
+            background-color: rgba(212, 175, 55, 0.2);
             border-color: #d4af37;
         }
 
         .dolby-toggle-container.is-active .switch-knob {
             transform: translateX(18px);
             background-color: #d4af37;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 8px rgba(212, 175, 55, 0.6);
         }
 
         .back-btn {
-            background: rgba(255, 255, 255, 0.04);
+            background-color: rgba(0, 0, 0, 0.6);
             color: #d4af37;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 0.55rem 1.4rem;
-            font-size: 0.8rem;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 4px;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
         }
 
         .back-btn:hover {
             color: #fff;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(212, 175, 55, 0.2);
+            border-color: #d4af37;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
             transform: scale(1.02);
         }
 
@@ -699,9 +677,9 @@
             position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
-            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            border-radius: 6px;
             overflow: hidden;
             background-color: #000;
         }
@@ -724,24 +702,23 @@
             height: 100%;
             object-fit: cover;
             outline: none;
-            transition: filter 0.6s ease;
+            transition: filter 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* Support Section Glass Layout Split Framework */
+        /* Support Section Split-Layout Framework */
         .support-container {
             width: 100%;
             max-width: 900px;
             margin: 1.5rem auto;
-            padding: 2.5rem;
-            background: rgba(18, 18, 18, 0.4);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255,255,255,0.05);
+            padding: 2rem;
+            background: rgba(12, 12, 12, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -755,7 +732,6 @@
                 flex-direction: column;
                 text-align: center;
                 gap: 1.5rem;
-                padding: 2rem;
             }
             .support-info-block {
                 align-items: center !important;
@@ -775,18 +751,18 @@
 
         .support-title {
             color: #d4af37;
-            font-size: 1.3rem;
-            font-weight: 700;
+            font-size: 1.4rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 3px;
             margin-bottom: 0.75rem;
-            text-shadow: 0 0 8px rgba(212, 175, 55, 0.15);
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.2);
         }
 
         .support-text {
             color: #ccc;
-            font-size: 1rem;
-            line-height: 1.55;
+            font-size: 1.05rem;
+            line-height: 1.5;
             margin-bottom: 1.2rem;
         }
 
@@ -795,25 +771,25 @@
             align-items: center;
             gap: 10px;
             margin-bottom: 1.2rem;
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.6rem 1.2rem;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s ease;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: border-color 0.3s ease;
         }
-        .upi-block:hover { border-color: rgba(212, 175, 55, 0.4); background: rgba(212, 175, 55, 0.05); }
+        .upi-block:hover { border-color: rgba(212, 175, 55, 0.5); }
 
         .upi-label {
             color: #d4af37;
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 1px;
         }
 
         .upi-id-text {
             color: #fff;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             letter-spacing: 0.5px;
         }
 
@@ -826,7 +802,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1);
         }
         
         .copy-btn:hover {
@@ -846,11 +822,12 @@
 
         .support-subtext {
             color: #888;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-style: italic;
             line-height: 1.4;
         }
 
+        /* Layout Wrapper for Dual QR/Instagram Fields */
         .support-actions-wrapper {
             display: flex;
             align-items: center;
@@ -861,47 +838,49 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 15px rgba(255,255,255,0.02);
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .qr-element {
-            width: 130px;
-            height: 130px;
+            width: 140px;
+            height: 140px;
             object-fit: contain;
-            border-radius: 6px;
-            filter: drop-shadow(0 0 8px rgba(0,0,0,0.3));
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 4px;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.15));
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .qr-wrapper:hover { border-color: rgba(212, 175, 55, 0.3); background: rgba(212, 175, 55, 0.03); }
-        .qr-wrapper:hover .qr-element { transform: scale(1.04); }
+        .qr-wrapper:hover { border-color: rgba(212, 175, 55, 0.4); }
+        .qr-wrapper:hover .qr-element { transform: scale(1.05); }
 
+        /* Premium Instagram Link Button Framework */
         .instagram-link-card {
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(255, 255, 255, 0.03);
-            padding: 14px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 15px rgba(255,255,255,0.02);
-            width: 160px;
-            height: 160px;
+            background: rgba(255, 255, 255, 0.04);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.05);
+            width: 166px;
+            height: 166px;
             text-decoration: none;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         .instagram-icon-element {
-            width: 54px;
-            height: 54px;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.15));
+            transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
         }
 
         .instagram-card-label {
@@ -910,52 +889,39 @@
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin-top: 14px;
+            margin-top: 12px;
             transition: color 0.3s ease, text-shadow 0.3s ease;
         }
 
         .instagram-link-card:hover {
-            border-color: rgba(212, 175, 55, 0.4);
-            background: rgba(212, 175, 55, 0.06);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            border-color: #d4af37;
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 12px rgba(212, 175, 55, 0.2);
             transform: translateY(-4px);
         }
 
         .instagram-link-card:hover .instagram-icon-element {
-            transform: scale(1.1) rotate(3deg);
-            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.3));
+            transform: scale(1.1) rotate(4deg);
+            filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.4)) brightness(1.1);
         }
 
         .instagram-link-card:hover .instagram-card-label {
             color: #fff;
-            text-shadow: 0 0 6px rgba(212, 175, 55, 0.4);
+            text-shadow: 0 0 6px rgba(212, 175, 55, 0.6);
         }
 
         .designer-credit {
             padding-top: 1rem;
             padding-bottom: 1rem;
-            color: #999;
-            font-size: 0.85rem;
+            color: #aaa;
+            font-size: 0.9rem;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.6);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
             margin-top: auto;
         }
         .designer-credit span { color: #d4af37; font-weight: bold; }
     </style></head><body>
-
-    <svg style="visibility: hidden; position: absolute;" width="0" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1">
-        <defs>
-            <filter id="liquid-goo">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                <feComposite in="SourceGraphic" in2="goo" operator="atop" />
-            </filter>
-        </defs>
-    </svg>
-
-    <div class="liquid-bg-blob blob-1"></div>
-    <div class="liquid-bg-blob blob-2"></div>
 
     <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
         Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
@@ -970,6 +936,7 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
+                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
@@ -979,230 +946,406 @@
                                 <div class="dropdown-item-desc">Watch VFX reel by Starvel Studios.</div>
                             </div>
                         </div>
+                        
+                        <!-- Stranger Things Tile 2 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
+                            <div class="dropdown-item-thumb">
+                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Vecna's Curse</span>
+                                <div class="dropdown-item-desc">Watch breakdown by Starvel Studios.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Oppenheimer Tile 1 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
+                            <div class="dropdown-item-thumb">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer VFX</span>
+                                <div class="dropdown-item-desc">Watch VFX breakdown with Dolby Vision.</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Oppenheimer Tile 2 -->
+                        <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot VFX', 'OPPENHEIMER.png', true)">
+                            <div class="dropdown-item-thumb">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer Shot</span>
+                                <div class="dropdown-item-desc">Watch shot breakdown with Dolby Vision.</div>
+                            </div>
+                        </div>
                     </div>
                 </li>
             </ul>
-            <div class="nav-view-counter">VIEWS<span>1.43K</span></div>
+            <div class="nav-view-counter">
+                Views:<span id="count">1,024</span>
+            </div>
         </div>
     </nav>
 
-    <div class="title-container">
-        <img src="VARANASI TITEL.png" alt="Varanasi Master Title Graphic Representation">
+    <!-- Overlay Container with Dedicated Control Switches -->
+    <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
+        <div class="vfx-container">
+            <div class="vfx-header-area">
+                <h2 id="vfxDisplayTitle" class="vfx-title">Showcase Title</h2>
+                <div class="vfx-controls-right">
+                    <div class="dolby-toggle-container" id="dolbyToggleFrame">
+                        <span class="dolby-toggle-label">Dolby Vision</span>
+                        <div class="switch-track" onclick="toggleVfxDolby()">
+                            <div class="switch-knob"></div>
+                        </div>
+                    </div>
+                    <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
+                </div>
+            </div>
+            <div class="vfx-video-wrapper">
+                <img id="vfxFormatOverlay" class="vfx-format-overlay" src="dolby.png" alt="Active Modal Video Format Badge">
+                <video id="vfxTargetVideo" class="vfx-video-element" preload="none" muted playsinline controls></video>
+            </div>
+        </div>
     </div>
 
-    <p class="subtitle">
-        Explore every cinematic aspect ratio of the Varanasi teaser presentation, shot exclusively on IMAX film cameras. Switch formats seamlessly between IMAX 70mm, Dolby Vision, and Large Format.
-    </p>
+    <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline></video>
 
-    <div class="player-container" id="mainPlayerContainer">
+    <div class="title-container">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge">
+    </div>
+
+    <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
+
+    <div id="playerContainer" class="player-container">
+        
         <div class="video-area">
-            <div class="video-wrapper" id="mainVideoWrapper">
-                <img id="formatOverlayImage" class="format-overlay" src="" alt="Format Frame Ratio Guide Layer" style="display: none; width: 120px;">
-                <video id="primaryCinemaVideo" class="main-video" autoplay loop muted playsinline src="https://www.dropbox.com/scl/fi/2v99o0sveb6m70vffis5k/1.43.mp4?rlkey=v6j46xalwbe358dof07198m3p&st=zshz6oeg&raw=1">
-                </video>
+            <div class="video-wrapper" id="videoWrapper">
+                <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="none" autoplay loop muted playsinline controls controlsList="nofullscreen"></video>
             </div>
         </div>
 
         <div class="controls">
-            <button class="format-btn active" data-ratio="1.43" data-src="https://www.dropbox.com/scl/fi/2v99o0sveb6m70vffis5k/1.43.mp4?rlkey=v6j46xalwbe358dof07198m3p&st=zshz6oeg&raw=1" data-overlay="1.43.png">
-                <span class="format-title">IMAX 70MM</span>
-                <span class="format-ratio">1.43:1 Dedicated</span>
+            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax')" aria-label="Switch aspect ratio framework to IMAX 70mm">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="5" width="38" height="30" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="8" y1="9" x2="42" y2="9" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="8" y1="31" x2="42" y2="31" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">IMAX<br>70MM</span>
+                <span class="format-ratio">1.43:1</span>
             </button>
 
-            <button class="format-btn" data-ratio="1.90" data-src="https://www.dropbox.com/scl/fi/lky6t96ly7iixidshfmgx/1.90.mp4?rlkey=4m6isx7t3480z23g6yph167p5&st=g2w49wep&raw=1" data-overlay="imax digital.png">
-                <span class="format-title">IMAX Digital</span>
-                <span class="format-ratio">1.90:1 Commercial</span>
+            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax')" aria-label="Switch aspect ratio framework to Digital IMAX">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="10" width="38" height="20" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                </svg>
+                <span class="format-title">IMAX</span>
+                <span class="format-ratio">1.90:1</span>
             </button>
 
-            <button class="format-btn" data-ratio="2.39" data-src="https://www.dropbox.com/scl/fi/f0shb7gnt4mwyasw8t898/2.39.mp4?rlkey=sct508r5j6cly75y4pccpbeur&st=70y9g3w1&raw=1" data-overlay="">
-                <span class="format-title">Dolby Cinema</span>
-                <span class="format-ratio">2.39:1 Scope</span>
+            <button class="format-btn" onclick="changeRatio(2.20, this, 'none')" aria-label="Switch aspect ratio framework to Standard 70mm film">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title"><span class="font-light">7</span><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="vertical-align: -1px; margin: 0 1px;"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>MM</span>
+                <span class="format-ratio">2.20:1</span>
+            </button>
+
+            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none')" aria-label="Switch aspect ratio framework to Standard Cinema 35mm scope">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">35MM</span>
+                <span class="format-ratio">2.39:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'dolby')" aria-label="Switch aspect ratio framework to Dolby Vision high contrast grading">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="6" y="11" width="38" height="18" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                </svg>
+                <span class="format-title" style="display:flex; align-items:center; justify-content:center; gap:3px;">
+                    <svg width="16" height="12" viewBox="0 0 24 16" fill="currentColor"><path d="M7 0H0v16h7c4.4 0 8-3.6 8-8s-3.6-8-8-8z"/><path d="M17 0h7v16h-7c-4.4 0-8-3.6-8-8s3.6-8 8-8z"/></svg> 
+                    Dolby<br><span style="font-size: 0.5rem; letter-spacing: 2px; position:absolute; margin-top:24px;">VISION</span>
+                </span>
+                <span class="format-ratio" style="margin-top:4px;">1.85:1 | 2.39:1</span>
+            </button>
+
+            <button class="format-btn" onclick="changeRatio(1.85, this, 'large')" aria-label="Switch aspect ratio framework to Large Format widescreen presentation">
+                <svg class="screen-icon" width="50" height="40" viewBox="0 0 50 40">
+                    <rect x="10" y="13" width="30" height="14" stroke="currentColor" stroke-width="2" fill="none" rx="1"/>
+                    <path d="M 6 12 L 8 14 L 6 16 L 8 18 L 6 20 L 8 22 L 6 24 L 8 26 L 6 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                    <path d="M 44 12 L 42 14 L 44 16 L 42 18 L 44 20 L 42 22 L 44 24 L 42 26 L 44 28" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linejoin="round"/>
+                </svg>
+                <span class="format-title font-impact" style="font-size: 1.1rem; line-height: 0.9;">LARGE FORMAT</span>
+                <span class="format-ratio">1.85:1 | 2.39:1</span>
             </button>
 
             <div class="divider"></div>
 
-            <button class="fullscreen-btn" id="systemFullscreenBtn" title="Toggle Fullscreen Arena View Mode">
-                <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Maximize</span>
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton" aria-label="Toggle native application workspace fullscreen layout mode">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+                <span class="format-title" style="font-size: 0.8rem;" id="fsText">FULLSCREEN</span>
             </button>
+
         </div>
     </div>
 
-    <div class="info-section">
-        <p>
-            Varanasi is designed to bridge spatial depth textures with high-fidelity production scales. The layout system here lets viewers evaluate master source updates dynamically without viewport disruptions.
-        </p>
+    <section class="info-section">
+        <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
+        <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
+        
         <div class="video-embed-container">
-            <h3>Official Teaser Stream</h3>
+            <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
             <div class="video-embed">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Cinema Resolution and Projector Formats" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
-    </div>
+    </section>
 
-    <div class="support-container">
+    <!-- Action Container Block Layout -->
+    <section class="support-container">
         <div class="support-info-block">
-            <h4 class="support-title">Support Our Productions</h4>
-            <p class="support-text">Help fund independent creative pipelines, cinematic asset rendering optimization runs, and raw format web distribution channels.</p>
+            <h2 class="support-title">Support the Developer</h2>
+            <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
             <div class="upi-block">
                 <span class="upi-label">UPI ID:</span>
-                <span class="upi-id-text" id="targetUpiString">7337446545@ybl</span>
-                <button class="copy-btn" id="actionCopyBtn" title="Copy UPI ID String String">
-                    <svg viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
+                <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn" aria-label="Copy developer upi token identifier">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                    </svg>
                 </button>
             </div>
-            <p class="support-subtext">*Transactions process securely via standardized local payment architectures directly.</p>
+            <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
         </div>
+        
         <div class="support-actions-wrapper">
-            <div class="qr-wrapper">
-                <img class="qr-element" src="image_9b83b1.jpg" alt="Official Production QR Code Scanner Matrix Link">
-            </div>
-            <a class="instagram-link-card" href="https://www.instagram.com/sathwik_g_/" target="_blank" rel="noopener noreferrer">
-                <img class="instagram-icon-element" src="image_bc64f2.jpg" alt="Instagram Official Verification Profile Link Interface">
-                <span class="instagram-card-label">Follow Developer</span>
+            <!-- Dynamic Link Box Framework targeting Instagram_icon.jpg -->
+            <a href="https://www.instagram.com/_s4thw1k_/" target="_blank" class="instagram-link-card" aria-label="Follow developer profile on Instagram platform">
+                <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset Graphic Token Identifier">
+                <span class="instagram-card-label">Follow Me</span>
             </a>
+
+            <div class="qr-wrapper">
+                <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset for sathwik.gurram@okaxis">
+            </div>
         </div>
-    </div>
+    </section>
 
     <footer class="designer-credit">
-        Designed & Maintained by <span>G. Sathwik</span> & Starvel Studios Production Engineering
+        Designed By <span>G.Sathwik</span>
     </footer>
 
-    <div class="vfx-overlay-screen" id="vfxCinemaModalOverlay">
-        <div class="vfx-container">
-            <div class="vfx-header-area">
-                <div class="vfx-title" id="modalVfxScreenTitle">VFX Cinematic Render Screen</div>
-                <div class="vfx-controls-right">
-                    <div class="dolby-toggle-container" id="dolbyVfxGradingSwitch">
-                        <span class="dolby-toggle-label">Dolby Vision Grade</span>
-                        <div class="switch-track"><div class="switch-knob"></div></div>
-                    </div>
-                    <button class="back-btn" onclick="terminateVfxModalView()">Close View</button>
-                </div>
-            </div>
-            <div class="vfx-video-wrapper">
-                <img id="vfxModalFrameOverlay" class="vfx-format-overlay" src="" alt="VFX Frame Target Ratio Layer">
-                <video id="vfxModalVideoPlayer" class="vfx-video-element" controls loops muted playsinline></video>
-            </div>
-        </div>
-    </div>
-
     <script>
-        // Micro-Interaction Navigation Control Handling Transitions
         const vfxDropdown = document.getElementById('vfxDropdown');
         const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
+        let vfxDolbyActive = false; 
 
-        vfxTriggerBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
+        vfxTriggerBtn.addEventListener('click', function(event) {
+            event.stopPropagation(); 
             vfxDropdown.classList.toggle('is-active');
         });
 
-        document.addEventListener('click', () => {
-            vfxDropdown.classList.remove('is-active');
-        });
-
-        // Main Format Video Swapping Interface Layout Control Core
-        const formatButtons = document.querySelectorAll('.format-btn');
-        const playerContainer = document.getElementById('mainPlayerContainer');
-        const videoWrapper = document.getElementById('mainVideoWrapper');
-        const primaryVideo = document.getElementById('primaryCinemaVideo');
-        const overlayImage = document.getElementById('formatOverlayImage');
-
-        formatButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                if(btn.classList.contains('active')) return;
-
-                formatButtons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const newRatio = btn.getAttribute('data-ratio');
-                const newSrc = btn.getAttribute('data-src');
-                const overlaySrc = btn.getAttribute('data-overlay');
-
-                // Dynamic Transition Logic Core Values updates
-                playerContainer.style.setProperty('--current-ratio', newRatio);
-                primaryVideo.src = newSrc;
-                primaryVideo.play();
-
-                if (overlaySrc) {
-                    overlayImage.src = overlaySrc;
-                    overlayImage.style.display = 'block';
-                    overlayImage.style.opacity = '1';
-                } else {
-                    overlayImage.style.opacity = '0';
-                    overlayImage.style.display = 'none';
-                }
-            });
-        });
-
-        // Fullscreen Context Management Engine Hook
-        const fullScreenBtn = document.getElementById('systemFullscreenBtn');
-        fullScreenBtn.addEventListener('click', () => {
-            if (!document.fullscreenElement) {
-                playerContainer.requestFullscreen().catch(err => {
-                    console.error(`Error enabling fullscreen system interface initialization: ${err.message}`);
-                });
-            } else {
-                document.exitFullscreen();
+        document.addEventListener('click', function(event) {
+            if (!vfxDropdown.contains(event.target)) {
+                vfxDropdown.classList.remove('is-active');
             }
         });
 
-        // VFX Structural Inline Execution Windows Overlay Handlers
-        const modalOverlay = document.getElementById('vfxCinemaModalOverlay');
-        const modalVideo = document.getElementById('vfxModalVideoPlayer');
-        const modalTitle = document.getElementById('modalVfxScreenTitle');
-        const modalOverlayImg = document.getElementById('vfxModalFrameOverlay');
-        const dolbySwitch = document.getElementById('dolbyVfxGradingSwitch');
+        function playVfxInline(videoSrc, titleText, posterSrc, isDolby) {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxTitle = document.getElementById('vfxDisplayTitle');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
 
-        function playVfxInline(videoUrl, titleText, overlayAsset = '', isDolbyDefault = false) {
-            modalTitle.textContent = titleText;
-            modalVideo.src = videoUrl;
+            if (explorerVideo) explorerVideo.pause();
+
+            vfxTitle.innerText = titleText;
+            vfxVideo.src = videoSrc;
+            vfxVideo.poster = posterSrc;
             
-            if (overlayAsset && overlayAsset.trim() !== '') {
-                modalOverlayImg.src = overlayAsset;
-                modalOverlayImg.style.display = 'block';
-                setTimeout(() => modalOverlayImg.style.opacity = '1', 50);
+            vfxDolbyActive = isDolby;
+            if (vfxDolbyActive) {
+                vfxVideo.classList.add('dolby-grade');
+                toggleFrame.classList.add('is-active');
+                vfxBadge.style.display = 'block';
+                setTimeout(() => vfxBadge.style.opacity = '1', 50);
             } else {
-                modalOverlayImg.style.opacity = '0';
-                modalOverlayImg.style.display = 'none';
+                vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
+                vfxBadge.style.display = 'none';
             }
 
-            if(isDolbyDefault) {
-                dolbySwitch.classList.add('is-active');
-                modalVideo.classList.add('dolby-grade');
-            } else {
-                dolbySwitch.classList.remove('is-active');
-                modalVideo.classList.remove('dolby-grade');
-            }
-
-            modalOverlay.classList.add('is-open');
-            modalVideo.play();
+            vfxVideo.load(); 
+            vfxOverlay.classList.add('is-open');
+            vfxVideo.play();
+            
+            vfxDropdown.classList.remove('is-active');
         }
 
-        function terminateVfxModalView() {
-            modalOverlay.classList.remove('is-open');
-            modalVideo.pause();
-            modalVideo.src = "";
+        function toggleVfxDolby() {
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
+
+            vfxDolbyActive = !vfxDolbyActive;
+
+            if (vfxDolbyActive) {
+                vfxVideo.classList.add('dolby-grade');
+                toggleFrame.classList.add('is-active');
+                vfxBadge.style.display = 'block';
+                setTimeout(() => vfxBadge.style.opacity = '1', 50);
+            } else {
+                vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
+                setTimeout(() => {
+                    if(!vfxDolbyActive) vfxBadge.style.display = 'none';
+                }, 400); 
+            }
         }
 
-        dolbySwitch.addEventListener('click', () => {
-            dolbySwitch.classList.toggle('is-active');
-            if(dolbySwitch.classList.contains('is-active')) {
-                modalVideo.classList.add('dolby-grade');
-            } else {
-                modalVideo.classList.remove('dolby-grade');
-            }
-        });
+        function closeVfxInline() {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
 
-        // Copy Clipboard Control Operations Architecture 
-        const copyBtn = document.getElementById('actionCopyBtn');
-        copyBtn.addEventListener('click', () => {
-            const upiText = document.getElementById('targetUpiString').textContent;
-            navigator.clipboard.writeText(upiText).then(() => {
-                alert('UPI ID string copied cleanly onto your target user clipboard array.');
+            if (vfxVideo) {
+                vfxVideo.pause();
+                vfxVideo.src = "";
+                vfxVideo.load();
+            }
+            
+            vfxOverlay.classList.remove('is-open');
+
+            if (explorerVideo) explorerVideo.play();
+        }
+
+        function changeRatio(ratio, buttonElement, formatType) {
+            const playerContainer = document.getElementById('playerContainer');
+            const videoElement = document.getElementById('myVideo');
+            const overlay = document.getElementById('formatOverlay');
+            
+            if (videoElement.readyState === 0) {
+                videoElement.setAttribute('preload', 'auto');
+                videoElement.load();
+            }
+
+            playerContainer.style.setProperty('--current-ratio', ratio);
+
+            if (formatType === 'dolby') {
+                videoElement.classList.add('dolby-grade');
+            } else {
+                videoElement.classList.remove('dolby-grade');
+            }
+
+            if (formatType === 'imax') {
+                overlay.src = 'imax-seeklogo.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                overlay.style.width = '100px';
+                
+            } else if (formatType === 'dolby') {
+                overlay.src = 'dolby.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))'; 
+                overlay.style.width = '100px';
+                
+            } else if (formatType === 'large') {
+                overlay.src = '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                overlay.style.width = '140px';
+                
+            } else {
+                overlay.style.filter = 'none';
+                overlay.style.display = 'none';
+            }
+
+            const buttons = document.querySelectorAll('.format-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+        }
+
+        const playerContainer = document.getElementById('playerContainer');
+        const fsText = document.getElementById('fsText');
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (playerContainer.requestFullscreen) {
+                    playerContainer.requestFullscreen();
+                } else if (playerContainer.webkitRequestFullscreen) { 
+                    playerContainer.webkitRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { 
+                    document.webkitExitFullscreen();
+                }
+            }
+        }
+
+        document.addEventListener('fullscreenchange', updateFsButton);
+        document.addEventListener('webkitfullscreenchange', updateFsButton);
+
+        function updateFsButton() {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                fsText.innerText = "EXIT FS";
+            } else {
+                fsText.innerText = "FULLSCREEN";
+            }
+        }
+
+        function copyUpiToClipboard() {
+            const upiString = document.getElementById('upiId').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            
+            navigator.clipboard.writeText(upiString).then(() => {
+                const originalSvg = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalSvg;
+                }, 2000);
             }).catch(err => {
-                console.error('Could not manage clipboard asset data sequence initialization parameters: ', err);
+                console.error('Could not copy string text parameter: ', err);
             });
-        });
-    </script>
-</body></html>
+        }
+
+        function loadPageViews() {
+            const namespace = "s4thw1k07_varanasiimax";
+            const key = "visits";
+            
+            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://api.countapi.xyz/hit/${namespace}/${key}`)}`)
+                .then(response => {
+                    if (response.ok) return response.json();
+                    throw new Error('Network proxy error.');
+                })
+                .then(data => {
+                    const result = JSON.parse(data.contents);
+                    if(result && result.value) {
+                        document.getElementById('count').innerText = " " + result.value.toLocaleString();
+                    }
+                })
+                .catch(() => {
+                    let fallbackViews = localStorage.getItem('local_views') || 1024;
+                    fallbackViews = parseInt(fallbackViews) + 1;
+                    localStorage.setItem('local_views', fallbackViews);
+                    document.getElementById('count').innerText = " " + fallbackViews.toLocaleString();
+                });
+        }
+        window.addEventListener('DOMContentLoaded', loadPageViews);
+    </script></body></html>
