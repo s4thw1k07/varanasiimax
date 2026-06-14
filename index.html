@@ -16,12 +16,10 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
-    <!-- DESKTOP NETWORK PRIORITIZATION LINKS -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
     <link rel="preconnect" href="https://countapi.mileshilliard.com">
 
-    <!-- DESKTOP HIGH-PRIORITY GRAPHIC PRELOAD PIPELINES -->
     <link rel="preload" href="imax-seeklogo.png" as="image">
     <link rel="preload" href="dolby.png" as="image">
     <link rel="preload" href="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" as="image">
@@ -954,21 +952,6 @@
             color: #fff;
         }
 
-        /* --- Footer Framework --- */
-        .designer-credit {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            color: #888888;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: auto;
-        }
-        .designer-credit span {
-            color: #fff;
-            font-weight: 600;
-        }
-
         /* Fullscreen Action Box Anchors */
         .player-container:fullscreen {
             max-width: none !important;
@@ -1046,7 +1029,6 @@
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
-                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail" decoding="async">
@@ -1057,7 +1039,6 @@
                             </div>
                         </div>
                         
-                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
                                 <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail" decoding="async">
@@ -1068,7 +1049,6 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail" decoding="async">
@@ -1079,7 +1059,6 @@
                             </div>
                         </div>
                         
-                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot Reconstruction', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
                                 <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail" decoding="async">
@@ -1098,7 +1077,6 @@
         </div>
     </nav>
 
-    <!-- Liquid Interstitial Overlay Screen Layer -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -1120,7 +1098,6 @@
         </div>
     </div>
 
-    <!-- HIGH-DENSITY BITRATE DIRECT DESKTOP PRELOAD BUFFER -->
     <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline></video>
 
     <div class="title-container">
@@ -1138,7 +1115,6 @@
         </div>
 
         <div class="controls">
-            <!-- Hybrid Extra Surface Special Card Layer -->
             <button class="format-btn hybrid-special-btn active" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
                 <div class="hybrid-icon-wrap">
                     <img src="imax-seeklogo.png" alt="IMAX Hardware Asset Header" style="width: 44px; height: auto;" decoding="async">
@@ -1147,7 +1123,6 @@
                 <span class="format-ratio">1.43:1 Grade</span>
             </button>
 
-            <!-- 1.43:1 Native IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
                 <div class="screen-icon">
                     <img src="imax-seeklogo.png" alt="IMAX Logo" style="width: 80px; height: auto;" decoding="async">
@@ -1156,7 +1131,6 @@
                 <span class="format-ratio">1.43:1</span>
             </button>
 
-            <!-- 1.90:1 Native Digital IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
                 <div class="screen-icon">
                     <img src="imax-seeklogo.png" alt="IMAX Digital Logo" style="width: 80px; height: auto;" decoding="async">
@@ -1185,7 +1159,6 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <!-- Native Dolby Double-D Card -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
                 <div class="screen-icon">
                     <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);" decoding="async">
@@ -1193,7 +1166,6 @@
                 <span class="format-ratio">1.85:1</span>
             </button>
 
-            <!-- Native Curved Large Format Card -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
                 <div class="screen-icon">
                     <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);" decoding="async">
@@ -1224,7 +1196,6 @@
         </div>
     </section>
 
-    <!-- Support Container Block Layout -->
     <section class="support-container">
         <div class="support-info-block">
             <h2 class="support-title">Support the Developer</h2>
@@ -1306,6 +1277,7 @@
             vfxDropdown.classList.remove('is-active');
         }
 
+        // Generic helper to manage premium modal states
         function playPremiumVfx(badgeSrc, videoElem, badgeElem, toggleElem) {
             vfxDolbyActive = true;
             videoElem.classList.add('dolby-grade');
@@ -1359,6 +1331,7 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
+            /* 500 FPS motion blur dynamic execution pipeline loop */
             videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
                 videoElement.classList.remove('vfx-blur-active');
@@ -1446,25 +1419,48 @@
             });
         }
 
-        /* STRIPED SKEWED LOCALSTORAGE TRAFFIC FALLBACKS FOR LIFELIKE REALTIME DATA HANDSHAKES */
+        /* REAL-TIME DYNAMIC BACKGROUND INTERVAL POLLING ENGINE */
         function loadPageViews() {
             const NAMESPACE = "s4thw1k07_varanasiimax";
             const KEY = "visits";
             
-            fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
-                .then(response => {
-                    if (!response.ok) throw new Error('API server pipeline failure.');
-                    return response.json();
-                })
-                .then(data => {
-                    if (data && data.value) {
-                        document.getElementById('count').innerText = " " + data.value.toLocaleString();
-                    }
-                })
-                .catch(err => {
-                    console.warn("Global database offline, falling back to design baseline:", err);
-                    document.getElementById('count').innerText = " 1,024";
-                });
+            const fetchGlobalTrafficRegister = () => {
+                fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
+                    .then(response => {
+                        if (!response.ok) throw new Error('API server pipeline latency.');
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data && data.value) {
+                            const counterElement = document.getElementById('count');
+                            const currentDisplayVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
+                            
+                            // Only trigger animation transitions if traffic metrics change
+                            if (data.value !== currentDisplayVal) {
+                                counterElement.innerText = " " + data.value.toLocaleString();
+                                
+                                // Adds a premium gold shimmer flash on real-time count mutations
+                                counterElement.style.color = '#fff';
+                                counterElement.style.textShadow = '0 0 12px #e5c158';
+                                counterElement.style.transition = 'all 0.3s ease';
+                                
+                                setTimeout(() => {
+                                    counterElement.style.color = '#e5c158';
+                                    counterElement.style.textShadow = 'none';
+                                }, 800);
+                            }
+                        }
+                    })
+                    .catch(err => {
+                        console.warn("Background view handshake lagging:", err);
+                    });
+            };
+
+            // Initial immediate check
+            fetchGlobalTrafficRegister();
+
+            // Background dynamic poll interval loop locked to 5000ms
+            setInterval(fetchGlobalTrafficRegister, 5000);
         }
 
         function initPlaybackSchedules() {
@@ -1472,6 +1468,7 @@
             
             const mainVideo = document.getElementById('myVideo');
             
+            // Set hybrid special button as default landing state preset
             const initialSpecialBtn = document.querySelector('.hybrid-special-btn');
             if(initialSpecialBtn) {
                 playerContainer.style.setProperty('--current-ratio', '1.43');
@@ -1483,6 +1480,7 @@
                 overlay.style.width = '100px';
             }
             
+            // 1-Second Delay Timeline for Poster Presentation Highlighting
             setTimeout(() => {
                 mainVideo.play().then(() => {
                     console.log("Delayed playback initialized successfully.");
@@ -1491,6 +1489,7 @@
                 });
             }, 1000);
 
+            // Programmatic System Capture Hook to safely handle desktop auto-unmute loops
             const unmuteContextHook = () => {
                 if (mainVideo.muted) {
                     mainVideo.muted = false;
