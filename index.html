@@ -190,28 +190,27 @@
             transform: rotate(180deg);
         }
 
-        /* --- Liquid Glass Mega Grid Menu --- */
+        /* --- Redesigned Modern Visual Grid Menu --- */
         .dropdown-menu {
             position: absolute;
-            top: 110%; 
+            top: 120%; 
             right: 0;
-            background: rgba(12, 12, 12, 0.6);
-            backdrop-filter: blur(35px);
-            -webkit-backdrop-filter: blur(35px);
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(40px);
+            -webkit-backdrop-filter: blur(40px);
             border: var(--glass-border);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.1);
-            border-radius: 16px;
-            width: 580px;
-            padding: 1.2rem;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85), inset 0 1px 1px rgba(255,255,255,0.15);
+            border-radius: 20px;
+            width: 520px;
+            padding: 1.25rem;
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+            gap: 16px;
             text-align: left;
             
-            /* Water Drop In/Out States */
             opacity: 0;
             visibility: hidden;
-            transform: scale(0.93) translateY(-15px);
+            transform: scale(0.95) translateY(-10px);
             transition: opacity var(--water-duration) var(--water-transition), 
                         visibility var(--water-duration) var(--water-transition), 
                         transform var(--water-duration) var(--water-transition);
@@ -226,96 +225,117 @@
             pointer-events: auto;
         }
 
-        /* --- Glass Visual Grid Tiles --- */
+        /* --- Minimalist Vertical Elegant Cards --- */
         .dropdown-item {
             display: flex;
             flex-direction: column;
             background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
             overflow: hidden;
             text-decoration: none;
             transition: all var(--water-duration) var(--water-transition);
             cursor: pointer;
+            position: relative;
         }
 
         .dropdown-item-thumb {
             width: 100%;
             aspect-ratio: 16 / 9;
-            background-color: #020202;
+            background-color: #050505;
             position: relative;
             overflow: hidden;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .dropdown-item-thumb img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s var(--water-transition), filter var(--water-duration) ease;
+            transition: transform 0.8s var(--water-transition);
         }
 
+        /* Sleek Gradient Overlay Structure */
         .dropdown-item-meta {
-            padding: 0.75rem;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.5) 70%, rgba(5,5,5,0) 100%);
             display: flex;
             flex-direction: column;
-            gap: 2px;
-            background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, rgba(5,5,5,0.4) 100%);
+            gap: 4px;
+            flex-grow: 1;
         }
 
         .dropdown-item span {
             display: block;
-            color: #e5c158;
+            color: #ffffff;
             font-weight: 700;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
             transition: color 0.3s ease;
         }
 
         .dropdown-item-desc {
-            color: #b5b5b5;
-            font-size: 0.75rem;
-            line-height: 1.3;
+            color: #a0a0a0;
+            font-size: 0.78rem;
+            line-height: 1.4;
             font-weight: 400;
             transition: color 0.3s ease;
         }
 
+        /* Micro-interactions */
         .dropdown-item:hover {
-            background: rgba(212, 175, 55, 0.08);
-            border: var(--glass-border);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-            transform: translateY(-4px) scale(1.02);
+            border-color: #e5c158;
+            box-shadow: 0 12px 25px rgba(229, 193, 88, 0.15);
+            transform: translateY(-5px);
         }
 
         .dropdown-item:hover .dropdown-item-thumb img {
-            transform: scale(1.07);
-            filter: brightness(1.15);
+            transform: scale(1.05);
         }
 
         .dropdown-item:hover span {
-            color: #fff;
+            color: #e5c158;
         }
 
         .dropdown-item:hover .dropdown-item-desc {
-            color: #fff;
+            color: #e2e8f0;
         }
 
-        /* --- View Counter Badge --- */
-        .nav-view-counter {
-            color: #b5b5b5;
+        /* --- Footer Integrated Views Layout --- */
+        .designer-credit {
+            padding-top: 2rem;
+            padding-bottom: 2rem;
+            color: #666666;
             font-size: 0.85rem;
-            letter-spacing: 1.5px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            font-weight: 700;
-            padding: 0.5rem 1.1rem;
-            border-radius: 30px;
-            border: var(--glass-border);
-            background: rgba(255, 255, 255, 0.03);
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
-        .nav-view-counter span {
+        .designer-credit span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .footer-view-counter {
+            color: #888888;
+            font-size: 0.8rem;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.02);
+            display: inline-flex;
+            align-items: center;
+            margin-top: 4px;
+        }
+        .footer-view-counter span {
             color: #e5c158;
-            margin-left: 4px;
+            margin-left: 5px;
+            font-weight: 700;
         }
 
         /* --- Fixed Title Constraints --- */
@@ -387,7 +407,6 @@
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
         }
 
-        /* TWEAKED: High-performance class using GPU layers for motion blur blending */
         video.main-video { 
             width: 100%; 
             height: 100%; 
@@ -426,7 +445,6 @@
             padding-bottom: 1rem;
         }
         
-        /* WATER RIPPLE ENGINE SPECIFICATION */
         .format-btn { 
             position: relative;
             background: var(--glass-bg);
@@ -450,13 +468,11 @@
             overflow: hidden;
         }
 
-        /* Dynamic Media Variants to Center Premium Logos */
         .format-btn.premium-logo-btn {
             justify-content: center;
             gap: 12px;
         }
 
-        /* Fluid Water Underlay Ripple Mechanics */
         .format-btn::before {
             content: '';
             position: absolute;
@@ -498,7 +514,6 @@
         .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; }
         .screen-icon img { width: 100%; height: auto; object-fit: contain; }
 
-        /* Centering overrides for text-free graphic cards */
         .premium-logo-btn .screen-icon {
             margin-bottom: 0;
             display: flex;
@@ -901,7 +916,6 @@
         .qr-wrapper:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .qr-wrapper:hover .qr-element { transform: scale(1.04); }
 
-        /* Liquid Instagram Link Block Framework */
         .instagram-link-card {
             display: flex;
             flex-direction: column;
@@ -950,21 +964,6 @@
             color: #fff;
         }
 
-        /* --- Footer Credit Panel --- */
-        .designer-credit {
-            padding-top: 1.5rem;
-            padding-bottom: 1.5rem;
-            color: #888888;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-top: auto;
-        }
-        .designer-credit span {
-            color: #fff;
-            font-weight: 600;
-        }
-
         /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
         .player-container:fullscreen {
             max-width: none !important;
@@ -1011,7 +1010,6 @@
             box-shadow: 0 0 50px rgba(0,0,0,0.9) !important;
         }
 
-        /* FIXED Row Constraint Engine */
         .player-container:fullscreen .controls,
         .player-container:-webkit-full-screen .controls {
             width: auto !important;
@@ -1028,7 +1026,7 @@
 
         @supports not (backdrop-filter: blur(10px)) {
             .navbar { background: rgba(15, 15, 15, 0.95); }
-            .dropdown-menu { background: rgba(12, 12, 12, 0.98); }
+            .dropdown-menu { background: rgba(10, 10, 10, 0.98); }
             .format-btn { background: rgba(255, 255, 255, 0.05); }
             .vfx-overlay-screen { background-color: rgba(5, 5, 5, 0.98); }
         }
@@ -1089,9 +1087,6 @@
                     </div>
                 </li>
             </ul>
-            <div class="nav-view-counter">
-                Views:<span id="count">1,024</span>
-            </div>
         </div>
     </nav>
 
@@ -1236,7 +1231,10 @@
     </section>
 
     <footer class="designer-credit">
-        Designed By <span>G.Sathwik</span>
+        <div>Designed By <span>G.Sathwik</span></div>
+        <div class="footer-view-counter">
+            Views:<span id="count">1,024</span>
+        </div>
     </footer>
 
     <script>
@@ -1340,7 +1338,6 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            /* 500 FPS motion blur injector trigger loop */
             videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
                 videoElement.classList.remove('vfx-blur-active');
@@ -1451,14 +1448,12 @@
                 });
         }
 
-        /* Core 1-Second delay timeline engine execution loop */
         function initPlaybackSchedules() {
             loadPageViews();
             
             const mainVideo = document.getElementById('myVideo');
             const bgVideo = document.getElementById('bgVideo');
             
-            // Hold playback parameters for exactly 1000 milliseconds to highlight poster asset
             setTimeout(() => {
                 mainVideo.play().then(() => {
                     console.log("Delayed playback initialized successfully.");
@@ -1466,7 +1461,6 @@
                     console.log("Auto-play pending gesture fallback initialization loop.");
                 });
 
-                // Bootstrap background loop safely after layout calculations stabilize
                 if (bgVideo) {
                     bgVideo.src = "loop.mp4";
                     bgVideo.load();
@@ -1474,7 +1468,6 @@
                 }
             }, 1000);
 
-            // Programmatic Global Capture Hook to resolve system auto-unmute restrictions smoothly
             const unmuteContextHook = () => {
                 if (mainVideo.muted) {
                     mainVideo.muted = false;
