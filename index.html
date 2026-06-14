@@ -1,6 +1,6 @@
 <!DOCTYPE html><html lang="en"><head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Varanasi IMAX Premium Formats Experience | Starvel Studios</title>
     
@@ -18,7 +18,7 @@
     
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
-    <link rel="preconnect" href="https://countapi.mileshilliard.com">
+    <link rel="preconnect" href="https://api.allorigins.win">
 
     <link rel="preload" href="imax-seeklogo.png" as="image">
     <link rel="preload" href="dolby.png" as="image">
@@ -29,11 +29,6 @@
 
     <style>
         :root {
-            /* SHADER INTEGRATION VARIABLES (From Reference Site) */
-            --shd-refraction-index: 1.05;
-            --shd-chromatic-aberration: 0.18;
-            --shd-surface-tension: 0.82;
-            
             /* Apple Liquid Glass Design Variables */
             --glass-bg: rgba(255, 255, 255, 0.05);
             --glass-bg-hover: rgba(255, 255, 255, 0.12);
@@ -44,24 +39,22 @@
             /* Fluid Water-Inertia Timing Curve */
             --water-transition: cubic-bezier(0.25, 1, 0.4, 1);
             --water-duration: 0.65s;
-            --fluid-in: cubic-bezier(0.19, 1, 0.22, 1);
-            --fluid-duration: 0.9s;
-            --ripple-duration: 1.1s;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
-        
-        /* FIX: Dynamic view layer split allowing full natural native scrolling across desktop frames */
-        html { overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; height: 100%; }
+        /* Speed Opt: Global layer flattening for rapid page parsing */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
         
         body { 
             background-color: #030303; 
             color: #fff; 
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            text-align: center;
-            transform-style: preserve-3d;
-            perspective: 1200px;
-            min-height: 100%;
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            min-height: 100vh; 
+            padding: 0 2rem 2rem 2rem; 
+            text-align: center; 
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Ambient Dynamic Background Layer */
@@ -72,10 +65,11 @@
             width: 100vw;
             height: 100vh;
             object-fit: cover;
-            z-index: -2; 
+            z-index: -1; 
             opacity: 0.35; 
             pointer-events: none; 
-            transform: translateZ(-1px);
+            transform: translateZ(0);
+            will-change: transform;
         }
 
         /* --- GLOBAL SMOOTH PAGE TRANSITIONS --- */
@@ -85,6 +79,7 @@
             animation: fluidWaterIn 1.4s var(--water-transition) forwards;
         }
 
+        /* Staggered Load Pipelines */
         .navbar { animation-delay: 0.05s; }
         .title-container { animation-delay: 0.15s; }
         .subtitle { animation-delay: 0.2s; }
@@ -100,68 +95,23 @@
             }
         }
 
-        /* MASTER ADVANCED GLASS SHADER INTERACTION OVERLAYS */
-        .lg-shader-active {
-            position: relative;
-            background: rgba(18, 18, 18, 0.35);
-            backdrop-filter: blur(14px) contrast(1.1) saturate(1.2);
-            -webkit-backdrop-filter: blur(14px) contrast(1.1) saturate(1.2);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transform: translateZ(0);
-            will-change: transform, background;
-            overflow: hidden;
-            
-            mask-image: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 50%, rgba(0,0,0,1) 100%);
-            -webkit-mask-image: linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.92) 50%, rgba(0,0,0,1) 100%);
-        }
-
-        .lg-shader-active::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(255,0,0,0.01) 0%, transparent 40%),
-                radial-gradient(circle at 90% 90%, rgba(0,0,255,0.01) 0%, transparent 40%),
-                linear-gradient(135deg, rgba(255,255,255,0.12) 0%, transparent 45%, rgba(255,255,255,0.04) 55%, transparent 100%);
-            pointer-events: none;
-            z-index: 1;
-            transition: opacity 0.4s ease;
-            opacity: 0.8;
-            mix-blend-mode: color-dodge;
-        }
-
-        .lg-shader-active:hover::after, .lg-shader-active.active::after {
-            opacity: 1;
-            background: 
-                radial-gradient(circle at 10% 10%, rgba(255,0,0,0.02) 0%, transparent 35%),
-                radial-gradient(circle at 90% 90%, rgba(0,0,255,0.02) 0%, transparent 35%),
-                linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 40%, rgba(255,255,255,0.06) 60%, transparent 100%),
-                radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.12) 0%, transparent 50%);
-        }
-
-        @media (max-width: 1024px) {
-            html, body { overflow: hidden; position: fixed; width: 100%; height: 100%; }
-            .desktop-content { display: none !important; }
-            .mobile-reel-view { display: block !important; }
-        }
-
         /* --- Liquid Glass Navigation Bar --- */
         .navbar {
-            width: calc(100% - 4rem);
-            max-width: 1400px;
-            margin: 1.5rem auto;
+            width: 100vw;
             background: rgba(10, 10, 10, 0.4);
-            backdrop-filter: blur(25px) contrast(1.15) saturate(1.3);
-            -webkit-backdrop-filter: blur(25px) contrast(1.15) saturate(1.3);
-            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: var(--glass-border);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 0.75rem 2rem;
-            border-radius: 40px;
+            position: sticky;
+            top: 0;
             z-index: 100;
-            position: relative;
+            margin-bottom: 2rem;
+            transform: translateZ(0);
         }
 
         .nav-logo-container {
@@ -240,11 +190,12 @@
             transform: rotate(180deg);
         }
 
+        /* --- Liquid Glass Mega Grid Menu --- */
         .dropdown-menu {
             position: absolute;
-            top: 120%; 
+            top: 110%; 
             right: 0;
-            background: rgba(12, 12, 12, 0.7);
+            background: rgba(12, 12, 12, 0.6);
             backdrop-filter: blur(35px);
             -webkit-backdrop-filter: blur(35px);
             border: var(--glass-border);
@@ -256,6 +207,8 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             text-align: left;
+            
+            /* Water Drop In/Out States */
             opacity: 0;
             visibility: hidden;
             transform: scale(0.93) translateY(-15px);
@@ -264,7 +217,6 @@
                         transform var(--water-duration) var(--water-transition);
             pointer-events: none;
             transform: translateZ(0);
-            z-index: 500;
         }
 
         .dropdown.is-active .dropdown-menu {
@@ -274,6 +226,7 @@
             pointer-events: auto;
         }
 
+        /* --- Glass Visual Grid Tiles --- */
         .dropdown-item {
             display: flex;
             flex-direction: column;
@@ -340,9 +293,15 @@
             filter: brightness(1.15);
         }
 
-        .dropdown-item:hover span { color: #fff; }
-        .dropdown-item:hover .dropdown-item-desc { color: #fff; }
+        .dropdown-item:hover span {
+            color: #fff;
+        }
 
+        .dropdown-item:hover .dropdown-item-desc {
+            color: #fff;
+        }
+
+        /* --- View Counter Badge --- */
         .nav-view-counter {
             color: #b5b5b5;
             font-size: 0.85rem;
@@ -353,22 +312,13 @@
             border-radius: 30px;
             border: var(--glass-border);
             background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
         }
         .nav-view-counter span {
             color: #e5c158;
             margin-left: 4px;
         }
 
-        /* --- DESKTOP CONTENT ARRANGEMENT --- */
-        .desktop-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            padding: 0 2rem 4rem 2rem;
-        }
-
+        /* --- Fixed Title Constraints --- */
         .title-container {
             margin-bottom: 1rem;
             max-width: 420px; 
@@ -376,16 +326,35 @@
             padding: 10px;
             transition: transform var(--water-duration) var(--water-transition);
         }
-        .title-container:hover { transform: scale(1.02); }
-        .title-container img { width: 100%; height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)); }
+        .title-container:hover {
+            transform: scale(1.02);
+        }
 
+        .title-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8));
+        }
+
+        p.subtitle { 
+            font-size: 1rem; 
+            color: #cccccc; 
+            margin-bottom: 3rem; 
+            max-width: 800px; 
+            text-shadow: 0 2px 8px rgba(0,0,0,0.6); 
+            line-height: 1.5;
+        }
+        
+        /* --- Core Master Video Suite Container --- */
         .player-container {
             width: 100%;
-            max-width: 1100px; 
+            max-width: 1000px; 
             display: flex;
             flex-direction: column;
             background-color: transparent; 
-            margin: 0 auto 1.5rem auto;
+            margin: 0 auto 3rem auto;
             --current-ratio: 2.39; 
         }
 
@@ -418,6 +387,7 @@
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
         }
 
+        /* TWEAKED: High-performance class using GPU layers for motion blur blending */
         video.main-video { 
             width: 100%; 
             height: 100%; 
@@ -446,200 +416,680 @@
             filter: contrast(1.12) saturate(1.15) brightness(1.03) drop-shadow(0 0 30px rgba(255,255,255,0.05));
         }
         
-        /* --- BRAND BUTTONS FRAMEWORK --- */
+        /* --- Fluid Glass Buttons Framework --- */
+        .controls { 
+            display: flex; 
+            gap: 12px; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            align-items: center;
+            padding-bottom: 1rem;
+        }
+        
+        /* WATER RIPPLE ENGINE SPECIFICATION */
         .format-btn { 
             position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            width: 135px; 
-            height: 95px;
-            border-radius: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: #b5b5b5; 
+            border: var(--glass-border);
+            border-radius: 16px; 
+            padding: 1.1rem 0.6rem; 
+            cursor: pointer; 
+            width: 125px; 
+            height: 90px;
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: flex-end;
-            gap: 4px; 
-            padding: 1rem 0.6rem;
-            transition: all var(--fluid-duration) var(--fluid-in);
-            transform-style: preserve-3d;
+            gap: 6px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all var(--water-duration) var(--water-transition);
+            transform: translateZ(0);
+            overflow: hidden;
         }
 
+        /* Dynamic Media Variants to Center Premium Logos */
+        .format-btn.premium-logo-btn {
+            justify-content: center;
+            gap: 12px;
+        }
+
+        /* Fluid Water Underlay Ripple Mechanics */
         .format-btn::before {
-            content: ''; position: absolute; top: 50%; left: 50%;
-            width: 0; height: 0; border-radius: 50%;
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
             background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
             transform: translate(-50%, -50%);
-            pointer-events: none; z-index: 1;
-            transition: width var(--ripple-duration) var(--fluid-in), height var(--ripple-duration) var(--fluid-in), opacity 0.4s ease;
-            opacity: 0;
+            transition: width 0.75s var(--water-transition), height 0.75s var(--water-transition);
+            pointer-events: none;
+            z-index: 1;
         }
-        .format-btn:hover::before { width: 160%; height: 200%; opacity: 1; }
-
+        
+        .format-btn:hover::before, .format-btn.active::before { 
+            width: 200px; height: 200px; 
+        }
+        
         .format-btn:hover { 
-            background: var(--glass-base-hover);
-            transform: translateY(-8px) scale(1.04) rotateX(4deg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7), 0 10px 10px rgba(0,0,0,0.2), 0 0 1px rgba(255,255,255,0.08);
-            border-color: rgba(255,255,255,0.18);
+            color: #fff; 
+            background: var(--glass-bg-hover);
+            border: var(--glass-shine);
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
         
         .format-btn.active { 
             background: rgba(255, 255, 255, 0.14);
             color: #fff; 
-            border: 2px solid #e5c158;
+            border: var(--glass-shine);
+            border-color: #e5c158;
             box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2);
-            transform: translateY(-10px) scale(1.06) rotateX(6deg);
+            transform: translateY(-6px) scale(1.05);
         }
 
         .format-btn > * { z-index: 2; position: relative; }
+
         .format-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; text-align: center; }
-        .format-btn.active .format-title { color: #e5c158; }
         .format-ratio { font-size: 0.7rem; opacity: 0.65; font-weight: 500; margin-top: 1px; }
-        .format-btn.active .format-ratio { color: rgba(229,193,88,0.7); }
+        .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; }
+        .screen-icon img { width: 100%; height: auto; object-fit: contain; }
 
-        /* FIX: Locked image icon constraints prevents distorted dimensions */
-        .screen-icon { 
-            margin-bottom: auto; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            width: 100%; 
-            height: 38px; 
-            max-height: 38px;
-        }
-        .screen-icon img { 
-            max-width: 100%; 
-            max-height: 100%; 
-            width: auto; 
-            height: auto; 
-            object-fit: contain; 
-            display: block;
+        /* Centering overrides for text-free graphic cards */
+        .premium-logo-btn .screen-icon {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .premium-logo-btn { justify-content: center !important; gap: 12px !important; }
-        .premium-logo-btn .screen-icon { margin-bottom: 0 !important; height: 44px !important; max-height: 44px !important; }
-
-        .hybrid-icon-wrap { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; height: 36px; }
-        .hybrid-icon-wrap img { max-height: 100%; width: auto; object-fit: contain; }
+        .divider {
+            width: 1px;
+            height: 50px;
+            background-color: rgba(255, 255, 255, 0.15);
+            margin: 0 8px;
+        }
 
         .fullscreen-btn {
-            width: 105px; height: 95px; border-radius: 20px;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; padding: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            color: #b5b5b5;
+            border: var(--glass-border);
+            border-radius: 16px;
+            padding: 1rem;
+            cursor: pointer;
+            width: 105px;
+            height: 90px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all var(--fluid-duration) var(--fluid-in);
+            transition: all var(--water-duration) var(--water-transition);
+            transform: translateZ(0);
         }
         .fullscreen-btn:hover {
-            background: var(--glass-base-hover);
-            transform: translateY(-8px) scale(1.04) rotateX(4deg);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-            border-color: rgba(255,255,255,0.18);
+            color: #fff;
+            background: var(--glass-bg-hover);
+            border: var(--glass-shine);
+            transform: translateY(-4px) scale(1.03);
         }
-        .fullscreen-btn svg { width: 24px; height: 24px; fill: #b5b5b5; z-index: 2; position: relative; }
-        .fullscreen-btn:hover svg { fill: #fff; }
+        .fullscreen-btn svg { width: 22px; height: 22px; fill: currentColor; }
         
-        /* Layout Structuring */
+        /* Info Section */
         .info-section { 
-            width: 100%; max-width: 960px; padding: 3rem; text-align: left; margin: 1rem auto 2rem;
-            border-radius: 28px; box-shadow: 0 30px 70px rgba(0,0,0,0.85); position: relative;
+            width: 100%; 
+            max-width: 900px; 
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: var(--glass-border);
+            border-radius: 20px;
+            padding: 2.5rem; 
+            text-align: left; 
+            margin-bottom: 2rem; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
-        .info-section h2 { font-size: 1.8rem; font-weight: 600; margin-bottom: 1.2rem; }
-        .info-section p { font-size: 1.05rem; color: #d0d0d0; line-height: 1.6; margin-bottom: 2.8rem; font-weight: 400; }
-        
-        /* --- Support Split Layout Section Panels --- */
-        .support-container {
-            width: 100%; max-width: 960px; margin: 1.5rem auto; padding: 2.5rem;
-            border-radius: 28px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-            display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; text-align: left;
+        .info-section h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; }
+        .info-section p { font-size: 1.05rem; color: #d4d4d4; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; color: #e5c158; font-size: 0.9rem; }
+        .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; border: var(--glass-border); }
+        .video-embed iframe { width: 100%; height: 100%; }
+
+        /* --- Fluid Interstitial Layer Overlay Display --- */
+        .vfx-overlay-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(2, 2, 2, 0.6);
+            backdrop-filter: blur(0px);
+            -webkit-backdrop-filter: blur(0px);
+            z-index: 1000;
+            display: flex; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s var(--water-transition), 
+                        visibility 0.5s var(--water-transition),
+                        backdrop-filter 0.5s var(--water-transition),
+                        -webkit-backdrop-filter 0.5s var(--water-transition);
+            transform: translateZ(0);
         }
 
-        .support-info-block { display: flex; flex-direction: column; align-items: flex-start; flex: 1; }
-        .support-title { color: #fff; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 0.75rem; }
-        .support-text { color: #cbd5e1; font-size: 1.05rem; line-height: 1.5; margin-bottom: 1.4rem; }
+        .vfx-overlay-screen.is-open {
+            opacity: 1;
+            visibility: visible;
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+        }
+
+        .vfx-container {
+            position: relative;
+            width: 100%;
+            max-width: 960px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transform: scale(0.88) translateY(40px);
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .vfx-overlay-screen.is-open .vfx-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .vfx-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: var(--glass-border);
+            padding-bottom: 14px;
+        }
+
+        .vfx-title {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.4rem;
+            text-align: left;
+            letter-spacing: -0.2px;
+        }
+
+        .vfx-controls-right {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* --- Dolby Vision Toggle UI Component --- */
+        .dolby-toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            user-select: none;
+            transition: all var(--water-duration) var(--water-transition);
+        }
+        .dolby-toggle-container:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .dolby-toggle-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888;
+            transition: color var(--water-duration) ease;
+        }
+
+        .dolby-toggle-container.is-active .dolby-toggle-label {
+            color: #e5c158;
+            text-shadow: 0 0 8px rgba(229, 193, 88, 0.4);
+        }
+
+        .switch-track {
+            position: relative;
+            width: 42px;
+            height: 22px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            transition: all 0.3s var(--water-transition);
+        }
+
+        .switch-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.4);
+            transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), background-color 0.3s ease;
+        }
+
+        .dolby-toggle-container.is-active .switch-track {
+            background-color: rgba(229, 193, 88, 0.2);
+            border-color: #e5c158;
+        }
+
+        .dolby-toggle-container.is-active .switch-knob {
+            transform: translateX(20px);
+            background-color: #e5c158;
+            box-shadow: 0 0 10px rgba(229, 193, 88, 0.6);
+        }
+
+        .back-btn {
+            background: var(--glass-bg);
+            color: #e5c158;
+            border: var(--glass-border);
+            border-radius: 30px;
+            padding: 0.6rem 1.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all var(--water-duration) var(--water-transition);
+        }
+
+        .back-btn:hover {
+            color: #fff;
+            background: var(--glass-bg-hover);
+            border: var(--glass-shine);
+            transform: scale(1.02);
+        }
+
+        .vfx-video-wrapper {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: var(--glass-border);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #000;
+            transform: translateZ(0);
+        }
+
+        .vfx-format-overlay {
+            position: absolute;
+            top: 25px;
+            left: 25px;
+            z-index: 10;
+            pointer-events: none;
+            width: 100px;
+            display: none;
+            filter: invert(1) drop-shadow(0 4px 8px rgba(0,0,0,0.5));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .vfx-video-element {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            outline: none;
+            transition: filter var(--water-duration) var(--water-transition);
+        }
+
+        .font-light { font-weight: 400; }
+        .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
+
+        /* Support Glass Layout Frame */
+        .support-container {
+            width: 100%;
+            max-width: 900px;
+            margin: 1.5rem auto;
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 20px;
+            border: var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+            text-align: left;
+            transform: translateZ(0);
+        }
+
+        @media (max-width: 768px) {
+            .support-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 1.5rem;
+            }
+            .support-info-block {
+                align-items: center !important;
+            }
+            .support-actions-wrapper {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .support-info-block {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            flex: 1;
+        }
+
+        .support-title {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+            margin-bottom: 0.75rem;
+        }
+
+        .support-text {
+            color: #cbd5e1;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            margin-bottom: 1.4rem;
+        }
 
         .upi-block {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 1.4rem;
-            background: rgba(0, 0, 0, 0.3); padding: 0.6rem 1.2rem; border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.08); transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.4rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: all 0.3s ease;
         }
         .upi-block:hover { border-color: rgba(255,255,255,0.2); }
-        .upi-label { color: #e5c158; font-weight: 700; font-size: 1rem; letter-spacing: 0.5px; }
-        .upi-id-text { color: #fff; font-weight: 600; font-size: 1rem; }
 
-        .copy-btn { background: transparent; border: none; color: #e5c158; cursor: pointer; padding: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; }
-        .copy-btn:hover { color: #fff; transform: scale(1.2); }
-        .copy-btn svg { width: 16px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+        .upi-label {
+            color: #e5c158;
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+        }
 
-        .support-subtext { color: #888888; font-size: 0.85rem; font-style: italic; line-height: 1.4; }
-        .support-actions-wrapper { display: flex; align-items: center; gap: 16px; }
+        .upi-id-text {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .copy-btn {
+            background: transparent;
+            border: none;
+            color: #e5c158;
+            cursor: pointer;
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--water-duration) var(--water-transition);
+        }
+        
+        .copy-btn:hover {
+            color: #fff;
+            transform: scale(1.2);
+        }
+
+        .copy-btn svg {
+            width: 16px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .support-subtext {
+            color: #888888;
+            font-size: 0.85rem;
+            font-style: italic;
+            line-height: 1.4;
+        }
+
+        .support-actions-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
 
         .qr-wrapper {
-            display: flex; flex-direction: column; align-items: center; background: rgba(255, 255, 255, 0.03);
-            padding: 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.2); transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            transition: all var(--water-duration) var(--water-transition);
         }
-        .qr-element { width: 140px; height: 140px; object-fit: contain; border-radius: 4px; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3)); transition: transform 0.3s ease; }
+
+        .qr-element {
+            width: 140px;
+            height: 140px;
+            object-fit: contain;
+            border-radius: 4px;
+            filter: drop-shadow(0 4px 10px rgba(0,0,0,0.3));
+            transition: transform var(--water-duration) var(--water-transition);
+        }
+
         .qr-wrapper:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .qr-wrapper:hover .qr-element { transform: scale(1.04); }
 
+        /* Liquid Instagram Link Block Framework */
         .instagram-link-card {
-            display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.03);
-            padding: 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.2); width: 166px; height: 166px; text-decoration: none; transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 12px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+            width: 166px;
+            height: 166px;
+            text-decoration: none;
+            transition: all var(--water-duration) var(--water-transition);
         }
-        .instagram-icon-element { width: 56px; height: 64px; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); transition: transform 0.3s ease; }
-        .instagram-card-label { color: #b5b5b5; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-top: 12px; }
-        .instagram-link-card:hover { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.05); transform: translateY(-4px); }
-        .instagram-link-card:hover .instagram-icon-element { transform: scale(1.1) rotate(3deg); }
 
-        /* --- MOBILE REEL SCAFFOLDING --- */
-        .mobile-reel-view {
-            display: none; height: 100dvh; width: 100vw;
-            overflow-y: scroll; scroll-snap-type: y mandatory;
-            background: #000; z-index: 1000; position: fixed; top: 0; left: 0;
-            will-change: transform; scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
+        .instagram-icon-element {
+            width: 56px;
+            height: 64px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2));
+            transition: transform var(--water-duration) var(--water-transition);
         }
-        .reel-container { height: 100dvh; width: 100vw; scroll-snap-align: start; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        video.reel-video { width: 100%; height: 100%; object-fit: cover; z-index: 1; pointer-events: none; }
-        
-        .reel-ui-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 5; display: flex; flex-direction: column; justify-content: flex-end; padding: 30px; pointer-events: none; background: linear-gradient(0deg, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 40%, rgba(0,0,0,0) 100%); }
-        .reel-meta { text-align: left; color: #fff; max-width: 80%; }
-        .reel-title { font-weight: 700; font-size: 1.2rem; margin-bottom: 8px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
-        .reel-author { font-size: 0.9rem; color: #e5c158; text-transform: uppercase; letter-spacing: 1px; }
-        .reel-swipe-hint { position: absolute; top: 15px; left: 50%; transform: translateX(-50%); z-index: 5; font-size: 0.8rem; text-transform: uppercase; color: rgba(255,255,255,0.6); letter-spacing: 1.5px; opacity: 1; transition: opacity 0.4s ease; display: flex; align-items: center; gap: 8px; }
-        .reel-swipe-hint svg { width: 14px; height: 14px; fill: currentColor; }
-        .mobile-reel-view::-webkit-scrollbar { display: none; }
+
+        .instagram-card-label {
+            color: #b5b5b5;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 12px;
+            transition: color 0.3s ease;
+        }
+
+        .instagram-link-card:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateY(-4px);
+        }
+
+        .instagram-link-card:hover .instagram-icon-element {
+            transform: scale(1.1) rotate(3deg);
+        }
+
+        .instagram-link-card:hover .instagram-card-label {
+            color: #fff;
+        }
+
+        /* --- Footer Credit Panel --- */
+        .designer-credit {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            color: #888888;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: auto;
+        }
+        .designer-credit span {
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
+        .player-container:fullscreen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 30px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        .player-container:-webkit-full-screen {
+            max-width: none !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            background: #000 !important;
+            padding: 30px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+
+        .player-container:fullscreen .video-area,
+        .player-container:-webkit-full-screen .video-area {
+            width: 100% !important;
+            height: calc(100vh - 160px) !important;
+            margin-bottom: 20px !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            flex-grow: 1 !important;
+        }
+
+        .player-container:fullscreen .video-wrapper,
+        .player-container:-webkit-full-screen .video-wrapper {
+            border: none !important;
+            border-radius: 12px !important;
+            height: 100% !important;
+            width: auto !important;
+            max-width: 100% !important;
+            aspect-ratio: var(--current-ratio) / 1 !important;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9) !important;
+        }
+
+        /* FIXED Row Constraint Engine */
+        .player-container:fullscreen .controls,
+        .player-container:-webkit-full-screen .controls {
+            width: auto !important;
+            max-width: 100% !important;
+            padding-bottom: 0 !important;
+            background: transparent !important;
+            z-index: 10 !important;
+            display: flex !important;
+            flex-direction: row !important;
+            flex-wrap: nowrap !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        @supports not (backdrop-filter: blur(10px)) {
+            .navbar { background: rgba(15, 15, 15, 0.95); }
+            .dropdown-menu { background: rgba(12, 12, 12, 0.98); }
+            .format-btn { background: rgba(255, 255, 255, 0.05); }
+            .vfx-overlay-screen { background-color: rgba(5, 5, 5, 0.98); }
+        }
     </style></head><body>
 
-    <nav class="navbar lg-shader-active">
+    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
+        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
+    </h1>
+
+    <nav class="navbar">
         <div class="nav-logo-container">
             <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo" decoding="async">
-            <span class="nav-logo-text" style="font-family:'Impact',sans-serif; font-size:1.6rem; letter-spacing:-0.5px; margin-left:10px;">STARVEL</span>
         </div>
         <div class="nav-right-side">
             <ul class="nav-menu">
                 <li class="dropdown" id="vfxDropdown">
-                    <button class="dropdown-trigger">VFX Shots by Sathwik</button>
+                    <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
-                            <div class="dropdown-item-thumb"><img src="Stranger Things PART 1.png" alt="Stranger Things" decoding="async"></div>
-                            <div class="dropdown-item-meta"><span>Stranger Things</span><div class="dropdown-item-desc">Watch VFX reel by Starvel Studios.</div></div>
+                            <div class="dropdown-item-thumb">
+                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail" decoding="async">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Stranger Things</span>
+                                <div class="dropdown-item-desc">Watch VFX reel by Starvel Studios.</div>
+                            </div>
                         </div>
+                        
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
-                            <div class="dropdown-item-thumb"><img src="Stranger Things PART 1.png" alt="Vecna's Curse" decoding="async"></div>
-                            <div class="dropdown-item-meta"><span>Vecna's Curse</span><div class="dropdown-item-desc">Watch breakdown by Starvel Studios.</div></div>
+                            <div class="dropdown-item-thumb">
+                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail" decoding="async">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Vecna's Curse</span>
+                                <div class="dropdown-item-desc">Watch breakdown by Starvel Studios.</div>
+                            </div>
                         </div>
+                        
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
-                            <div class="dropdown-item-thumb"><img src="OPPENHEIMER.png" alt="Oppenheimer" decoding="async"></div>
-                            <div class="dropdown-item-meta"><span>Oppenheimer VFX</span><div class="dropdown-item-desc">Watch VFX breakdown with Dolby Vision.</div></div>
+                            <div class="dropdown-item-thumb">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail" decoding="async">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer VFX</span>
+                                <div class="dropdown-item-desc">Watch VFX breakdown with Dolby Vision.</div>
+                            </div>
                         </div>
+                        
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot Reconstruction', 'OPPENHEIMER.png', true)">
-                            <div class="dropdown-item-thumb"><img src="OPPENHEIMER.png" alt="Oppenheimer" decoding="async"></div>
-                            <div class="dropdown-item-meta"><span>Oppenheimer Shot</span><div class="dropdown-item-desc">Watch shot breakdown with Dolby Vision.</div></div>
+                            <div class="dropdown-item-thumb">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail" decoding="async">
+                            </div>
+                            <div class="dropdown-item-meta">
+                                <span>Oppenheimer Shot</span>
+                                <div class="dropdown-item-desc">Watch shot breakdown with Dolby Vision.</div>
+                            </div>
                         </div>
                     </div>
                 </li>
             </ul>
-            <div class="nav-view-counter lg-shader-active">
+            <div class="nav-view-counter">
                 Views:<span id="count">1,024</span>
             </div>
         </div>
@@ -652,7 +1102,9 @@
                 <div class="vfx-controls-right">
                     <div class="dolby-toggle-container" id="dolbyToggleFrame" onclick="toggleVfxDolby()">
                         <span class="dolby-toggle-label">Dolby Vision</span>
-                        <div class="switch-track"><div class="switch-knob"></div></div>
+                        <div class="switch-track">
+                            <div class="switch-knob"></div>
+                        </div>
                     </div>
                     <button class="back-btn" onclick="closeVfxInline()">← Go Back to Explorer</button>
                 </div>
@@ -664,291 +1116,377 @@
         </div>
     </div>
 
-    <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline></video>
+    <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="none" loop muted playsinline></video>
 
-    <div class="desktop-content">
-        <div class="title-container">
-            <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
-        </div>
-
-        <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
-
-        <div id="playerContainer" class="player-container">
-            <div class="video-area">
-                <div class="video-wrapper" id="videoWrapper">
-                    <img id="formatOverlay" class="format-overlay" src="" alt="Active Format Overlay Badge" style="display: none;" decoding="async">
-                    <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline controls controlsList="nofullscreen"></video>
-                </div>
-            </div>
-
-            <div class="controls">
-                <button class="format-btn hybrid-special-btn active lg-shader-active" id="presetBtn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
-                    <div class="hybrid-icon-wrap">
-                        <img src="imax-seeklogo.png" alt="IMAX Hardware Asset Header" decoding="async">
-                        <img src="dolby.png" alt="Dolby Digital System Core" style="filter: invert(1);" decoding="async">
-                    </div>
-                    <span class="format-ratio">1.43:1 Grade</span>
-                </button>
-
-                <button class="format-btn lg-shader-active" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
-                    <div class="screen-icon">
-                        <img src="imax-seeklogo.png" alt="IMAX Logo" decoding="async">
-                    </div>
-                    <span class="format-title">IMAX 70MM</span>
-                    <span class="format-ratio">1.43:1</span>
-                </button>
-
-                <button class="format-btn lg-shader-active" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
-                    <div class="screen-icon">
-                        <img src="imax-seeklogo.png" alt="IMAX Digital Logo" decoding="async">
-                    </div>
-                    <span class="format-title">IMAX Digital</span>
-                    <span class="format-ratio">1.90:1</span>
-                </button>
-
-                <button class="format-btn lg-shader-active" onclick="changeRatio(2.20, this, 'none', 'none')">
-                    <div class="screen-icon">
-                        <svg width="46" height="24" viewBox="0 0 50 40">
-                            <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
-                            <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                            <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                        </svg>
-                    </div>
-                    <span class="format-title">70MM Film</span>
-                    <span class="format-ratio">2.20:1</span>
-                </button>
-
-                <button class="format-btn lg-shader-active" onclick="changeRatio(2.39, this, 'none', 'none')">
-                    <div class="screen-icon">
-                        <svg width="46" height="24" viewBox="0 0 50 40">
-                            <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
-                            <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                            <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                        </svg>
-                    </div>
-                    <span class="format-title">35MM Scope</span>
-                    <span class="format-ratio">2.39:1</span>
-                </button>
-
-                <button class="format-btn premium-logo-btn lg-shader-active" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
-                    <div class="screen-icon">
-                        <img src="dolby.png" alt="Dolby Vision Logo" style="filter: invert(1);" decoding="async">
-                    </div>
-                    <span class="format-ratio">1.85:1</span>
-                </button>
-
-                <button class="format-btn premium-logo-btn lg-shader-active" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
-                    <div class="screen-icon">
-                        <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="filter: invert(1);" decoding="async">
-                    </div>
-                    <span class="format-ratio">1.85:1</span>
-                </button>
-
-                <div class="divider"></div>
-
-                <button class="fullscreen-btn lg-shader-active" onclick="toggleFullscreen()" id="fsButton">
-                    <svg viewBox="0 0 24 24"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
-                    <span class="format-title" style="font-size: 0.8rem;" id="fsText">FULLSCREEN</span>
-                </button>
-            </div>
-        </div>
-
-        <section class="info-section lg-shader-active">
-            <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
-            <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
-            <div class="video-embed-container">
-                <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
-                <div class="video-embed">
-                    <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Cinema Resolution and Projector Formats" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section class="support-container lg-shader-active">
-            <div class="support-info-block">
-                <h2 class="support-title">Support the Developer</h2>
-                <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
-                <div class="upi-block">
-                    <span class="upi-label">UPI ID:</span>
-                    <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
-                    <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
-                        </svg>
-                    </button>
-                </div>
-                <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
-            </div>
-            <div class="support-actions-wrapper">
-                <a href="https://www.instagram.com/_starvelstudios_/" target="_blank" class="instagram-link-card">
-                    <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset" decoding="async">
-                    <span class="instagram-card-label">Follow Us</span>
-                </a>
-                <div class="qr-wrapper">
-                    <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Code" decoding="async">
-                </div>
-            </div>
-        </section>
-
-        <footer class="designer-credit">Designed By <span>G.Sathwik</span></footer>
+    <div class="title-container">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
     </div>
 
-    <div id="mobileReelPlayer" class="mobile-reel-view">
-        <div id="swipeHint" class="reel-swipe-hint">
-            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 16h-2v-2h2v2zm3.3-6.7l-1.4 1.4c-1.1 1.1-1.9 1.8-1.9 3.3h-2v-.5c0-1.1.4-2.1 1.1-2.8l1.3-1.3c.4-.4.6-.9.6-1.4 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.2 1.8-4 4-4s4 1.8 4 4c0 .9-.3 1.7-.7 2.3z"></path></svg>
-            Vertical Swipe for More
+    <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
+
+    <div id="playerContainer" class="player-container">
+        <div class="video-area">
+            <div class="video-wrapper" id="videoWrapper">
+                <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;" decoding="async">
+                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline controls controlsList="nofullscreen"></video>
+            </div>
         </div>
 
-        <div class="reel-container">
-            <video class="reel-video" poster="1.43.png" src="https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1" preload="none" loop muted playsinline data-ratio="2.20" data-grade="dolby"></video>
-            <div class="reel-ui-layer"><div class="reel-meta"><div class="reel-title">Oppenheimer: VFX Breakdown</div><div class="reel-author">@STARVELSTUDIOS</div></div></div>
-        </div>
+        <div class="controls">
+            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
+                <div class="screen-icon">
+                    <img src="imax-seeklogo.png" alt="IMAX Logo" style="width: 80px; height: auto;" decoding="async">
+                </div>
+                <span class="format-title">IMAX 70MM</span>
+                <span class="format-ratio">1.43:1</span>
+            </button>
 
-        <div class="reel-container">
-            <video class="reel-video" poster="1.43.png" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" preload="none" loop muted playsinline data-ratio="2.39" data-grade="none"></video>
-            <div class="reel-ui-layer"><div class="reel-meta"><div class="reel-title">Varanasi - IMAX Teaser</div><div class="reel-author">@STARVELSTUDIOS</div></div></div>
-        </div>
+            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
+                <div class="screen-icon">
+                    <img src="imax-seeklogo.png" alt="IMAX Digital Logo" style="width: 80px; height: auto;" decoding="async">
+                </div>
+                <span class="format-title">IMAX Digital</span>
+                <span class="format-ratio">1.90:1</span>
+            </button>
 
-        <div class="reel-container">
-            <video class="reel-video" poster="1.43.png" src="https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1" preload="none" loop muted playsinline data-ratio="2.39" data-grade="none"></video>
-            <div class="reel-ui-layer"><div class="reel-meta"><div class="reel-title">Oppenheimer: Shot Construction</div><div class="reel-author">@STARVELSTUDIOS</div></div></div>
-        </div>
+            <button class="format-btn" onclick="changeRatio(2.20, this, 'none', 'none')">
+                <svg class="screen-icon" width="60" height="24" viewBox="0 0 50 40">
+                    <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
+                    <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">70MM Film</span>
+                <span class="format-ratio">2.20:1</span>
+            </button>
 
-        <div class="reel-container">
-            <video class="reel-video" poster="1.43.png" src="https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1" preload="none" loop muted playsinline data-ratio="2.39" data-grade="none"></video>
-            <div class="reel-ui-layer"><div class="reel-meta"><div class="reel-title">Stranger Things PART 1</div><div class="reel-author">@STARVELSTUDIOS</div></div></div>
-        </div>
+            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none', 'none')">
+                <svg class="screen-icon" width="60" height="24" viewBox="0 0 50 40">
+                    <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
+                    <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                    <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                </svg>
+                <span class="format-title">35MM Scope</span>
+                <span class="format-ratio">2.39:1</span>
+            </button>
 
-        <div class="reel-container">
-            <video class="reel-video" poster="1.43.png" src="https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1" preload="none" loop muted playsinline data-ratio="2.39" data-grade="none"></video>
-            <div class="reel-ui-layer"><div class="reel-meta"><div class="reel-title">VECNA'S CURSE Breakdown</div><div class="reel-author">@STARVELSTUDIOS</div></div></div>
+            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
+                <div class="screen-icon">
+                    <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);" decoding="async">
+                </div>
+                <span class="format-ratio">1.85:1</span>
+            </button>
+
+            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
+                <div class="screen-icon">
+                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);" decoding="async">
+                </div>
+                <span class="format-ratio">1.85:1</span>
+            </button>
+
+            <div class="divider"></div>
+
+            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton">
+                <svg viewBox="0 0 24 24">
+                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                </svg>
+                <span class="format-title" style="font-size: 0.8rem;" id="fsText">FULLSCREEN</span>
+            </button>
         </div>
     </div>
+
+    <section class="info-section">
+        <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
+        <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
+        
+        <div class="video-embed-container">
+            <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
+            <div class="video-embed">
+                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Cinema Resolution and Projector Formats" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            </div>
+        </div>
+    </section>
+
+    <section class="support-container">
+        <div class="support-info-block">
+            <h2 class="support-title">Support the Developer</h2>
+            <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
+            <div class="upi-block">
+                <span class="upi-label">UPI ID:</span>
+                <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
+                <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn" aria-label="Copy developer upi token identifier">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
+                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                    </svg>
+                </button>
+            </div>
+            <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
+        </div>
+        
+        <div class="support-actions-wrapper">
+            <a href="https://www.instagram.com/_starvelstudios_/" target="_blank" class="instagram-link-card" aria-label="Follow developer profile on Instagram platform">
+                <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset" decoding="async">
+                <span class="instagram-card-label">Follow Us</span>
+            </a>
+
+            <div class="qr-wrapper">
+                <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset for sathwik.gurram@okaxis" decoding="async">
+            </div>
+        </div>
+    </section>
+
+    <footer class="designer-credit">
+        Designed By <span>G.Sathwik</span>
+    </footer>
 
     <script>
-        /* --- MOUSE DYNAMIC SHADER REFRACTION PIPELINE --- */
-        const lgElements = document.querySelectorAll('.lg-shader-active');
-        document.addEventListener('mousemove', (e) => {
-            const { clientX, clientY } = e;
-            const centerX = window.innerWidth / 2;
-            const centerY = window.innerHeight / 2;
-            const shiftX = (clientX - centerX) / centerX * 15;
-            const shiftY = (clientY - centerY) / centerY * 15;
-            lgElements.forEach(el => {
-                el.style.transform = `rotateX(${-shiftY * 0.15}deg) rotateY(${shiftX * 0.15}deg)`;
-                el.style.maskPosition = `${50 + (shiftX * 0.2)}% ${50 + (shiftY * 0.2)}%`;
-                el.style.webkitMaskPosition = `${50 + (shiftX * 0.2)}% ${50 + (shiftY * 0.2)}%`;
-            });
-        });
-        document.addEventListener('mouseleave', () => {
-            lgElements.forEach(el => {
-                el.style.transform = 'rotateX(0deg) rotateY(0deg)';
-                el.style.maskPosition = '50% 50%'; el.style.webkitMaskPosition = '50% 50%';
-            });
+        const vfxDropdown = document.getElementById('vfxDropdown');
+        const vfxTriggerBtn = document.getElementById('vfxTriggerBtn');
+        let vfxDolbyActive = false; 
+
+        vfxTriggerBtn.addEventListener('click', function(event) {
+            event.stopPropagation(); 
+            vfxDropdown.classList.toggle('is-active');
         });
 
-        /* --- FORMAT ENGAGEMENT ENGINES --- */
-        const mainVideo = document.getElementById('myVideo');
-        const overlay = document.getElementById('formatOverlay');
-        const player = document.getElementById('playerContainer');
+        document.addEventListener('click', function(event) {
+            if (!vfxDropdown.contains(event.target)) {
+                vfxDropdown.classList.remove('is-active');
+            }
+        });
+
+        function playVfxInline(videoSrc, titleText, posterSrc, isDolby) {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxTitle = document.getElementById('vfxDisplayTitle');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
+
+            if (explorerVideo) explorerVideo.pause();
+
+            vfxTitle.innerText = titleText;
+            vfxVideo.src = videoSrc;
+            vfxVideo.poster = posterSrc;
+            
+            if (isDolby) {
+                playPremiumVfx('dolby.png', vfxVideo, vfxBadge, toggleFrame);
+            } else if (titleText.includes('Stranger Things')) {
+                playPremiumVfx('https://img.icons8.com/color/48/netflix--v1.png', vfxVideo, vfxBadge, toggleFrame);
+            } else {
+                vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
+                vfxBadge.style.display = 'none';
+            }
+
+            vfxVideo.load(); 
+            vfxOverlay.classList.add('is-open');
+            vfxVideo.play();
+            
+            vfxDropdown.classList.remove('is-active');
+        }
+
+        function playPremiumVfx(badgeSrc, videoElem, badgeElem, toggleElem) {
+            vfxDolbyActive = true;
+            videoElem.classList.add('dolby-grade');
+            toggleElem.classList.add('is-active');
+            badgeElem.src = badgeSrc;
+            badgeElem.style.display = 'block';
+            setTimeout(() => badgeElem.style.opacity = '1', 50);
+        }
+
+        function toggleVfxDolby() {
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+            const vfxBadge = document.getElementById('vfxFormatOverlay');
+            const toggleFrame = document.getElementById('dolbyToggleFrame');
+
+            vfxDolbyActive = !vfxDolbyActive;
+
+            if (vfxDolbyActive) {
+                vfxVideo.classList.add('dolby-grade');
+                toggleFrame.classList.add('is-active');
+                vfxBadge.src = 'dolby.png'; 
+                vfxBadge.style.display = 'block';
+                setTimeout(() => vfxBadge.style.opacity = '1', 50);
+            } else {
+                vfxVideo.classList.remove('dolby-grade');
+                toggleFrame.classList.remove('is-active');
+                vfxBadge.style.opacity = '0';
+                setTimeout(() => {
+                    if(!vfxDolbyActive) vfxBadge.style.display = 'none';
+                }, 400); 
+            }
+        }
+
+        function closeVfxInline() {
+            const explorerVideo = document.getElementById('myVideo');
+            const vfxOverlay = document.getElementById('vfxPlayerOverlay');
+            const vfxVideo = document.getElementById('vfxTargetVideo');
+
+            if (vfxVideo) {
+                vfxVideo.pause();
+                vfxVideo.src = "";
+                vfxVideo.load();
+            }
+            
+            vfxOverlay.classList.remove('is-open');
+
+            if (explorerVideo) explorerVideo.play();
+        }
 
         function changeRatio(ratio, buttonElement, badgeSource, gradeMode) {
-            mainVideo.classList.add('vfx-blur-active');
+            const playerContainer = document.getElementById('playerContainer');
+            const videoElement = document.getElementById('myVideo');
+            const overlay = document.getElementById('formatOverlay');
+            
+            /* 500 FPS motion blur injector trigger loop */
+            videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
-                player.style.setProperty('--current-ratio', ratio);
-                if (gradeMode === 'grade' || gradeMode === 'dolby') {
-                    mainVideo.classList.add('dolby-grade');
-                } else {
-                    mainVideo.classList.remove('dolby-grade');
-                }
-                if (badgeSource !== 'none') {
-                    overlay.src = badgeSource; overlay.style.display = 'block';
-                    overlay.style.filter = (badgeSource === 'imax-seeklogo.png') ? 'none' : 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
-                    overlay.style.width = (badgeSource === '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png') ? '140px' : '100px';
-                } else {
-                    overlay.style.display = 'none';
-                }
-                document.querySelectorAll('.format-btn').forEach(btn => btn.classList.remove('active'));
-                buttonElement.classList.add('active');
-                mainVideo.classList.remove('vfx-blur-active');
+                videoElement.classList.remove('vfx-blur-active');
             }, 280);
+
+            if (videoElement.readyState === 0) {
+                videoElement.setAttribute('preload', 'auto');
+                videoElement.load();
+            }
+
+            playerContainer.style.setProperty('--current-ratio', ratio);
+
+            if (gradeMode === 'grade') {
+                videoElement.classList.add('dolby-grade');
+            } else {
+                videoElement.classList.remove('dolby-grade');
+            }
+
+            if (badgeSource !== 'none') {
+                overlay.src = badgeSource;
+                overlay.style.display = 'block';
+                
+                if (badgeSource === 'dolby.png') {
+                    overlay.style.filter = 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))'; 
+                    overlay.style.width = '100px';
+                } else if (badgeSource === '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png') {
+                    overlay.style.filter = 'invert(1) drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                    overlay.style.width = '140px';
+                } else {
+                    overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                    overlay.style.width = '100px';
+                }
+            } else {
+                overlay.style.filter = 'none';
+                overlay.style.display = 'none';
+            }
+
+            const buttons = document.querySelectorAll('.format-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
         }
+
+        const playerContainer = document.getElementById('playerContainer');
+        const fsText = document.getElementById('fsText');
 
         function toggleFullscreen() {
-            if (!document.fullscreenElement) {
-                document.getElementById('videoWrapper').requestFullscreen().catch(() => {});
+            if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                if (playerContainer.requestFullscreen) {
+                    playerContainer.requestFullscreen();
+                } else if (playerContainer.webkitRequestFullscreen) { 
+                    playerContainer.webkitRequestFullscreen();
+                }
             } else {
-                document.exitFullscreen();
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) { 
+                    document.webkitExitFullscreen();
+                }
             }
         }
 
-        /* --- SYNCHRONIZED READ/WRITE TRAFFIC CONTROLS --- */
-        function loadPageViews() {
-            const NAMESPACE = "s4thw1k07_varanasiimax"; const KEY = "visits";
-            const counterElement = document.getElementById('count');
-            const fetchLiveViewCountOnly = () => {
-                fetch(`https://countapi.mileshilliard.com/api/v1/get/${NAMESPACE}_${KEY}`)
-                    .then(res => res.ok ? res.json() : null)
-                    .then(data => {
-                        if (data && data.value) {
-                            const currentDisplayVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
-                            if (data.value !== currentDisplayVal) {
-                                counterElement.innerText = " " + data.value.toLocaleString();
-                                counterElement.style.color = '#fff'; counterElement.style.textShadow = '0 0 12px #e5c158';
-                                setTimeout(() => { counterElement.style.color = '#e5c158'; counterElement.style.textShadow = 'none'; }, 800);
-                            }
-                        }
-                    }).catch(() => {});
-            };
-            fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
-                .then(res => res.ok ? res.json() : null)
-                .then(data => { if (data && data.value) counterElement.innerText = " " + data.value.toLocaleString(); })
-                .catch(() => { counterElement.innerText = " 1,024"; });
-            setInterval(fetchLiveViewCountOnly, 6000);
+        document.addEventListener('fullscreenchange', updateFsButton);
+        document.addEventListener('webkitfullscreenchange', updateFsButton);
+
+        function updateFsButton() {
+            if (document.fullscreenElement || document.webkitFullscreenElement) {
+                fsText.innerText = "EXIT FS";
+            } else {
+                fsText.innerText = "FULLSCREEN";
+            }
         }
 
-        /* --- MOBILE INTERSECTION SWIPING ENGINE --- */
-        const reelsView = document.getElementById('mobileReelPlayer');
-        const reelHint = document.getElementById('swipeHint');
-        const reelVideos = document.querySelectorAll('.reel-video');
-        const reelObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                const video = entry.target;
-                if (entry.isIntersecting) {
-                    video.style.aspectRatio = video.dataset.ratio + '/ 1';
-                    (video.dataset.grade === 'dolby') ? video.classList.add('dolby-grade') : video.classList.remove('dolby-grade');
-                    video.play().catch(() => { window.addEventListener('touchstart', () => video.play(), {once: true}); });
-                } else {
-                    video.pause(); video.currentTime = 0;
-                }
+        function copyUpiToClipboard() {
+            const upiString = document.getElementById('upiId').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            
+            navigator.clipboard.writeText(upiString).then(() => {
+                const originalSvg = copyBtn.innerHTML;
+                copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalSvg;
+                }, 2000);
+            }).catch(err => {
+                console.error('Could not copy string text parameter: ', err);
             });
-        }, { threshold: 0.82 });
-        reelVideos.forEach(v => reelObserver.observe(v));
-        reelsView.addEventListener('scroll', () => reelHint.style.opacity = '0', {once: true});
+        }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            initPlaybackSchedules();
-        });
+        function loadPageViews() {
+            const namespace = "s4thw1k07_varanasiimax";
+            const key = "visits";
+            
+            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://api.countapi.xyz/hit/${namespace}/${key}`)}`)
+                .then(response => {
+                    if (response.ok) return response.json();
+                    throw new Error('Network proxy error.');
+                })
+                .then(data => {
+                    const result = JSON.parse(data.contents);
+                    if(result && result.value) {
+                        document.getElementById('count').innerText = " " + result.value.toLocaleString();
+                    }
+                })
+                .catch(() => {
+                    let fallbackViews = localStorage.getItem('local_views') || 1024;
+                    fallbackViews = parseInt(fallbackViews) + 1;
+                    localStorage.setItem('local_views', fallbackViews);
+                    document.getElementById('count').innerText = " " + fallbackViews.toLocaleString();
+                });
+        }
 
+        /* Core 1-Second delay timeline engine execution loop */
         function initPlaybackSchedules() {
             loadPageViews();
+            
             const mainVideo = document.getElementById('myVideo');
-            const initialSpecialBtn = document.querySelector('.hybrid-special-btn');
-            if(initialSpecialBtn) {
-                playerContainer.style.setProperty('--current-ratio', '1.43');
-                mainVideo.classList.add('dolby-grade');
-                const overlay = document.getElementById('formatOverlay');
-                overlay.src = 'imax-seeklogo.png'; overlay.style.display = 'block';
-                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))'; overlay.style.width = '100px';
-            }
-            setTimeout(() => { mainVideo.play().catch(() => {}); }, 1000);
+            const bgVideo = document.getElementById('bgVideo');
+            
+            // Hold playback parameters for exactly 1000 milliseconds to highlight poster asset
+            setTimeout(() => {
+                mainVideo.play().then(() => {
+                    console.log("Delayed playback initialized successfully.");
+                }).catch(err => {
+                    console.log("Auto-play pending gesture fallback initialization loop.");
+                });
+
+                // Bootstrap background loop safely after layout calculations stabilize
+                if (bgVideo) {
+                    bgVideo.src = "loop.mp4";
+                    bgVideo.load();
+                    bgVideo.play().catch(() => {});
+                }
+            }, 1000);
+
+            // Programmatic Global Capture Hook to resolve system auto-unmute restrictions smoothly
             const unmuteContextHook = () => {
-                if (mainVideo.muted) mainVideo.muted = false;
+                if (mainVideo.muted) {
+                    mainVideo.muted = false;
+                    console.log("Hardware interface successfully unmuted via capture context hook.");
+                }
                 document.removeEventListener('click', unmuteContextHook);
                 document.removeEventListener('touchstart', unmuteContextHook);
             };
+
             document.addEventListener('click', unmuteContextHook);
             document.addEventListener('touchstart', unmuteContextHook);
         }
+
+        window.addEventListener('DOMContentLoaded', initPlaybackSchedules);
     </script></body></html>
