@@ -16,9 +16,16 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
+    <!-- HIGH-SPEED PRE-CONNECTIONS -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
+    <link rel="preconnect" href="https://api.allorigins.win">
 
+    <!-- HIGH-PRIORITY CRITICAL CODE ASSET PRELOAD PIPELINES -->
+    <link rel="preload" href="imax-seeklogo.png" as="image">
+    <link rel="preload" href="dolby.png" as="image">
+    <link rel="preload" href="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" as="image">
+    <link rel="preload" href="title.png" as="image">
     <link rel="preload" href="Stranger Things PART 1.png" as="image">
     <link rel="preload" href="OPPENHEIMER.png" as="image">
 
@@ -48,6 +55,7 @@
             padding: 0 2rem 2rem 2rem; 
             text-align: center; 
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Ambient Dynamic Background Layer */
@@ -343,7 +351,7 @@
         /* --- Core Master Video Suite Container --- */
         .player-container {
             width: 100%;
-            max-width: 1000px; 
+            max-width: 1100px; 
             display: flex;
             flex-direction: column;
             background-color: transparent; 
@@ -375,14 +383,11 @@
             align-items: center;
             justify-content: center;
             transform: translateZ(0);
-            
-            /* TWEAKED: Added strict transition tracking layer to trigger 500 FPS motion blur matrices */
             transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         width 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
         }
 
-        /* TWEAKED: High-performance class using GPU layers for motion blur blending */
         video.main-video { 
             width: 100%; 
             height: 100%; 
@@ -451,7 +456,14 @@
             gap: 12px;
         }
 
-        /* Fluid Water Underlay Ripple Mechanics */
+        /* Special Hybrid Variant Layout */
+        .format-btn.hybrid-special-btn {
+            width: 145px;
+            justify-content: center;
+            gap: 8px;
+            border-color: rgba(229, 193, 88, 0.25);
+        }
+
         .format-btn::before {
             content: '';
             position: absolute;
@@ -466,7 +478,7 @@
         }
         
         .format-btn:hover::before, .format-btn.active::before { 
-            width: 200px; height: 200px; 
+            width: 220px; height: 220px; 
         }
         
         .format-btn:hover { 
@@ -475,6 +487,11 @@
             border: var(--glass-shine);
             transform: translateY(-4px) scale(1.03);
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        .format-btn.hybrid-special-btn:hover {
+            border-color: #e5c158;
+            box-shadow: 0 10px 25px rgba(229, 193, 88, 0.15);
         }
         
         .format-btn.active { 
@@ -493,12 +510,20 @@
         .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; }
         .screen-icon img { width: 100%; height: auto; object-fit: contain; }
 
-        /* Centering overrides for text-free graphic cards */
-        .premium-logo-btn .screen-icon {
+        .premium-logo-btn .screen-icon, .hybrid-special-btn .screen-icon {
             margin-bottom: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+        }
+
+        /* Layout wrapper for side-by-side hybrid graphics mapping */
+        .hybrid-icon-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
         }
 
         .divider {
@@ -748,7 +773,7 @@
         .font-light { font-weight: 400; }
         .font-impact { font-family: 'Impact', 'Arial Black', sans-serif; letter-spacing: 0px; font-weight: normal; }
 
-        /* Support Section Split-Layout Framework */
+        /* Support Glass Layout Frame */
         .support-container {
             width: 100%;
             max-width: 900px;
@@ -896,7 +921,7 @@
         .qr-wrapper:hover { border-color: rgba(255,255,255,0.2); background: rgba(255,255,255,0.05); }
         .qr-wrapper:hover .qr-element { transform: scale(1.04); }
 
-        /* Liquid Instagram Link Block Framework */
+        /* Liquid Instagram Link Button Framework */
         .instagram-link-card {
             display: flex;
             flex-direction: column;
@@ -1035,16 +1060,17 @@
 
     <nav class="navbar">
         <div class="nav-logo-container">
-            <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo">
+            <img class="nav-logo" src="image_76c806.jpg" alt="Starvel Studios Production House Logo" decoding="async">
         </div>
         <div class="nav-right-side">
             <ul class="nav-menu">
                 <li class="dropdown" id="vfxDropdown">
                     <button class="dropdown-trigger" id="vfxTriggerBtn">VFX Shots by Sathwik</button>
                     <div class="dropdown-menu">
+                        <!-- Stranger Things Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/xxfbjavx6ra2ti696qzbr/strangerthings-part1.mp4?rlkey=fz3epel4jv4tmocl6jh11jufs&st=pq9mpuuw&raw=1', 'Stranger Things VFX reel', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
-                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail">
+                                <img src="Stranger Things PART 1.png" alt="Stranger Things VFX Reel Thumbnail" decoding="async">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Stranger Things</span>
@@ -1052,9 +1078,10 @@
                             </div>
                         </div>
                         
+                        <!-- Stranger Things Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/66ragirza0o8qo62wkmx3/VECNA-S-CURSE.mp4?rlkey=df6r4860uls1g2rpmu11jcw6s&st=1qzc8yw3&raw=1', 'Vecna\'s Curse breakdown', 'Stranger Things PART 1.png', false)">
                             <div class="dropdown-item-thumb">
-                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail">
+                                <img src="Stranger Things PART 1.png" alt="Vecna's Curse Breakdown Thumbnail" decoding="async">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Vecna's Curse</span>
@@ -1062,9 +1089,10 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 1 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/hsqigxe3gynjljlh1bpts/VFX-BREAKDOWN-VIDEO.mp4?rlkey=6c8uz7zgccncffr4ownhya47i&st=zzikdhqv&raw=1', 'Oppenheimer VFX Breakdown', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
-                                <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Visual Effects Breakdown Video Thumbnail" decoding="async">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer VFX</span>
@@ -1072,9 +1100,10 @@
                             </div>
                         </div>
                         
+                        <!-- Oppenheimer Tile 2 -->
                         <div class="dropdown-item" onclick="playVfxInline('https://www.dropbox.com/scl/fi/6v174onmexmdhjanobc6u/OPPENHEIMER-Shot-VFX.mp4?rlkey=xu87i7w6ycyrg9xupkxwgkxdm&st=ytwfjea6&raw=1', 'Oppenheimer Shot Reconstruction', 'OPPENHEIMER.png', true)">
                             <div class="dropdown-item-thumb">
-                                <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail">
+                                <img src="OPPENHEIMER.png" alt="Oppenheimer Shot Reconstruction Video Thumbnail" decoding="async">
                             </div>
                             <div class="dropdown-item-meta">
                                 <span>Oppenheimer Shot</span>
@@ -1090,6 +1119,7 @@
         </div>
     </nav>
 
+    <!-- Liquid Interstitial Overlay Screen Layer -->
     <div id="vfxPlayerOverlay" class="vfx-overlay-screen">
         <div class="vfx-container">
             <div class="vfx-header-area">
@@ -1105,16 +1135,16 @@
                 </div>
             </div>
             <div class="vfx-video-wrapper">
-                <img id="vfxFormatOverlay" class="vfx-format-overlay" src="" alt="Active Modal Video Format Badge">
+                <img id="vfxFormatOverlay" class="vfx-format-overlay" src="" alt="Active Modal Video Format Badge" decoding="async">
                 <video id="vfxTargetVideo" class="vfx-video-element" preload="none" muted playsinline controls></video>
             </div>
         </div>
     </div>
 
-    <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline></video>
+    <video id="bgVideo" src="" poster="1.43.png" preload="none" loop muted playsinline></video>
 
     <div class="title-container">
-        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge">
+        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
     </div>
 
     <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
@@ -1122,23 +1152,34 @@
     <div id="playerContainer" class="player-container">
         <div class="video-area">
             <div class="video-wrapper" id="videoWrapper">
-                <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;">
+                <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;" decoding="async">
                 <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline controls controlsList="nofullscreen"></video>
             </div>
         </div>
 
         <div class="controls">
+            <!-- NEW HYBRID EXTRA SURFACE CARD: Native IMAX 1.43:1 + Dolby Vision Color Mapping Engine Switcher -->
+            <button class="format-btn hybrid-special-btn active" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
+                <div class="hybrid-icon-wrap">
+                    <img src="imax-seeklogo.png" alt="IMAX Hardware Asset Header" style="width: 44px; height: auto;" decoding="async">
+                    <img src="dolby.png" alt="Dolby Digital System Core" style="width: 40px; height: auto; filter: invert(1);" decoding="async">
+                </div>
+                <span class="format-ratio">1.43:1 Grade</span>
+            </button>
+
+            <!-- 1.43:1 Native IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
                 <div class="screen-icon">
-                    <img src="imax-seeklogo.png" alt="IMAX Logo" style="width: 80px; height: auto;">
+                    <img src="imax-seeklogo.png" alt="IMAX Logo" style="width: 80px; height: auto;" decoding="async">
                 </div>
                 <span class="format-title">IMAX 70MM</span>
                 <span class="format-ratio">1.43:1</span>
             </button>
 
+            <!-- 1.90:1 Native Digital IMAX Logo Button -->
             <button class="format-btn" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
                 <div class="screen-icon">
-                    <img src="imax-seeklogo.png" alt="IMAX Digital Logo" style="width: 80px; height: auto;">
+                    <img src="imax-seeklogo.png" alt="IMAX Digital Logo" style="width: 80px; height: auto;" decoding="async">
                 </div>
                 <span class="format-title">IMAX Digital</span>
                 <span class="format-ratio">1.90:1</span>
@@ -1154,7 +1195,7 @@
                 <span class="format-ratio">2.20:1</span>
             </button>
 
-            <button class="format-btn active" onclick="changeRatio(2.39, this, 'none', 'none')">
+            <button class="format-btn" onclick="changeRatio(2.39, this, 'none', 'none')">
                 <svg class="screen-icon" width="60" height="24" viewBox="0 0 50 40">
                     <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
                     <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
@@ -1164,16 +1205,18 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
+            <!-- Native Dolby Double-D Vector Logo Button -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
                 <div class="screen-icon">
-                    <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);">
+                    <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);" decoding="async">
                 </div>
                 <span class="format-ratio">1.85:1</span>
             </button>
 
+            <!-- Native Curved Widescreen Ribbon Vector Logo Button -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
                 <div class="screen-icon">
-                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);">
+                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);" decoding="async">
                 </div>
                 <span class="format-ratio">1.85:1</span>
             </button>
@@ -1201,6 +1244,7 @@
         </div>
     </section>
 
+    <!-- Support Container Block Layout -->
     <section class="support-container">
         <div class="support-info-block">
             <h2 class="support-title">Support the Developer</h2>
@@ -1220,12 +1264,12 @@
         
         <div class="support-actions-wrapper">
             <a href="https://www.instagram.com/_starvelstudios_/" target="_blank" class="instagram-link-card" aria-label="Follow developer profile on Instagram platform">
-                <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset">
+                <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset" decoding="async">
                 <span class="instagram-card-label">Follow Us</span>
             </a>
 
             <div class="qr-wrapper">
-                <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset for sathwik.gurram@okaxis">
+                <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset for sathwik.gurram@okaxis" decoding="async">
             </div>
         </div>
     </section>
@@ -1335,7 +1379,7 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            /* TWEAKED: 500 FPS motion blur injector trigger loop */
+            /* 500 FPS motion blur injector trigger loop */
             videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
                 videoElement.classList.remove('vfx-blur-active');
@@ -1446,28 +1490,43 @@
                 });
         }
 
-        /* TWEAKED: Core 1-Second delay timeline engine execution loop */
         function initPlaybackSchedules() {
             loadPageViews();
             
             const mainVideo = document.getElementById('myVideo');
+            const bgVideo = document.getElementById('bgVideo');
             
-            // Hold playback parameters for exactly 1000 milliseconds to highlight poster asset
+            // Set hybrid special button as natively active configuration to force IMAX + Dolby Vision properties initially
+            const initialSpecialBtn = document.querySelector('.hybrid-special-btn');
+            if(initialSpecialBtn) {
+                playerContainer.style.setProperty('--current-ratio', '1.43');
+                mainVideo.classList.add('dolby-grade');
+                const overlay = document.getElementById('formatOverlay');
+                overlay.src = 'imax-seeklogo.png';
+                overlay.style.display = 'block';
+                overlay.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))';
+                overlay.style.width = '100px';
+            }
+            
             setTimeout(() => {
                 mainVideo.play().then(() => {
                     console.log("Delayed playback initialized successfully.");
                 }).catch(err => {
-                    console.log("Browser policy blocked direct audio stream. Pending global fallback wrapper.");
+                    console.log("Auto-play pending gesture fallback initialization loop.");
                 });
+
+                if (bgVideo) {
+                    bgVideo.src = "loop.mp4";
+                    bgVideo.load();
+                    bgVideo.play().catch(() => {});
+                }
             }, 1000);
 
-            // Programmatic Global Capture Hook to resolve system auto-unmute restrictions smoothly
             const unmuteContextHook = () => {
                 if (mainVideo.muted) {
                     mainVideo.muted = false;
                     console.log("Hardware interface successfully unmuted via capture context hook.");
                 }
-                // Strip background event hooks cleanly to free memory registers
                 document.removeEventListener('click', unmuteContextHook);
                 document.removeEventListener('touchstart', unmuteContextHook);
             };
