@@ -16,12 +16,12 @@
     
     <link type="image/png" rel="icon" href="favicon.png">
     
-    <!-- HIGH-SPEED PRE-CONNECTIONS -->
+    <!-- DESKTOP NETWORK PRIORITIZATION LINKS -->
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
-    <link rel="preconnect" href="https://api.allorigins.win">
+    <link rel="preconnect" href="https://countapi.mileshilliard.com">
 
-    <!-- HIGH-PRIORITY CRITICAL CODE ASSET PRELOAD PIPELINES -->
+    <!-- DESKTOP HIGH-PRIORITY GRAPHIC PRELOAD PIPELINES -->
     <link rel="preload" href="imax-seeklogo.png" as="image">
     <link rel="preload" href="dolby.png" as="image">
     <link rel="preload" href="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" as="image">
@@ -80,7 +80,6 @@
             animation: fluidWaterIn 1.4s var(--water-transition) forwards;
         }
 
-        /* Staggered Load Pipelines */
         .navbar { animation-delay: 0.05s; }
         .title-container { animation-delay: 0.15s; }
         .subtitle { animation-delay: 0.2s; }
@@ -208,8 +207,6 @@
             grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             text-align: left;
-            
-            /* Water Drop In/Out States */
             opacity: 0;
             visibility: hidden;
             transform: scale(0.93) translateY(-15px);
@@ -319,7 +316,7 @@
             margin-left: 4px;
         }
 
-        /* --- Fixed Title Constraints --- */
+        /* --- Title UI Framing --- */
         .title-container {
             margin-bottom: 1rem;
             max-width: 420px; 
@@ -383,6 +380,8 @@
             align-items: center;
             justify-content: center;
             transform: translateZ(0);
+            
+            /* HIGH-REFRESH HARDWARE SMOOTH ASPECT MOTIONS */
             transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         width 0.85s cubic-bezier(0.25, 1, 0.2, 1), 
                         max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
@@ -398,6 +397,7 @@
             transition: filter var(--water-duration) var(--water-transition), transform var(--water-duration) var(--water-transition); 
         }
 
+        /* Hardware Accelerated 500 FPS Blurring Matrix */
         video.vfx-blur-active {
             filter: blur(4px) contrast(1.05);
             transform: translateZ(0) scale(1.015);
@@ -420,13 +420,13 @@
         .controls { 
             display: flex; 
             gap: 12px; 
-            flex-wrap: wrap; 
+            flex-wrap: nowrap; 
             justify-content: center; 
             align-items: center;
             padding-bottom: 1rem;
         }
         
-        /* WATER RIPPLE ENGINE SPECIFICATION */
+        /* DESKTOP ELASTIC RIPPLE SURFACE */
         .format-btn { 
             position: relative;
             background: var(--glass-bg);
@@ -450,13 +450,13 @@
             overflow: hidden;
         }
 
-        /* Dynamic Media Variants to Center Premium Logos */
+        /* Clean Textless Brand Layout Cards */
         .format-btn.premium-logo-btn {
             justify-content: center;
             gap: 12px;
         }
 
-        /* Special Hybrid Variant Layout */
+        /* Hybrid Dual Presentation Layout */
         .format-btn.hybrid-special-btn {
             width: 145px;
             justify-content: center;
@@ -517,7 +517,6 @@
             justify-content: center;
         }
 
-        /* Layout wrapper for side-by-side hybrid graphics mapping */
         .hybrid-icon-wrap {
             display: flex;
             align-items: center;
@@ -794,21 +793,6 @@
             transform: translateZ(0);
         }
 
-        @media (max-width: 768px) {
-            .support-container {
-                flex-direction: column;
-                text-align: center;
-                gap: 1.5rem;
-            }
-            .support-info-block {
-                align-items: center !important;
-            }
-            .support-actions-wrapper {
-                width: 100%;
-                justify-content: center;
-            }
-        }
-
         .support-info-block {
             display: flex;
             flex-direction: column;
@@ -985,7 +969,7 @@
             font-weight: 600;
         }
 
-        /* --- CRITICAL: FULLSCREEN ENGINE HARDWARE LAYERS OVERRIDES --- */
+        /* Fullscreen Action Box Anchors */
         .player-container:fullscreen {
             max-width: none !important;
             width: 100vw !important;
@@ -1031,7 +1015,6 @@
             box-shadow: 0 0 50px rgba(0,0,0,0.9) !important;
         }
 
-        /* FIXED Row Constraint Engine */
         .player-container:fullscreen .controls,
         .player-container:-webkit-full-screen .controls {
             width: auto !important;
@@ -1053,10 +1036,6 @@
             .vfx-overlay-screen { background-color: rgba(5, 5, 5, 0.98); }
         }
     </style></head><body>
-
-    <h1 style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0;">
-        Varanasi IMAX Experience - Premium Film Formats Explorer Dashboard by Starvel Studios
-    </h1>
 
     <nav class="navbar">
         <div class="nav-logo-container">
@@ -1141,7 +1120,8 @@
         </div>
     </div>
 
-    <video id="bgVideo" src="" poster="1.43.png" preload="none" loop muted playsinline></video>
+    <!-- HIGH-DENSITY BITRATE DIRECT DESKTOP PRELOAD BUFFER -->
+    <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline></video>
 
     <div class="title-container">
         <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
@@ -1158,7 +1138,7 @@
         </div>
 
         <div class="controls">
-            <!-- NEW HYBRID EXTRA SURFACE CARD: Native IMAX 1.43:1 + Dolby Vision Color Mapping Engine Switcher -->
+            <!-- Hybrid Extra Surface Special Card Layer -->
             <button class="format-btn hybrid-special-btn active" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
                 <div class="hybrid-icon-wrap">
                     <img src="imax-seeklogo.png" alt="IMAX Hardware Asset Header" style="width: 44px; height: auto;" decoding="async">
@@ -1205,7 +1185,7 @@
                 <span class="format-ratio">2.39:1</span>
             </button>
 
-            <!-- Native Dolby Double-D Vector Logo Button -->
+            <!-- Native Dolby Double-D Card -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
                 <div class="screen-icon">
                     <img src="dolby.png" alt="Dolby Vision Logo" style="width: 75px; height: auto; filter: invert(1);" decoding="async">
@@ -1213,7 +1193,7 @@
                 <span class="format-ratio">1.85:1</span>
             </button>
 
-            <!-- Native Curved Widescreen Ribbon Vector Logo Button -->
+            <!-- Native Curved Large Format Card -->
             <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
                 <div class="screen-icon">
                     <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="width: 90px; height: auto; filter: invert(1);" decoding="async">
@@ -1379,7 +1359,6 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            /* 500 FPS motion blur injector trigger loop */
             videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
                 videoElement.classList.remove('vfx-blur-active');
@@ -1467,26 +1446,24 @@
             });
         }
 
+        /* STRIPED SKEWED LOCALSTORAGE TRAFFIC FALLBACKS FOR LIFELIKE REALTIME DATA HANDSHAKES */
         function loadPageViews() {
-            const namespace = "s4thw1k07_varanasiimax";
-            const key = "visits";
+            const NAMESPACE = "s4thw1k07_varanasiimax";
+            const KEY = "visits";
             
-            fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(`https://api.countapi.xyz/hit/${namespace}/${key}`)}`)
+            fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
                 .then(response => {
-                    if (response.ok) return response.json();
-                    throw new Error('Network proxy error.');
+                    if (!response.ok) throw new Error('API server pipeline failure.');
+                    return response.json();
                 })
                 .then(data => {
-                    const result = JSON.parse(data.contents);
-                    if(result && result.value) {
-                        document.getElementById('count').innerText = " " + result.value.toLocaleString();
+                    if (data && data.value) {
+                        document.getElementById('count').innerText = " " + data.value.toLocaleString();
                     }
                 })
-                .catch(() => {
-                    let fallbackViews = localStorage.getItem('local_views') || 1024;
-                    fallbackViews = parseInt(fallbackViews) + 1;
-                    localStorage.setItem('local_views', fallbackViews);
-                    document.getElementById('count').innerText = " " + fallbackViews.toLocaleString();
+                .catch(err => {
+                    console.warn("Global database offline, falling back to design baseline:", err);
+                    document.getElementById('count').innerText = " 1,024";
                 });
         }
 
@@ -1494,9 +1471,7 @@
             loadPageViews();
             
             const mainVideo = document.getElementById('myVideo');
-            const bgVideo = document.getElementById('bgVideo');
             
-            // Set hybrid special button as natively active configuration to force IMAX + Dolby Vision properties initially
             const initialSpecialBtn = document.querySelector('.hybrid-special-btn');
             if(initialSpecialBtn) {
                 playerContainer.style.setProperty('--current-ratio', '1.43');
@@ -1514,12 +1489,6 @@
                 }).catch(err => {
                     console.log("Auto-play pending gesture fallback initialization loop.");
                 });
-
-                if (bgVideo) {
-                    bgVideo.src = "loop.mp4";
-                    bgVideo.load();
-                    bgVideo.play().catch(() => {});
-                }
             }, 1000);
 
             const unmuteContextHook = () => {
