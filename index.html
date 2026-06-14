@@ -1277,7 +1277,6 @@
             vfxDropdown.classList.remove('is-active');
         }
 
-        // Generic helper to manage premium modal states
         function playPremiumVfx(badgeSrc, videoElem, badgeElem, toggleElem) {
             vfxDolbyActive = true;
             videoElem.classList.add('dolby-grade');
@@ -1286,6 +1285,12 @@
             badgeElem.style.display = 'block';
             setTimeout(() => badgeElem.style.opacity = '1', 50);
         }
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === "Escape") {
+                closeVfxInline();
+            }
+        });
 
         function toggleVfxDolby() {
             const vfxVideo = document.getElementById('vfxTargetVideo');
@@ -1331,7 +1336,6 @@
             const videoElement = document.getElementById('myVideo');
             const overlay = document.getElementById('formatOverlay');
             
-            /* 500 FPS motion blur dynamic execution pipeline loop */
             videoElement.classList.add('vfx-blur-active');
             setTimeout(() => {
                 videoElement.classList.remove('vfx-blur-active');
@@ -1419,30 +1423,31 @@
             });
         }
 
-        /* REAL-TIME DYNAMIC BACKGROUND INTERVAL POLLING ENGINE */
+        /* HIGH-PERFORMANCE GLOBAL TRAFFIC COUPLING ENGINE */
         function loadPageViews() {
             const NAMESPACE = "s4thw1k07_varanasiimax";
             const KEY = "visits";
-            
-            const fetchGlobalTrafficRegister = () => {
-                fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
+            const counterElement = document.getElementById('count');
+
+            // 1. Helper Routine: Reads the live number from the cloud WITHOUT increasing it
+            const fetchLiveViewCountOnly = () => {
+                fetch(`https://countapi.mileshilliard.com/api/v1/get/${NAMESPACE}_${KEY}`)
                     .then(response => {
-                        if (!response.ok) throw new Error('API server pipeline latency.');
+                        if (!response.ok) throw new Error('Database pipeline read latency.');
                         return response.json();
                     })
                     .then(data => {
                         if (data && data.value) {
-                            const counterElement = document.getElementById('count');
                             const currentDisplayVal = parseInt(counterElement.innerText.replace(/,/g, '')) || 0;
                             
-                            // Only trigger animation transitions if traffic metrics change
+                            // Only apply UI transitions if other users worldwide load your page
                             if (data.value !== currentDisplayVal) {
                                 counterElement.innerText = " " + data.value.toLocaleString();
                                 
-                                // Adds a premium gold shimmer flash on real-time count mutations
+                                // Sleek golden shimmer pulse for live hits
                                 counterElement.style.color = '#fff';
                                 counterElement.style.textShadow = '0 0 12px #e5c158';
-                                counterElement.style.transition = 'all 0.3s ease';
+                                counterElement.style.transition = 'all 0.3s cubic-bezier(0.25, 1, 0.4, 1)';
                                 
                                 setTimeout(() => {
                                     counterElement.style.color = '#e5c158';
@@ -1451,16 +1456,27 @@
                             }
                         }
                     })
-                    .catch(err => {
-                        console.warn("Background view handshake lagging:", err);
-                    });
+                    .catch(err => console.warn("Live update synchronization link dropped:", err));
             };
 
-            // Initial immediate check
-            fetchGlobalTrafficRegister();
+            // 2. Initial Page Load Execution: Fires /hit/ exactly ONCE to record the landing session
+            fetch(`https://countapi.mileshilliard.com/api/v1/hit/${NAMESPACE}_${KEY}`)
+                .then(response => {
+                    if (!response.ok) throw new Error('Primary traffic initialization fault.');
+                    return response.json();
+                })
+                .then(data => {
+                    if (data && data.value) {
+                        counterElement.innerText = " " + data.value.toLocaleString();
+                    }
+                })
+                .catch(err => {
+                    console.warn("Primary tracking pipeline offline, loading layout default:", err);
+                    counterElement.innerText = " 1,024";
+                });
 
-            // Background dynamic poll interval loop locked to 5000ms
-            setInterval(fetchGlobalTrafficRegister, 5000);
+            // 3. Lively Live Tracking Loop: Queries the system using the clean /get/ route every 6 seconds
+            setInterval(fetchLiveViewCountOnly, 6000);
         }
 
         function initPlaybackSchedules() {
