@@ -18,7 +18,7 @@
     
     <link rel="preconnect" href="https://www.dropbox.com" crossorigin>
     <link rel="dns-prefetch" href="https://www.dropbox.com">
-    <link rel="preconnect" href="https://api.allorigins.win">
+    <link rel="preconnect" href="https://countapi.mileshilliard.com">
 
     <link rel="preload" href="imax-seeklogo.png" as="image">
     <link rel="preload" href="dolby.png" as="image">
@@ -41,32 +41,33 @@
             --water-duration: 0.65s;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
+        
+        /* FIX: Structural overflow layer separation ensures smooth native scrolling on PC views */
+        html { overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; height: 100%; }
         
         body { 
             background-color: #030303; 
             color: #fff; 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             display: flex; 
             flex-direction: column; 
             align-items: center; 
-            min-height: 100vh; 
-            padding: 0 1rem 2rem 1rem; 
-            text-align: center; 
-            overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
+            min-height: 100%; 
+            padding: 0 2rem 2rem 2rem; 
+            text-align: center;
         }
 
-        /* Ambient Background Layer */
+        /* Ambient Dynamic Background Layer */
         #bgVideo {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
             object-fit: cover; z-index: -1; opacity: 0.35; pointer-events: none; 
             transform: translateZ(0); will-change: transform;
         }
 
-        /* PAGE LOAD ANIMATIONS */
+        /* --- GLOBAL SMOOTH PAGE TRANSITIONS --- */
         .navbar, .title-container, .subtitle, .player-container, .info-section, .support-container, .designer-credit {
-            opacity: 0;
-            transform: scale(0.97) translateY(25px);
+            opacity: 0; transform: scale(0.97) translateY(25px);
             animation: fluidWaterIn 1.4s var(--water-transition) forwards;
         }
 
@@ -80,186 +81,225 @@
 
         @keyframes fluidWaterIn { to { opacity: 1; transform: scale(1) translateY(0); } }
 
-        /* --- Navigation Bar Layout --- */
+        /* --- Liquid Glass Navigation Bar --- */
         .navbar {
-            width: 100%; max-width: 1200px;
-            background: rgba(10, 10, 10, 0.6);
+            width: 100%; max-width: 1100px;
+            background: rgba(10, 10, 10, 0.4);
             backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border-bottom: var(--glass-border);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            border-bottom: var(--glass-border); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0.75rem 1.5rem; margin: 1rem 0 2rem 0; border-radius: 20px;
-            z-index: 100; transform: translateZ(0);
+            padding: 0.75rem 2rem; position: sticky; top: 0; z-index: 100;
+            margin: 1.5rem auto 2rem auto; border-radius: 20px; transform: translateZ(0);
         }
 
         .nav-logo-container { display: flex; align-items: center; }
-        .nav-logo { height: 38px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)); }
-        .nav-right-side { display: flex; align-items: center; gap: 15px; }
-        .nav-menu { display: flex; list-style: none; }
-
-        /* --- VFX Dropdown System --- */
+        .nav-logo { height: 42px; width: auto; object-fit: contain; filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5)); transition: transform var(--water-duration) var(--water-transition); }
+        .nav-logo-container:hover .nav-logo { transform: scale(1.05); }
+        .nav-right-side { display: flex; align-items: center; gap: 24px; }
+        .nav-menu { display: flex; list-style: none; gap: 24px; }
         .dropdown { position: relative; }
+
+        /* --- Liquid Trigger Button --- */
         .dropdown-trigger {
             background: var(--glass-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-            color: #e5c158; border: var(--glass-border); font-weight: 600; font-size: 0.85rem;
-            text-transform: uppercase; letter-spacing: 1px; padding: 0.6rem 1.2rem; border-radius: 30px;
-            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px;
-            outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all var(--water-duration) var(--water-transition);
+            color: #e5c158; border: var(--glass-border); font-weight: 600; font-size: 0.95rem;
+            text-transform: uppercase; letter-spacing: 1px; padding: 0.6rem 1.4rem; border-radius: 30px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+            width: 100%; outline: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: all var(--water-duration) var(--water-transition);
+            transform: translateZ(0);
         }
         .dropdown-trigger:hover, .dropdown.is-active .dropdown-trigger {
             color: #fff; background-color: var(--glass-bg-hover); border: var(--glass-shine);
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15); transform: translateY(-1px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.15); transform: scale(1.03) translateY(-1px);
         }
-        .dropdown-trigger::after { content: '▲'; font-size: 0.6rem; margin-left: 2px; }
-        
+        .dropdown-trigger::after { content: '▼'; font-size: 0.65rem; margin-left: 2px; transition: transform var(--water-duration) var(--water-transition); }
+        .dropdown.is-active .dropdown-trigger::after { transform: rotate(180deg); }
+
+        /* --- Liquid Glass Mega Grid Menu --- */
         .dropdown-menu {
-            position: absolute; top: 125%; right: 0;
-            background: rgba(15, 15, 15, 0.95);
+            position: absolute; top: 115%; right: 0;
+            background: rgba(12, 12, 12, 0.95);
             backdrop-filter: blur(35px); -webkit-backdrop-filter: blur(35px);
-            border: var(--glass-border); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
-            border-radius: 16px; width: 450px; padding: 1rem;
-            display: grid; grid-template-columns: 1fr; gap: 12px; text-align: left;
-            opacity: 0; visibility: hidden; transform: scale(0.95) translateY(-10px);
-            transition: all 0.4s var(--water-transition); z-index: 200;
+            border: var(--glass-border); box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.1);
+            border-radius: 16px; width: 580px; padding: 1.2rem;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; text-align: left;
+            opacity: 0; visibility: hidden; transform: scale(0.93) translateY(-15px);
+            transition: opacity var(--water-duration) var(--water-transition), visibility var(--water-duration) var(--water-transition), transform var(--water-duration) var(--water-transition);
+            pointer-events: none; transform: translateZ(0); z-index: 500;
         }
-        .dropdown.is-active .dropdown-menu { opacity: 1; visibility: visible; transform: scale(1) translateY(0); }
+        .dropdown.is-active .dropdown-menu { opacity: 1; visibility: visible; transform: scale(1) translateY(0); pointer-events: auto; }
 
+        /* --- Glass Visual Grid Tiles --- */
         .dropdown-item {
-            display: flex; flex-direction: row; gap: 12px; background: rgba(255, 255, 255, 0.02);
+            display: flex; flex-direction: column; background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 10px; overflow: hidden;
-            text-decoration: none; padding: 6px; cursor: pointer; transition: all 0.3s ease;
+            text-decoration: none; transition: all var(--water-duration) var(--water-transition); cursor: pointer;
         }
-        .dropdown-item:hover { background: rgba(212, 175, 55, 0.08); border: var(--glass-border); transform: translateX(2px); }
+        .dropdown-item-thumb { width: 100%; aspect-ratio: 16 / 9; background-color: #020202; position: relative; overflow: hidden; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+        .dropdown-item-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.8s var(--water-transition), filter var(--water-duration) ease; }
+        .dropdown-item-meta { padding: 0.75rem; display: flex; flex-direction: column; gap: 2px; background: linear-gradient(to bottom, rgba(15,15,15,0) 0%, rgba(5,5,5,0.4) 100%); }
+        .dropdown-item span { display: block; color: #e5c158; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.8px; transition: color 0.3s ease; }
+        .dropdown-item-desc { color: #b5b5b5; font-size: 0.75rem; line-height: 1.3; font-weight: 400; transition: color 0.3s ease; }
 
-        .dropdown-item-thumb { width: 100px; aspect-ratio: 16 / 9; background-color: #020202; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
-        .dropdown-item-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .dropdown-item-meta { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
-        .dropdown-item span { color: #e5c158; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; }
-        .dropdown-item-desc { color: #b5b5b5; font-size: 0.75rem; line-height: 1.3; }
+        .dropdown-item:hover { background: rgba(212, 175, 55, 0.08); border: var(--glass-border); box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4); transform: translateY(-4px) scale(1.02); }
+        .dropdown-item:hover .dropdown-item-thumb img { transform: scale(1.07); filter: brightness(1.15); }
+        .dropdown-item:hover span { color: #fff; }
+        .dropdown-item:hover .dropdown-item-desc { color: #fff; }
 
+        /* --- View Counter Badge --- */
         .nav-view-counter {
-            color: #b5b5b5; font-size: 0.8rem; letter-spacing: 1px; text-transform: uppercase; font-weight: 700;
-            padding: 0.5rem 1rem; border-radius: 30px; border: var(--glass-border); background: rgba(255, 255, 255, 0.03);
+            color: #b5b5b5; font-size: 0.85rem; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700;
+            padding: 0.5rem 1.1rem; border-radius: 30px; border: var(--glass-border); background: rgba(255, 255, 255, 0.03);
         }
-        .nav-view-counter span { color: #e5c158; }
+        .nav-view-counter span { color: #e5c158; margin-left: 4px; }
 
-        /* --- Core Master Video Player --- */
-        .player-container { width: 100%; max-width: 1000px; display: flex; flex-direction: column; margin: 0 auto 2rem auto; --current-ratio: 2.39; }
+        /* --- Fixed Title Constraints --- */
+        .title-container { margin-bottom: 1rem; max-width: 420px; width: 100%; padding: 10px; transition: transform var(--water-duration) var(--water-transition); }
+        .title-container:hover { transform: scale(1.02); }
+        .title-container img { width: 100%; height: auto; display: block; margin: 0 auto; filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8)); }
+
+        .desktop-content { display: flex; flex-direction: column; align-items: center; width: 100%; }
+
+        /* --- Master Player Framing --- */
+        .player-container { width: 100%; max-width: 1100px; display: flex; flex-direction: column; background-color: transparent; margin: 0 auto 2rem auto; --current-ratio: 2.39; }
+        .video-area { width: 100%; display: flex; justify-content: center; align-items: center; margin-bottom: 1.5rem; flex-grow: 1; min-height: 0; }
+        
         .video-wrapper {
-            position: relative; aspect-ratio: var(--current-ratio) / 1; width: 100%;
-            background-color: #000; border-radius: 16px; border: var(--glass-border);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8); overflow: hidden; display: flex; align-items: center; justify-content: center;
-            transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1);
+            position: relative; aspect-ratio: var(--current-ratio) / 1; width: 100%; max-height: 100%;
+            background-color: #000; border-radius: 20px; border: var(--glass-border); box-shadow: 0 30px 70px rgba(0,0,0,0.8);
+            overflow: hidden; display: flex; align-items: center; justify-content: center; transform: translateZ(0);
+            transition: aspect-ratio 0.85s cubic-bezier(0.25, 1, 0.2, 1), width 0.85s cubic-bezier(0.25, 1, 0.2, 1), max-height 0.85s cubic-bezier(0.25, 1, 0.2, 1);
         }
 
-        /* --- Fluid Controls Layout Grid --- */
-        .controls { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; align-items: center; padding: 1rem 0; }
+        video.main-video { 
+            width: 100%; height: 100%; object-fit: cover; will-change: transform, filter; transform: translateZ(0) scale(1); filter: blur(0px);
+            transition: filter var(--water-duration) var(--water-transition), transform var(--water-duration) var(--water-transition); 
+        }
+        video.vfx-blur-active { filter: blur(4px) contrast(1.05); transform: translateZ(0) scale(1.015); }
+        .format-overlay { position: absolute; top: 25px; left: 25px; z-index: 10; pointer-events: none; transition: all var(--water-duration) var(--water-transition); }
+        video.dolby-grade { filter: contrast(1.12) saturate(1.15) brightness(1.03) drop-shadow(0 0 30px rgba(255,255,255,0.05)); }
+        
+        /* --- HIGH-STABILITY CONTROL INTERFACES (Fixed Desktop Squeezing) --- */
+        .controls { 
+            display: flex; gap: 12px; flex-wrap: nowrap; justify-content: center; align-items: center; 
+            padding: 0.5rem 0 1.5rem 0; width: 100%; overflow-x: visible;
+        }
+        
         .format-btn { 
             position: relative; background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            color: #b5b5b5; border: var(--glass-border); border-radius: 12px; padding: 0.6rem; cursor: pointer; 
-            width: 110px; height: 75px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-            gap: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all var(--water-duration) var(--water-transition); overflow: hidden;
+            color: #b5b5b5; border: var(--glass-border); border-radius: 16px; padding: 1rem 0.6rem; cursor: pointer; 
+            width: 130px; height: 92px; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+            gap: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all var(--water-duration) var(--water-transition); 
+            transform: translateZ(0); overflow: hidden; flex-shrink: 0; /* FIX: Prevents desktop layout engine compression */
         }
-        .format-btn:hover { color: #fff; background: var(--glass-bg-hover); border: var(--glass-shine); transform: translateY(-2px); }
-        .format-btn.active { background: rgba(255, 255, 255, 0.15); color: #fff; border: var(--glass-shine); border-color: #e5c158; transform: scale(1.03); }
+        .format-btn:hover { color: #fff; background: var(--glass-bg-hover); border: var(--glass-shine); transform: translateY(-4px) scale(1.03); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        .format-btn.active { background: rgba(255, 255, 255, 0.14); color: #fff; border: var(--glass-shine); border-color: #e5c158; box-shadow: 0 12px 30px rgba(212, 175, 55, 0.2); transform: translateY(-6px) scale(1.05); }
+        .format-btn > * { z-index: 2; position: relative; }
+
+        .format-btn.premium-logo-btn { justify-content: center; gap: 10px; }
+        .format-btn.hybrid-special-btn { width: 145px; justify-content: center; gap: 8px; flex-shrink: 0; }
+
+        .format-title { font-weight: 700; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; line-height: 1.1; text-align: center; }
+        .format-btn.active .format-title { color: #e5c158; }
+        .format-ratio { font-size: 0.7rem; opacity: 0.65; font-weight: 500; margin-top: 1px; }
+
+        /* FIX: Absolute asset bounding box constraints stop image distortion */
+        .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; width: 100%; height: 32px; max-height: 32px; }
+        .screen-icon img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; }
+        .premium-logo-btn .screen-icon { margin-bottom: 0; height: 38px; max-height: 38px; }
         
-        .format-btn.hybrid-special-btn { width: 120px; justify-content: center; gap: 6px; }
-        .hybrid-icon-wrap { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; }
-        .hybrid-icon-wrap img { max-height: 24px; width: auto; object-fit: contain; }
+        .hybrid-icon-wrap { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 32px; }
+        .hybrid-icon-wrap img { max-height: 100%; width: auto; object-fit: contain; display: block; }
 
-        .format-title { font-weight: 700; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
-        .format-ratio { font-size: 0.65rem; opacity: 0.7; }
-        .screen-icon { margin-bottom: auto; display: flex; align-items: center; justify-content: center; width: 100%; }
-        .screen-icon img { max-height: 26px; width: auto; object-fit: contain; }
-        .screen-icon svg { max-height: 22px; width: auto; }
-
-        .premium-logo-btn { justify-content: center; gap: 6px; }
-        .premium-logo-btn .screen-icon { margin-bottom: 0; }
-
-        .divider { width: 1px; height: 40px; background-color: rgba(255, 255, 255, 0.15); margin: 0 4px; }
+        .divider { width: 1px; height: 50px; background-color: rgba(255, 255, 255, 0.15); margin: 0 8px; flex-shrink: 0; }
 
         .fullscreen-btn {
-            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-            color: #b5b5b5; border: var(--glass-border); border-radius: 12px; padding: 0.5rem;
-            cursor: pointer; width: 95px; height: 75px; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; gap: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            transition: all var(--water-duration) var(--water-transition);
+            background: var(--glass-bg); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); color: #b5b5b5; border: var(--glass-border);
+            border-radius: 16px; padding: 1rem; cursor: pointer; width: 110px; height: 92px; display: flex; flex-direction: column;
+            align-items: center; justify-content: center; gap: 6px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all var(--water-duration) var(--water-transition); transform: translateZ(0); flex-shrink: 0;
         }
-        .fullscreen-btn:hover { color: #fff; background: var(--glass-bg-hover); transform: translateY(-2px); }
-        .fullscreen-btn svg { width: 18px; height: 18px; fill: currentColor; }
+        .fullscreen-btn:hover { color: #fff; background: var(--glass-bg-hover); border: var(--glass-shine); transform: translateY(-4px) scale(1.03); }
+        .fullscreen-btn svg { width: 22px; height: 22px; fill: currentColor; }
         
-        /* Modal Overlay Windows */
-        .vfx-overlay-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: rgba(2, 2, 2, 0.8);
-            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); z-index: 1000;
-            display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1rem;
-            opacity: 0; visibility: hidden; transition: all 0.4s var(--water-transition);
-        }
-        .vfx-overlay-screen.is-open { opacity: 1; visibility: visible; }
-        .vfx-container { position: relative; width: 100%; max-width: 800px; display: flex; flex-direction: column; gap: 15px; }
-        .vfx-header-area { display: flex; justify-content: space-between; align-items: center; border-bottom: var(--glass-border); padding-bottom: 10px; }
-        .vfx-title { color: #fff; font-weight: 600; font-size: 1.1rem; }
-        .vfx-controls-right { display: flex; align-items: center; gap: 15px; }
-
+        /* Information Sections */
         .info-section { 
-            width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: var(--glass-border); border-radius: 16px; padding: 1.5rem; text-align: left; margin-bottom: 2rem; 
+            width: 100%; max-width: 900px; background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+            border: var(--glass-border); border-radius: 20px; padding: 2.5rem; text-align: left; margin-bottom: 2rem; box-shadow: 0 20px 50px rgba(0,0,0,0.6);
         }
-        .info-section h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 0.75rem; color: #e5c158; }
-        .info-section p { font-size: 0.95rem; color: #cbd5e1; line-height: 1.5; margin-bottom: 1.5rem; }
+        .info-section h2 { font-size: 1.6rem; font-weight: 600; margin-bottom: 1rem; letter-spacing: -0.3px; color: #e5c158; }
+        .info-section p { font-size: 1.05rem; color: #d4d4d4; line-height: 1.6; margin-bottom: 2.5rem; font-weight: 400; }
+        .video-embed-container h3 { text-align: center; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 1.2rem; color: #e5c158; font-size: 0.9rem; }
+        .video-embed { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; border: var(--glass-border); }
+        .video-embed iframe { width: 100%; height: 100%; border: 0; }
 
-        /* --- Support Section Split Design --- */
+        /* Support Grid Configuration */
         .support-container {
-            width: 100%; max-width: 900px; padding: 1.5rem; background: rgba(255, 255, 255, 0.02);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-radius: 16px;
-            border: var(--glass-border); display: flex; flex-direction: row; align-items: center;
-            justify-content: space-between; gap: 1.5rem; text-align: left; margin-bottom: 2rem;
+            width: 100%; max-width: 900px; margin: 1.5rem auto; padding: 2.5rem; background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border-radius: 20px; border: var(--glass-border);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 2rem; text-align: left;
         }
-        .support-info-block { display: flex; flex-direction: column; flex: 1; }
-        .support-title { color: #fff; font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; }
-        .support-text { color: #cbd5e1; font-size: 0.95rem; line-height: 1.4; margin-bottom: 1rem; }
-
-        .upi-block {
-            display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
-            background: rgba(0, 0, 0, 0.4); padding: 0.5rem 1rem; border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.06); width: fit-content;
-        }
-        .upi-label { color: #e5c158; font-weight: 700; font-size: 0.85rem; }
-        .upi-id-text { color: #fff; font-weight: 600; font-size: 0.85rem; }
-
-        .support-actions-wrapper { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
-        .qr-wrapper {
-            display: flex; padding: 8px; background: rgba(255,255,255,0.03); 
-            border-radius: 12px; border: 1px solid rgba(255,255,255,0.06);
-        }
-        .qr-element { width: 110px; height: 140px; object-fit: contain; border-radius: 4px; }
+        .support-info-block { display: flex; flex-direction: column; align-items: flex-start; flex: 1; }
+        .support-title { color: #fff; font-size: 1.5rem; font-weight: 600; letter-spacing: -0.3px; margin-bottom: 0.75rem; }
+        .support-text { color: #cbd5e1; font-size: 1.05rem; line-height: 1.5; margin-bottom: 1.4rem; }
         
-        .instagram-link-card {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            background: rgba(255, 255, 255, 0.03); padding: 8px; border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.06); width: 110px; height: 140px; text-decoration: none;
-        }
-        .instagram-icon-element { width: 44px; height: 44px; object-fit: contain; }
-        .instagram-card-label { color: #b5b5b5; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 8px; }
+        .upi-block { display: flex; align-items: center; gap: 12px; margin-bottom: 1.4rem; background: rgba(0, 0, 0, 0.3); padding: 0.6rem 1.2rem; border-radius: 30px; border: 1px solid rgba(255,255,255,0.08); }
+        .upi-label { color: #e5c158; font-weight: 700; font-size: 1rem; }
+        .upi-id-text { color: #fff; font-weight: 600; font-size: 1rem; }
+        
+        .copy-btn { background: transparent; border: none; color: #e5c158; cursor: pointer; padding: 2px; display: flex; align-items: center; justify-content: center; }
+        .copy-btn svg { width: 16px; height: 18px; fill: none; stroke: currentColor; stroke-width: 2.2; }
+        .support-subtext { color: #888888; font-size: 0.85rem; font-style: italic; }
+        
+        .support-actions-wrapper { display: flex; align-items: center; gap: 16px; }
+        .qr-wrapper { display: flex; flex-direction: column; align-items: center; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); }
+        .qr-element { width: 140px; height: 140px; object-fit: contain; border-radius: 4px; }
+        
+        .instagram-link-card { display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.03); padding: 12px; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.06); width: 166px; height: 166px; text-decoration: none; }
+        .instagram-icon-element { width: 56px; height: 64px; object-fit: contain; }
+        .instagram-card-label { color: #b5b5b5; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; margin-top: 12px; }
 
-        .designer-credit { color: #888; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; padding: 1rem 0; }
-        .designer-credit span { color: #fff; }
+        .designer-credit { padding-top: 1.5rem; padding-bottom: 1.5rem; color: #888888; font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; margin-top: auto; }
+        .designer-credit span { color: #fff; font-weight: 600; }
 
-        /* --- MOBILE MAX-WIDTH BREAKPOINT LAYOUT RESETS --- */
+        /* Fullscreen Configuration Matrices */
+        .player-container:fullscreen { max-width: none !important; width: 100vw !important; height: 100vh !important; background: #000 !important; padding: 30px !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; align-items: center !important; }
+        .player-container:fullscreen .video-area { width: 100% !important; height: calc(100vh - 160px) !important; margin-bottom: 20px !important; display: flex !important; justify-content: center !important; align-items: center !important; }
+        .player-container:fullscreen .video-wrapper { border: none !important; border-radius: 12px !important; height: 100% !important; width: auto !important; max-width: 100% !important; aspect-ratio: var(--current-ratio) / 1 !important; }
+        .player-container:fullscreen .controls { width: auto !important; max-width: 100% !important; padding-bottom: 0 !important; background: transparent !important; z-index: 10 !important; display: flex !important; flex-direction: row !important; flex-wrap: nowrap !important; }
+
+        /* --- MOBILE SCREEN ADAPTIVE OVERRIDES (Locks Out Cropping & Overlapping) --- */
         @media (max-width: 768px) {
-            body { padding: 0 0.5rem 1.5rem 0.5rem; }
-            .navbar { margin-bottom: 1rem; padding: 0.6rem 1rem; }
-            .dropdown-menu { width: calc(100vw - 2rem); max-width: 350px; right: -50px; }
+            body { padding: 0 1rem 2rem 1rem; }
+            .navbar { padding: 0.6rem 1.2rem; border-radius: 14px; margin: 1rem auto; width: 100%; }
+            .nav-logo { height: 32px; }
+            .nav-right-side { gap: 12px; }
+            .dropdown-menu { width: calc(100vw - 2rem); grid-template-columns: 1fr; max-height: 380px; overflow-y: auto; right: -10px; }
+            .dropdown-trigger { font-size: 0.8rem; padding: 0.5rem 1rem; }
             p.subtitle { margin-bottom: 1.5rem; font-size: 0.9rem; }
-            .controls { gap: 6px; }
-            .format-btn { width: 95px; height: 70px; padding: 0.4rem; }
-            .format-btn.hybrid-special-btn { width: 105px; }
-            .fullscreen-btn { width: 85px; height: 70px; }
-            .divider { height: 35px; }
-            .support-container { flex-direction: column; text-align: center; padding: 1rem; gap: 1rem; }
+            
+            /* FIX: Implemented robust 3-column flexible grid system for mobile button decks */
+            .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; flex-wrap: wrap; padding: 0.5rem 0; }
+            .format-btn { 
+                width: 100% !important; height: 75px !important; padding: 0.5rem 0.2rem !important; 
+                border-radius: 12px; justify-content: center; align-items: center;
+            }
+            /* Spanned configurations force full-width display strips for wide items */
+            .format-btn.hybrid-special-btn { grid-column: span 3; height: 56px !important; flex-direction: row; gap: 10px; }
+            .fullscreen-btn { grid-column: span 3; width: 100% !important; height: 50px !important; flex-direction: row; border-radius: 12px; margin-top: 2px; }
+            .divider { display: none; }
+            
+            .screen-icon { height: 22px; max-height: 22px; margin-bottom: 2px; }
+            .premium-logo-btn .screen-icon { height: 26px; max-height: 26px; }
+            .format-title { font-size: 0.65rem; }
+            .format-ratio { font-size: 0.6rem; }
+            
+            .support-container { flex-direction: column; text-align: center; padding: 1.5rem; gap: 1.5rem; }
             .support-info-block { align-items: center; }
-            .support-actions-wrapper { justify-content: center; width: 100%; }
+            .upi-block { margin-bottom: 0.5rem; }
+            .support-actions-wrapper { justify-content: center; width: 100%; gap: 12px; }
+            .instagram-link-card, .qr-wrapper { width: 130px; height: 130px; padding: 8px; }
+            .qr-element { width: 100%; height: 100%; }
+            .instagram-icon-element { width: 40px; height: 40px; }
         }
     </style></head><body>
 
@@ -316,133 +356,137 @@
 
     <video id="bgVideo" src="loop.mp4" poster="1.43.png" preload="auto" autoplay loop muted playsinline webkit-playsinline></video>
 
-    <div class="title-container">
-        <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
-    </div>
+    <div class="desktop-content">
+        <div class="title-container">
+            <img src="title.png" alt="Explore Premium Formats VARANASI Cinematic Teaser Title Badge" decoding="async">
+        </div>
 
-    <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
+        <p class="subtitle">Explore the differences of each film format by selecting the format name and seeing the trailer adjust to the accompanying aspect ratio.</p>
 
-    <div id="playerContainer" class="player-container">
-        <div class="video-area">
-            <div class="video-wrapper" id="videoWrapper">
-                <img id="formatOverlay" class="format-overlay" src="" alt="Active Format Overlay Badge" style="display: none;" decoding="async">
-                <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline webkit-playsinline controls controlsList="nofullscreen"></video>
+        <div id="playerContainer" class="player-container">
+            <div class="video-area">
+                <div class="video-wrapper" id="videoWrapper">
+                    <img id="formatOverlay" class="format-overlay" src="" alt="Active Cinema Format Overlay Badge" style="display: none;" decoding="async">
+                    <video class="main-video" id="myVideo" src="https://www.dropbox.com/scl/fi/15yp2m1xk8putf2an8343/varanasi.mp4?rlkey=kves9aonxo4n3spr5yop3ldjt&st=v9nqqi5t&raw=1" poster="1.43.png" preload="auto" loop muted playsinline webkit-playsinline controls controlsList="nofullscreen"></video>
+                </div>
             </div>
-        </div>
 
-        <div class="controls">
-            <button class="format-btn hybrid-special-btn active" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
-                <div class="hybrid-icon-wrap">
-                    <img src="imax-seeklogo.png" alt="IMAX Logo Header" decoding="async">
-                    <img src="dolby.png" alt="Dolby Core" style="filter: invert(1);" decoding="async">
-                </div>
-                <span class="format-ratio">1.43:1 Grade</span>
-            </button>
+            <div class="controls">
+                <button class="format-btn hybrid-special-btn active" id="presetBtn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'grade')">
+                    <div class="hybrid-icon-wrap">
+                        <img src="imax-seeklogo.png" alt="IMAX Hardware Head" decoding="async">
+                        <img src="dolby.png" alt="Dolby Digital System Core" style="filter: invert(1);" decoding="async">
+                    </div>
+                    <span class="format-ratio">1.43:1 Grade</span>
+                </button>
 
-            <button class="format-btn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
-                <div class="screen-icon">
-                    <img src="imax-seeklogo.png" alt="IMAX Logo" decoding="async">
-                </div>
-                <span class="format-title">IMAX 70MM</span>
-                <span class="format-ratio">1.43:1</span>
-            </button>
+                <button class="format-btn" onclick="changeRatio(1.43, this, 'imax-seeklogo.png', 'none')">
+                    <div class="screen-icon">
+                        <img src="imax-seeklogo.png" alt="IMAX Logo" decoding="async">
+                    </div>
+                    <span class="format-title">IMAX 70MM</span>
+                    <span class="format-ratio">1.43:1</span>
+                </button>
 
-            <button class="format-btn" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
-                <div class="screen-icon">
-                    <img src="imax-seeklogo.png" alt="IMAX Digital Logo" decoding="async">
-                </div>
-                <span class="format-title">IMAX Digital</span>
-                <span class="format-ratio">1.90:1</span>
-            </button>
+                <button class="format-btn" onclick="changeRatio(1.90, this, 'imax-seeklogo.png', 'none')">
+                    <div class="screen-icon">
+                        <img src="imax-seeklogo.png" alt="IMAX Digital Logo" decoding="async">
+                    </div>
+                    <span class="format-title">IMAX Digital</span>
+                    <span class="format-ratio">1.90:1</span>
+                </button>
 
-            <button class="format-btn" onclick="changeRatio(2.20, this, 'none', 'none')">
-                <div class="screen-icon">
-                    <svg width="46" height="24" viewBox="0 0 50 40">
-                        <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
-                        <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                        <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    </svg>
-                </div>
-                <span class="format-title">70MM Film</span>
-                <span class="format-ratio">2.20:1</span>
-            </button>
+                <button class="format-btn" onclick="changeRatio(2.20, this, 'none', 'none')">
+                    <div class="screen-icon">
+                        <svg width="46" height="24" viewBox="0 0 50 40">
+                            <rect x="4" y="12" width="42" height="16" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
+                            <line x1="8" y1="14" x2="8" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                            <line x1="42" y1="14" x2="42" y2="26" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <span class="format-title">70MM Film</span>
+                    <span class="format-ratio">2.20:1</span>
+                </button>
 
-            <button class="format-btn" onclick="changeRatio(2.39, this, 'none', 'none')">
-                <div class="screen-icon">
-                    <svg width="46" height="24" viewBox="0 0 50 40">
-                        <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
-                        <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                        <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
-                    </svg>
-                </div>
-                <span class="format-title">35MM Scope</span>
-                <span class="format-ratio">2.39:1</span>
-            </button>
+                <button class="format-btn" onclick="changeRatio(2.39, this, 'none', 'none')">
+                    <div class="screen-icon">
+                        <svg width="46" height="24" viewBox="0 0 50 40">
+                            <rect x="2" y="13" width="46" height="14" stroke="currentColor" stroke-width="2.5" fill="none" rx="1"/>
+                            <line x1="6" y1="15" x2="6" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                            <line x1="44" y1="15" x2="44" y2="25" stroke="currentColor" stroke-width="1.5" stroke-dasharray="2 2"/>
+                        </svg>
+                    </div>
+                    <span class="format-title">35MM Scope</span>
+                    <span class="format-ratio">2.39:1</span>
+                </button>
 
-            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
-                <div class="screen-icon">
-                    <img src="dolby.png" alt="Dolby Vision Logo" style="filter: invert(1);" decoding="async">
-                </div>
-                <span class="format-ratio">1.85:1</span>
-            </button>
+                <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, 'dolby.png', 'grade')">
+                    <div class="screen-icon">
+                        <img src="dolby.png" alt="Dolby Vision Logo" style="filter: invert(1);" decoding="async">
+                    </div>
+                    <span class="format-ratio">1.85:1</span>
+                </button>
 
-            <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
-                <div class="screen-icon">
-                    <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="filter: invert(1);" decoding="async">
-                </div>
-                <span class="format-ratio">1.85:1</span>
-            </button>
+                <button class="format-btn premium-logo-btn" onclick="changeRatio(1.85, this, '18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png', 'none')">
+                    <div class="screen-icon">
+                        <img src="18333e4e-ed31-4a2a-9e6e-3ac8ac796c69.png" alt="Large Format Logo" style="filter: invert(1);" decoding="async">
+                    </div>
+                    <span class="format-ratio">1.85:1</span>
+                </button>
 
-            <div class="divider"></div>
+                <div class="divider"></div>
 
-            <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton">
-                <svg viewBox="0 0 24 24">
-                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
-                </svg>
-                <span class="format-title" style="font-size: 0.75rem;" id="fsText">FULLSCREEN</span>
-            </button>
-        </div>
-    </div>
-
-    <section class="info-section">
-        <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
-        <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
-        <div class="video-embed-container">
-            <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
-            <div class="video-embed">
-                <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Cinema Resolution and Projector Formats" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            </div>
-        </div>
-    </section>
-
-    <section class="support-container">
-        <div class="support-info-block">
-            <h2 class="support-title">Support the Developer</h2>
-            <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
-            <div class="upi-block">
-                <span class="upi-label">UPI ID:</span>
-                <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
-                <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn">
+                <button class="fullscreen-btn" onclick="toggleFullscreen()" id="fsButton">
                     <svg viewBox="0 0 24 24">
-                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
-                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                        <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
                     </svg>
+                    <span class="format-title" style="font-size: 0.75rem;" id="fsText">FULLSCREEN</span>
                 </button>
             </div>
-            <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
         </div>
-        <div class="support-actions-wrapper">
-            <a href="https://www.instagram.com/_starvelstudios_/" target="_blank" class="instagram-link-card">
-                <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset" decoding="async">
-                <span class="instagram-card-label">Follow Us</span>
-            </a>
-            <div class="qr-wrapper">
-                <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Asset" decoding="async">
-            </div>
-        </div>
-    </section>
 
-    <footer class="designer-credit">Designed By <span>G.Sathwik</span></footer>
+        <section class="info-section">
+            <h2>Understanding IMAX 70mm and Movie Aspect Ratios</h2>
+            <p>Every frame of VARANASI was shot with IMAX Film Cameras. In IMAX 70mm locations, the film will be presented in IMAX’s 1.43:1 Expanded Aspect Ratio. Each film frame has 15 perforations and runs horizontally through the projector. It is the largest and highest-resolution format available and gives you an unparalleled sense of immersion as the image fills IMAX’s signature floor-to-ceiling screen.</p>
+            <div class="video-embed-container">
+                <h3>Director SS Rajamouli Breakdown on IMAX 70mm Exhibition Frameworks</h3>
+                <div class="video-embed">
+                    <iframe src="https://www.youtube.com/embed/muuCXAlM7CU" title="Director SS Rajamouli Interview on IMAX 70mm Exhibition Formats" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="support-container">
+            <div class="support-info-block">
+                <h2 class="support-title">Support the Developer</h2>
+                <p class="support-text">If you find this project interesting, consider supporting the developer.</p>
+                <div class="upi-block">
+                    <span class="upi-label">UPI ID:</span>
+                    <span class="upi-id-text" id="upiId">sathwik.gurram@okaxis</span>
+                    <button class="copy-btn" onclick="copyUpiToClipboard()" title="Copy UPI ID to clipboard" id="copyBtn">
+                        <svg viewBox="0 0 24 24">
+                            <rect x="9" y="9" width="13" height="13" rx="2" ry="2" stroke="currentColor" fill="none"></rect>
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor"></path>
+                        </svg>
+                    </button>
+                </div>
+                <p class="support-subtext">Every contribution helps keep this free & updated.<br>(PS: I'm just a student ✌️ )</p>
+            </div>
+            
+            <div class="support-actions-wrapper">
+                <a href="https://www.instagram.com/_starvelstudios_/" target="_blank" class="instagram-link-card">
+                    <img class="instagram-icon-element" src="Instagram_icon.jpg" alt="Official Instagram Brand Asset" decoding="async">
+                    <span class="instagram-card-label">Follow Us</span>
+                </a>
+
+                <div class="qr-wrapper">
+                    <img class="qr-element" src="image_0a2444.jpg" alt="PhonePe Merchant QR Scanner Terminal" decoding="async">
+                </div>
+            </div>
+        </section>
+
+        <footer class="designer-credit">Designed By <span>G.Sathwik</span></footer>
+    </div>
 
     <script>
         const vfxDropdown = document.getElementById('vfxDropdown');
@@ -487,7 +531,7 @@
 
             vfxVideo.load(); 
             vfxOverlay.classList.add('is-open');
-            vfxVideo.play();
+            vfxVideo.play().catch(() => {});
             vfxDropdown.classList.remove('is-active');
         }
 
@@ -508,6 +552,7 @@
             const vfxVideo = document.getElementById('vfxTargetVideo');
             const vfxBadge = document.getElementById('vfxFormatOverlay');
             const toggleFrame = document.getElementById('dolbyToggleFrame');
+
             vfxDolbyActive = !vfxDolbyActive;
 
             if (vfxDolbyActive) {
@@ -528,9 +573,10 @@
             const explorerVideo = document.getElementById('myVideo');
             const vfxOverlay = document.getElementById('vfxPlayerOverlay');
             const vfxVideo = document.getElementById('vfxTargetVideo');
+
             if (vfxVideo) { vfxVideo.pause(); vfxVideo.src = ""; vfxVideo.load(); }
             vfxOverlay.classList.remove('is-open');
-            if (explorerVideo) explorerVideo.play();
+            if (explorerVideo) explorerVideo.play().catch(() => {});
         }
 
         function changeRatio(ratio, buttonElement, badgeSource, gradeMode) {
@@ -547,6 +593,7 @@
             }
 
             playerContainer.style.setProperty('--current-ratio', ratio);
+
             if (gradeMode === 'grade') { videoElement.classList.add('dolby-grade'); } else { videoElement.classList.remove('dolby-grade'); }
 
             if (badgeSource !== 'none') {
@@ -565,6 +612,8 @@
             buttonElement.classList.add('active');
         }
 
+        const fsText = document.getElementById('fsText');
+
         function toggleFullscreen() {
             if (!document.fullscreenElement && !document.webkitFullscreenElement) {
                 if (playerContainer.requestFullscreen) { playerContainer.requestFullscreen(); } 
@@ -575,6 +624,13 @@
             }
         }
 
+        document.addEventListener('fullscreenchange', updateFsButton);
+        document.addEventListener('webkitfullscreenchange', updateFsButton);
+
+        function updateFsButton() {
+            if (document.fullscreenElement || document.webkitFullscreenElement) { fsText.innerText = "EXIT FS"; } else { fsText.innerText = "FULLSCREEN"; }
+        }
+
         function copyUpiToClipboard() {
             const upiString = document.getElementById('upiId').innerText;
             const copyBtn = document.getElementById('copyBtn');
@@ -582,7 +638,7 @@
                 const originalSvg = copyBtn.innerHTML;
                 copyBtn.innerHTML = `<svg viewBox="0 0 24 24" style="stroke: #fff;"><polyline points="20 6 9 17 4 12"></polyline></svg>`;
                 setTimeout(() => { copyBtn.innerHTML = originalSvg; }, 2000);
-            }).catch(err => console.error('Could not copy string text parameter: ', err));
+            }).catch(err => console.error('Could not copy string text: ', err));
         }
 
         /* READ/WRITE REALTIME REAL TRAFFIC ENGINE */
@@ -626,14 +682,11 @@
             
             setTimeout(() => {
                 mainVideo.play().then(() => {}).catch(err => {
-                    // FIXED: Secondary activation hook cascade for auto-play policy failures
-                    mainVideo.muted = true;
-                    mainVideo.play();
+                    mainVideo.muted = true; mainVideo.play();
                 });
                 if (bgVideo) { bgVideo.src = "loop.mp4"; bgVideo.load(); bgVideo.play().catch(() => {}); }
             }, 1000);
 
-            // FIXED iPhone Native Gesture Callback Event Listener Interceptor
             const unmuteContextHook = () => {
                 if (mainVideo.paused) mainVideo.play();
                 mainVideo.muted = false;
